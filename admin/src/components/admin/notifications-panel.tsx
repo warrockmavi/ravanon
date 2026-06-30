@@ -32,7 +32,7 @@ export function NotificationsPanel() {
 
   useEffect(() => {
     load();
-    const iv = setInterval(load, 30000);
+    const iv = setInterval(load, 10000);
     return () => clearInterval(iv);
   }, []);
 

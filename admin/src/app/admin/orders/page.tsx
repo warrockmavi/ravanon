@@ -29,6 +29,12 @@ export default function AdminOrdersPage() {
 
   useEffect(() => { load(); }, []);
 
+  useEffect(() => {
+    const onNew = () => load();
+    window.addEventListener("ravanon-new-order", onNew);
+    return () => window.removeEventListener("ravanon-new-order", onNew);
+  }, []);
+
   const kpis = getOrderKpis(orders);
 
   const handleUpdate = async (order: AdminOrder) => {
