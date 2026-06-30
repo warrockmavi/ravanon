@@ -1,7 +1,310 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-30T18:09:33.992Z",
+  "updatedAt": "2026-06-30T18:33:35.963Z",
   "orders": [
+    {
+      "id": "RVN-MR0ZJ7I5-WH9A",
+      "userId": "1782843297662",
+      "customerName": "admin@admin.com",
+      "customerEmail": "admin@admin.com",
+      "customerPhone": "admin@admin.com",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Niacinamide %10 + Zinc %1 Serum",
+          "brand": "The Ordinary",
+          "quantity": 10,
+          "price": 449
+        }
+      ],
+      "subtotal": 4490,
+      "shipping": 0,
+      "discount": 0,
+      "total": 4490,
+      "status": "pending",
+      "paymentMethod": "Havale / EFT",
+      "payment": {
+        "provider": "Havale / EFT",
+        "providerId": "havale",
+        "transactionId": "EFT-PENDING-1782844415925",
+        "status": "pending",
+        "amount": 4490
+      },
+      "shippingMethod": {
+        "methodId": "free-hepsijet",
+        "carrierId": "hepsijet",
+        "serviceId": "standard",
+        "type": "free",
+        "price": 0,
+        "etaDays": 2
+      },
+      "shippingInfo": {
+        "carrier": "HepsiJet",
+        "carrierId": "hepsijet",
+        "carrierCode": "HJ",
+        "serviceId": "standard",
+        "trackingNumber": "—",
+        "status": "preparing",
+        "estimatedDelivery": "2026-07-02",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş alındı",
+            "location": "RAVANON Depo",
+            "createdAt": "2026-06-30T18:33:35.957Z"
+          }
+        ]
+      },
+      "shippingAddress": "DDDDDDDDDDDDDD, DDDDDDDDDDDDDDDDDD",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T18:33:35.933Z",
+      "updatedAt": "2026-06-30T18:33:35.963Z"
+    },
+    {
+      "id": "RVN-MR0ZHIHF-HQTG",
+      "userId": "1782843297662",
+      "customerName": "admin@admin.com",
+      "customerEmail": "admin@admin.com",
+      "customerPhone": "admin@admin.com",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Niacinamide %10 + Zinc %1 Serum",
+          "brand": "The Ordinary",
+          "quantity": 2,
+          "price": 449
+        },
+        {
+          "productId": 2,
+          "name": "Hyaluronic Acid Serum",
+          "brand": "The Inkey List",
+          "quantity": 2,
+          "price": 389
+        },
+        {
+          "productId": 3,
+          "name": "Retro Matte Lipstick - Ruby Woo",
+          "brand": "MAC",
+          "quantity": 4,
+          "price": 899
+        }
+      ],
+      "subtotal": 5272,
+      "shipping": 0,
+      "discount": 0,
+      "total": 5272,
+      "status": "pending",
+      "paymentMethod": "Havale / EFT",
+      "payment": {
+        "provider": "Havale / EFT",
+        "providerId": "havale",
+        "transactionId": "EFT-PENDING-1782844336848",
+        "status": "pending",
+        "amount": 5272
+      },
+      "shippingMethod": {
+        "methodId": "free-hepsijet",
+        "carrierId": "hepsijet",
+        "serviceId": "standard",
+        "type": "free",
+        "price": 0,
+        "etaDays": 2
+      },
+      "shippingInfo": {
+        "carrier": "HepsiJet",
+        "carrierId": "hepsijet",
+        "carrierCode": "HJ",
+        "serviceId": "standard",
+        "trackingNumber": "—",
+        "status": "preparing",
+        "estimatedDelivery": "2026-07-02",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş alındı",
+            "location": "RAVANON Depo",
+            "createdAt": "2026-06-30T18:32:16.871Z"
+          }
+        ]
+      },
+      "shippingAddress": "DDDDDDDDDDDDDD, DDDDDDDDDDDDDDDDDD",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T18:32:16.851Z",
+      "updatedAt": "2026-06-30T18:32:16.876Z"
+    },
+    {
+      "id": "RVN-MR0YWJP5-CHSP",
+      "userId": "1782843297662",
+      "customerName": "admin@admin.com",
+      "customerEmail": "admin@admin.com",
+      "customerPhone": "admin@admin.com",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Niacinamide %10 + Zinc %1 Serum",
+          "brand": "The Ordinary",
+          "quantity": 2,
+          "price": 449
+        },
+        {
+          "productId": 2,
+          "name": "Hyaluronic Acid Serum",
+          "brand": "The Inkey List",
+          "quantity": 2,
+          "price": 389
+        },
+        {
+          "productId": 44,
+          "name": "1025 Dokdo Cleanser",
+          "brand": "Round Lab",
+          "quantity": 1,
+          "price": 399
+        },
+        {
+          "productId": 40,
+          "name": "Heartleaf 77% Soothing Toner",
+          "brand": "Anua",
+          "quantity": 1,
+          "price": 479
+        },
+        {
+          "productId": 38,
+          "name": "Advanced Snail 96 Mucin Essence",
+          "brand": "COSRX",
+          "quantity": 1,
+          "price": 689
+        },
+        {
+          "productId": 39,
+          "name": "Glow Deep Serum Rice + Alpha Arbutin",
+          "brand": "Beauty of Joseon",
+          "quantity": 1,
+          "price": 549
+        },
+        {
+          "productId": 47,
+          "name": "Advanced Snail 92 All in One Cream",
+          "brand": "COSRX",
+          "quantity": 1,
+          "price": 749
+        },
+        {
+          "productId": 48,
+          "name": "Relief Sun Rice + Probiotics SPF50+",
+          "brand": "Beauty of Joseon",
+          "quantity": 1,
+          "price": 649
+        },
+        {
+          "productId": 45,
+          "name": "RAVANON Rice Cleansing Oil",
+          "brand": "RAVANON",
+          "quantity": 1,
+          "price": 369
+        },
+        {
+          "productId": 36,
+          "name": "RAVANON Retinol Night Serum",
+          "brand": "RAVANON",
+          "quantity": 1,
+          "price": 549
+        },
+        {
+          "productId": 33,
+          "name": "RAVANON Pimple Patch Set",
+          "brand": "RAVANON",
+          "quantity": 1,
+          "price": 179
+        },
+        {
+          "productId": 35,
+          "name": "RAVANON Sleeping Mask",
+          "brand": "RAVANON",
+          "quantity": 1,
+          "price": 459
+        },
+        {
+          "productId": 3,
+          "name": "Retro Matte Lipstick - Ruby Woo",
+          "brand": "MAC",
+          "quantity": 1,
+          "price": 899
+        },
+        {
+          "productId": 6,
+          "name": "Soft Pinch Liquid Blush - Hope",
+          "brand": "Rare Beauty",
+          "quantity": 1,
+          "price": 1099
+        },
+        {
+          "productId": 5,
+          "name": "Pro Filt'r Soft Matte Foundation",
+          "brand": "Fenty Beauty",
+          "quantity": 1,
+          "price": 1599
+        },
+        {
+          "productId": 4,
+          "name": "Radiant Creamy Concealer",
+          "brand": "NARS",
+          "quantity": 1,
+          "price": 1249
+        }
+      ],
+      "subtotal": 11592,
+      "shipping": 0,
+      "discount": 0,
+      "total": 11592,
+      "status": "shipped",
+      "paymentMethod": "Havale / EFT",
+      "payment": {
+        "provider": "Havale / EFT",
+        "providerId": "havale",
+        "transactionId": "EFT-PENDING-1782843358629",
+        "status": "pending",
+        "amount": 11592
+      },
+      "shippingMethod": {
+        "methodId": "free-hepsijet",
+        "carrierId": "hepsijet",
+        "serviceId": "standard",
+        "type": "free",
+        "price": 0,
+        "etaDays": 2
+      },
+      "shippingInfo": {
+        "carrier": "HepsiJet",
+        "carrierId": "hepsijet",
+        "carrierCode": "HJ",
+        "serviceId": "standard",
+        "trackingNumber": "HJ843411151",
+        "status": "picked_up",
+        "estimatedDelivery": "2026-07-02",
+        "events": [
+          {
+            "id": "e-1782843411151",
+            "status": "preparing",
+            "title": "Sipariş hazırlandı",
+            "location": "İstanbul",
+            "createdAt": "2026-06-30T18:16:51.151Z"
+          },
+          {
+            "id": "e-1782843411151",
+            "status": "picked_up",
+            "title": "Kargoya verildi",
+            "location": "HepsiJet Aktarma Merkezi",
+            "createdAt": "2026-06-30T18:16:51.151Z"
+          }
+        ]
+      },
+      "shippingAddress": "DDDDDDDDDDDDDD, DDDDDDDDDDDDDDDDDD",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T18:15:58.649Z",
+      "updatedAt": "2026-06-30T18:16:51.168Z"
+    },
     {
       "id": "RVN-DEMO-SL6L",
       "userId": "demo",
