@@ -14,5 +14,6 @@ if errorlevel 1 (
     exit /b 1
 )
 echo.
-echo  Simdi Baslat-Hepsi.vbs ile magaza ve admini acabilirsiniz.
+echo  Tek tik: RAVANON.lnk veya RAVANON Admin.lnk
+echo  Ikisi birden: Baslat-Hepsi.vbs
 pause

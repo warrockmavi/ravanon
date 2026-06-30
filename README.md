@@ -40,13 +40,15 @@ Alternatif (komut satırı):
 npm run setup
 ```
 
-### 3. Başlatın
+### 3. Başlatın (tek tık)
 
-| Dosya | Ne açar? |
-|-------|----------|
-| `Baslat.vbs` | Mağaza → http://localhost:8765 |
-| `admin\Baslat-Admin.vbs` | Admin → http://localhost:3000/admin |
+| Kısayol | Ne açar? |
+|---------|----------|
+| **`RAVANON.lnk`** | Mağaza → http://localhost:8765 |
+| **`RAVANON Admin.lnk`** | Admin → http://localhost:3000/admin |
 | `Baslat-Hepsi.vbs` | İkisini birden |
+
+> Kısayollar proje klasöründe ve masaüstünde oluşur. Farklı klasöre taşıdıysanız `KISAYOLLAR.bat` ile yenileyin.
 
 ### 4. Admin girişi
 
@@ -88,9 +90,11 @@ RAVANON/
 │   ├── src/app/admin/                      # Admin sayfaları
 │   ├── src/app/api/                        # REST API
 │   └── Baslat-Admin.vbs                    # Admin başlatıcı
-├── Baslat.vbs                              # Mağaza başlatıcı
-├── Baslat-Hepsi.vbs                        # İkisi birden
+├── RAVANON.lnk                             # Tek tık — mağaza
+├── RAVANON Admin.lnk                       # Tek tık — admin panel
+├── Baslat.vbs / Baslat-Hepsi.vbs           # Alternatif başlatıcılar
 ├── KURULUM.bat                             # İlk kurulum
+├── KISAYOLLAR.bat                          # Kısayolları yenile
 └── scripts/                                # Yardımcı scriptler
 ```
 

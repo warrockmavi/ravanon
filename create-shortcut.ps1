@@ -102,25 +102,6 @@ $bitmap256.Save($iconPng, [System.Drawing.Imaging.ImageFormat]::Png)
 Save-MultiSizeIco $bitmap256 $iconIco
 $bitmap256.Dispose()
 
-$shell = New-Object -ComObject WScript.Shell
-$lnk = $shell.CreateShortcut($shortcut)
-$lnk.TargetPath = $wscript
-$lnk.Arguments = "//B ""$targetVbs"""
-$lnk.WorkingDirectory = $projectDir
-$lnk.IconLocation = "$iconIco,0"
-$lnk.Description = "RAVANON - Premium Kozmetik E-Ticaret"
-$lnk.WindowStyle = 7
-$lnk.Save()
-
-$innerShortcut = Join-Path $projectDir "RAVANON.lnk"
-$lnk2 = $shell.CreateShortcut($innerShortcut)
-$lnk2.TargetPath = $wscript
-$lnk2.Arguments = "//B ""$targetVbs"""
-$lnk2.WorkingDirectory = $projectDir
-$lnk2.IconLocation = "$iconIco,0"
-$lnk2.Description = "RAVANON Baslatici"
-$lnk2.Save()
-
 Add-Type @"
 using System; using System.Runtime.InteropServices;
 public class IconCache {
@@ -128,4 +109,10 @@ public class IconCache {
 }
 "@
 [IconCache]::SHChangeNotify(0x08000000, 0, [IntPtr]::Zero, [IntPtr]::Zero) | Out-Null
-Write-Host "RAVANON kisayolu guncellendi: $shortcut" -ForegroundColor Green
+Write-Host "RAVANON simgesi hazir: $iconIco" -ForegroundColor Green
+
+# Kisayollar scripts/create-shortcuts.ps1 tarafindan olusturulur
+$shortcutScript = Join-Path $projectDir "scripts\create-shortcuts.ps1"
+if (Test-Path $shortcutScript) {
+    & $shortcutScript
+}

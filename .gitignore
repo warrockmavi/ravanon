@@ -29,8 +29,7 @@ desktop.ini
 *.swp
 *.swo
 
-# Generated shortcuts (recreated by KURULUM.bat)
-RAVANON.lnk
+# Kisayollar repoda tutulur; farkli PC'de KURULUM.bat yollarini gunceller
 
 # TypeScript
 *.tsbuildinfo

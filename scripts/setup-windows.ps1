@@ -30,16 +30,17 @@ try {
     Pop-Location
 }
 
-# Masaustu kisayolu
+# Simge + kisayollar (proje + masaustu)
 Write-Host ""
+Write-Host "  Kisayollar olusturuluyor..." -ForegroundColor Cyan
 & (Join-Path $projectDir "create-shortcut.ps1")
 
 Write-Host ""
 Write-Host "  Kurulum tamamlandi!" -ForegroundColor Green
 Write-Host ""
-Write-Host "  Baslatma secenekleri:" -ForegroundColor White
-Write-Host "    Baslat.vbs          -> Sadece magaza  (localhost:8765)"
-Write-Host "    admin\Baslat-Admin.vbs -> Sadece admin (localhost:3000/admin)"
+Write-Host "  Tek tik baslatma:" -ForegroundColor White
+Write-Host "    RAVANON.lnk         -> Magaza  (localhost:8765)"
+Write-Host "    RAVANON Admin.lnk   -> Admin   (localhost:3000/admin)"
 Write-Host "    Baslat-Hepsi.vbs    -> Ikisi birden"
 Write-Host ""
 Write-Host "  Admin giris: admin@ravanon.com / Ravanon2026!"
