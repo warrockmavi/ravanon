@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+admin/node_modules/
+
+# Next.js
+admin/.next/
+admin/out/
+admin/build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated shortcuts (recreated by KURULUM.bat)
+RAVANON.lnk
+
+# TypeScript
+*.tsbuildinfo
+admin/next-env.d.ts
+
+# Vercel
+.vercel
+
+# Test artifacts
+coverage/

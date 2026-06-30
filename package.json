@@ -1,0 +1,16 @@
+{
+  "name": "ravanon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RAVANON — Premium kozmetik e-ticaret + admin panel",
+  "scripts": {
+    "setup": "npm install --prefix admin",
+    "dev:store": "npx --yes serve -l 8765",
+    "dev:admin": "npm run dev --prefix admin",
+    "build:admin": "npm run build --prefix admin",
+    "verify": "node scripts/verify-setup.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

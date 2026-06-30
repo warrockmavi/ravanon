@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Makale — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white article-page">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20" id="article-main">
+    <div id="article-loading" class="text-center py-24">
+      <div class="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin mx-auto"></div>
+      <p class="text-cream/50 text-sm mt-4">Makale yükleniyor...</p>
+    </div>
+    <div id="article-content" class="hidden max-w-4xl mx-auto"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/articles.js"></script>
+  <script>
+    onStoreReady(() => {
+      initSharedUI('article');
+      Articles.initPage();
+    });
+  </script>
+</body>
+</html>

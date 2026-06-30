@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/ravanon-icon.png">
+  <title>RAVANON — Premium Kozmetik & Güzellik</title>
+  <meta name="description" content="RAVANON - Türkiye'nin premium kozmetik platformu. AI destekli cilt analizi, kişisel rutin önerileri ve lüks güzellik ürünleri.">
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <!-- Deal Strip -->
+  <div class="deal-strip pt-40 md:pt-44">
+    🎀 Yeni üyelere %15 indirim · Kod: <strong>WELCOME15</strong> · 750 TL+ ücretsiz kargo · AI cilt analizi ücretsiz
+  </div>
+
+  <!-- Marquee -->
+  <section class="editorial-strip py-3">
+    <div class="luxury-marquee">
+      <div class="luxury-marquee-inner">
+        <span>K-Beauty Glow</span><span>AI Cilt Analizi</span><span>Viral TikTok</span><span>Clean Beauty</span><span>Glass Skin</span><span>Soft Glam 2026</span><span>Gen Z Picks</span>
+        <span>K-Beauty Glow</span><span>AI Cilt Analizi</span><span>Viral TikTok</span><span>Clean Beauty</span><span>Glass Skin</span><span>Soft Glam 2026</span><span>Gen Z Picks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="hero-sephora flex items-center relative overflow-hidden pt-8 pb-16">
+    <div class="max-w-7xl mx-auto px-4 py-12 relative z-10 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="scroll-animate">
+          <span class="badge-new inline-block mb-4">YENİ · 2026 KOLEKSİYON</span>
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
+            Güzelliğin<br><span class="hero-accent">En Güzel Hali</span>
+          </h1>
+          <p class="text-cream/60 text-lg leading-relaxed mb-8 max-w-md">
+            Sephora & Watsons tarzı premium alışveriş deneyimi. AI cilt analizi, viral koleksiyonlar ve genç enerjisi — hepsi RAVANON'da.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="SkinQuiz.open()" class="btn-rose px-8 py-4 text-sm flex items-center gap-2">
+              ✨ AI Cilt Analizi Başlat
+            </button>
+            <a href="#koleksiyonlar" class="btn-outline-rose px-8 py-4 text-sm">
+              Koleksiyonları Keşfet
+            </a>
+          </div>
+          <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gold/10">
+            <div><span class="text-shimmer font-display text-3xl block">48+</span><span class="text-[10px] text-cream/40 uppercase tracking-widest mt-1 block">Ürün</span></div>
+            <div><span class="text-shimmer font-display text-3xl block">8</span><span class="text-[10px] text-cream/40 uppercase tracking-widest mt-1 block">Koleksiyon</span></div>
+            <div><span class="text-shimmer font-display text-3xl block">AI</span><span class="text-[10px] text-cream/40 uppercase tracking-widest mt-1 block">Cilt Skoru</span></div>
+          </div>
+        </div>
+        <div class="relative scroll-animate hero-cover-grid" id="hero-covers-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Collections -->
+  <section id="koleksiyonlar" class="py-16 section-blush collection-highlight">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 scroll-animate">
+        <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Küratörlü Seçimler</p>
+        <h2 class="section-title text-3xl md:text-4xl mb-3">Seni Bekleyen Koleksiyonlar</h2>
+        <p class="text-cream/50 max-w-lg mx-auto">K-Beauty'den TikTok viralına — genç kızların en çok sevdiği editler</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="collections-grid"></div>
+    </div>
+  </section>
+
+  <!-- 2026 Trends -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="luxury-divider scroll-animate"><span class="text-xs tracking-[0.4em] text-gold uppercase">Sektör Trendleri</span></div>
+      <div class="text-center mb-14 scroll-animate">
+        <h2 class="section-title text-4xl md:text-5xl mb-4">2026 Güzellik Vizyonu</h2>
+        <p class="text-cream/45 max-w-xl mx-auto font-light">Sephora, Ulta ve global lüks markaların öncülük ettiği trendler RAVANON'da</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="trends-2026-grid"></div>
+    </div>
+  </section>
+
+  <!-- AI Skin Analysis Banner -->
+  <section class="py-12 section-cream">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="luxury-card p-8 md:p-12 scroll-animate">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="badge-new mb-4 inline-block">GELİŞMİŞ AI</span>
+            <h3 class="section-title text-3xl mb-3">Cilt Analizi 2.0</h3>
+            <p class="text-cream/60 mb-6">8 adımlı quiz ile cilt sağlık skorunuzu öğrenin. Sabah & akşam rutini, içerik önerileri ve kişisel ürün eşleştirmesi — dermatolog mantığıyla.</p>
+            <ul class="space-y-2 mb-8 text-sm text-cream/70">
+              <li>💗 Cilt sağlığı skoru (0-100)</li>
+              <li>☀️ AM / 🌙 PM ayrı rutin planı</li>
+              <li>🇰🇷 K-Beauty & Kore serisi ürünler</li>
+              <li>🧪 Hassasiyet & güneş analizi</li>
+            </ul>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="SkinQuiz.open()" class="btn-rose px-6 py-3 text-sm">Analizi Başlat</button>
+              <button onclick="AIChat.toggle(true)" class="btn-outline-rose px-6 py-3 text-sm">AI'a Sor</button>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <div class="skin-score-ring" style="--score:87">
+              <span>87</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="section-title text-3xl md:text-4xl text-center mb-12 scroll-animate">Koleksiyonlar</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="categories-grid"></div>
+    </div>
+  </section>
+
+  <!-- Yeni Gelenler -->
+  <section class="py-16 bg-navy-light/50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8 scroll-animate">
+        <div>
+          <p class="text-gold text-xs uppercase tracking-[0.3em] mb-1">Taze Gelenler</p>
+          <h2 class="section-title text-3xl">Yeni Gelenler</h2>
+        </div>
+        <a href="shop.html?filter=new" class="text-gold text-sm hover:underline">Tümünü Gör →</a>
+      </div>
+      <div class="relative">
+        <div class="carousel-track pb-4" id="new-products"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- En Çok Satanlar -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8 scroll-animate">
+        <div>
+          <p class="text-gold text-xs uppercase tracking-[0.3em] mb-1">Favoriler</p>
+          <h2 class="section-title text-3xl">En Çok Satanlar</h2>
+        </div>
+        <a href="shop.html?filter=bestseller" class="text-gold text-sm hover:underline">Tümünü Gör →</a>
+      </div>
+      <div class="product-grid" id="bestsellers-grid"></div>
+    </div>
+  </section>
+
+  <!-- RAVANON Picks -->
+  <section class="py-16 bg-gradient-to-b from-navy to-navy-light">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 scroll-animate">
+        <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Editör Seçimi</p>
+        <h2 class="section-title text-3xl md:text-4xl">RAVANON Picks</h2>
+        <p class="text-cream/50 mt-3 max-w-lg mx-auto">Uzmanlarımızın özenle seçtiği, en çok beğenilen ürünler</p>
+      </div>
+      <div class="product-grid" id="picks-grid"></div>
+    </div>
+  </section>
+
+  <!-- Flaş İndirimler -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="luxury-card p-8 md:p-10 mb-10 scroll-animate">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p class="text-rose-gold text-xs uppercase tracking-[0.3em] mb-2">Exclusive Flash Sale</p>
+            <h2 class="section-title text-3xl">Flaş İndirimler</h2>
+          </div>
+          <div id="flash-countdown" class="flex items-center gap-3">
+            <div class="luxury-countdown-unit"><span data-h>00</span><span>Saat</span></div>
+            <span class="text-gold text-xl">:</span>
+            <div class="luxury-countdown-unit"><span data-m>00</span><span>Dk</span></div>
+            <span class="text-gold text-xl">:</span>
+            <div class="luxury-countdown-unit"><span data-s>00</span><span>Sn</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-grid" id="flash-grid"></div>
+    </div>
+  </section>
+
+  <!-- Sürdürülebilirlik -->
+  <section class="py-16 editorial-strip">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 scroll-animate">
+        <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Sorumlu Güzellik</p>
+        <h2 class="section-title text-3xl">Sürdürülebilirlik Taahhüdümüz</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="sustainability-grid"></div>
+    </div>
+  </section>
+
+  <!-- Son Görüntülenenler -->
+  <section id="recently-viewed-section" class="py-16 hidden">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="section-title text-2xl mb-8 scroll-animate">Son İnceledikleriniz</h2>
+      <div class="product-grid" id="recently-viewed-grid"></div>
+    </div>
+  </section>
+
+  <!-- Bundle Deals -->
+  <section class="py-16 bg-navy-light/50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 scroll-animate">
+        <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Tasarruf Fırsatı</p>
+        <h2 class="section-title text-3xl">Bundle Fırsatları</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto" id="bundle-grid"></div>
+    </div>
+  </section>
+
+  <!-- AI Personalized -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="bg-gradient-to-r from-navy-light to-navy-card rounded-2xl border border-gold/20 p-8 md:p-12 scroll-animate">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Yapay Zeka</p>
+            <h2 class="section-title text-3xl mb-4">Size Özel Öneriler</h2>
+            <p class="text-cream/60 mb-6">Alışveriş geçmişiniz ve cilt analizinize göre kişiselleştirilmiş ürün önerileri.</p>
+            <button onclick="SkinQuiz.open()" class="px-6 py-3 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">
+              Rutinimi Oluştur
+            </button>
+          </div>
+          <div class="product-grid" id="personalized-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAVANON Club CTA -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="relative rounded-2xl overflow-hidden scroll-animate">
+        <div class="absolute inset-0 bg-gradient-to-r from-gold/20 via-rose-gold/10 to-gold/20"></div>
+        <div class="relative p-8 md:p-16 text-center border border-gold/20 rounded-2xl">
+          <h2 class="font-display text-4xl md:text-5xl text-cream mb-4">RAVANON Club</h2>
+          <p class="text-cream/60 max-w-xl mx-auto mb-8">Her alışverişte puan kazanın. Bronze'dan Platinum'a yükselin, özel indirimler ve VIP ayrıcalıkların keyfini çıkarın.</p>
+          <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <span class="px-4 py-2 rounded-full border border-[#CD7F32]/50 text-[#CD7F32] text-sm">Bronze</span>
+            <span class="px-4 py-2 rounded-full border border-[#C0C0C0]/50 text-[#C0C0C0] text-sm">Silver</span>
+            <span class="px-4 py-2 rounded-full border border-gold/50 text-gold text-sm">Gold</span>
+            <span class="px-4 py-2 rounded-full border border-rose-gold/50 text-rose-gold text-sm">Platinum</span>
+          </div>
+          <a href="club.html" class="inline-block px-8 py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Club'a Katıl — Ücretsiz</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Uzman Tavsiyeleri -->
+  <section id="uzman" class="py-16 bg-navy-light/50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 scroll-animate">
+        <p class="text-gold text-xs uppercase tracking-[0.3em] mb-2">Topluluk</p>
+        <h2 class="section-title text-3xl">Uzman Tavsiyeleri</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="expert-tips"></div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+      <div id="trust-badges"></div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/collection-covers.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/articles.js"></script>
+  <script>
+    onStoreReady(() => {
+      initSharedUI('home');
+
+      // Hero cover cards
+      document.getElementById('hero-covers-grid').innerHTML = `
+        <div class="grid grid-cols-2 gap-4">
+          ${CollectionCovers.renderHeroCard('k-beauty')}
+          ${CollectionCovers.renderHeroCard('gen-z-picks', { extraClass: '' })}
+          ${CollectionCovers.renderHeroCard('viral-tiktok', { extraClass: '' })}
+          ${CollectionCovers.renderHeroCard('ai-analiz', { button: true, onclick: 'SkinQuiz.open()' })}
+        </div>`;
+
+      // Collections
+      document.getElementById('collections-grid').innerHTML = renderCollectionsGrid(8);
+
+      // Categories
+      document.getElementById('categories-grid').innerHTML = RAVANON_DATA.categories.map(c => `
+        <a href="shop.html?category=${c.id}" class="luxury-card group p-8 text-center scroll-animate">
+          <span class="text-4xl block mb-3 group-hover:scale-110 transition-transform">${c.icon}</span>
+          <p class="text-cream font-medium">${c.name}</p>
+        </a>`).join('');
+
+      // New products carousel
+      const newProducts = RAVANON_DATA.products.filter(p => p.new);
+      document.getElementById('new-products').innerHTML = newProducts.map(p => renderProductCard(p)).join('');
+
+      // Bestsellers
+      const bestsellers = RAVANON_DATA.products.filter(p => p.bestseller).slice(0, 8);
+      document.getElementById('bestsellers-grid').innerHTML = bestsellers.map(p => renderProductCard(p)).join('');
+
+      // Picks (high rated)
+      const picks = [...RAVANON_DATA.products].sort((a, b) => b.rating - a.rating).slice(0, 4);
+      document.getElementById('picks-grid').innerHTML = picks.map(p => renderProductCard(p)).join('');
+
+      // Flash sales
+      const flash = RAVANON_DATA.products.filter(p => p.flash);
+      document.getElementById('flash-grid').innerHTML = flash.map(p => renderProductCard(p)).join('');
+
+      // Bundles
+      const bundles = RAVANON_DATA.products.filter(p => p.bundle);
+      document.getElementById('bundle-grid').innerHTML = bundles.map(p => `
+        <div class="flex gap-6 p-6 bg-navy-light rounded-2xl border border-gold/10 hover:border-gold/30 transition-all scroll-animate">
+          <div class="w-40 h-40 rounded-xl overflow-hidden flex-shrink-0">${getProductImageHTML(p, 'thumb')}</div>
+          <div class="flex flex-col justify-center">
+            <span class="text-xs text-gold uppercase tracking-wider mb-1">Bundle</span>
+            <h3 class="text-cream font-medium text-lg mb-2">${p.name}</h3>
+            <p class="text-cream/50 text-sm mb-3">${p.description}</p>
+            <div class="flex items-center gap-3">
+              <span class="text-cream/40 line-through text-sm">${formatPrice(p.originalPrice)}</span>
+              <span class="text-gold font-semibold text-xl">${formatPrice(p.price)}</span>
+              <button onclick="Cart.add(${p.id})" class="ml-auto px-4 py-2 bg-gold text-navy text-sm font-semibold rounded-lg hover:bg-gold-light transition-colors">Sepete Ekle</button>
+            </div>
+          </div>
+        </div>`).join('');
+
+      // Personalized (mock AI based on quiz or random)
+      const quizResults = Storage.get('quizResults', null);
+      let personalized;
+      if (quizResults) {
+        personalized = quizResults.recommendations.map(id => getProductById(id)).filter(Boolean);
+      } else {
+        personalized = RAVANON_DATA.products.filter(p => p.category === 'cilt-bakimi').slice(0, 4);
+      }
+      document.getElementById('personalized-grid').innerHTML = personalized.map(p => renderProductCard(p)).join('');
+
+      // Expert tips
+      Articles.renderCards('expert-tips');
+
+      // URL'den makale aç: index.html?article=1
+      const articleParam = getQueryParam('article');
+      if (articleParam) setTimeout(() => Articles.open(articleParam), 300);
+
+      // Trust badges
+      document.getElementById('trust-badges').innerHTML = renderTrustBadges();
+
+      initScrollAnimations();
+
+      window.addEventListener('ravanon-quiz-complete', () => {
+        const results = Storage.get('quizResults', null);
+        if (results?.recommendations) {
+          const personalized = results.recommendations.map(id => getProductById(id)).filter(Boolean);
+          document.getElementById('personalized-grid').innerHTML = personalized.map(p => renderProductCard(p)).join('');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

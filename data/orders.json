@@ -1,0 +1,486 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T15:20:48.134Z",
+  "orders": [
+    {
+      "id": "RVN-M2K8X4",
+      "userId": "u1",
+      "customerName": "Elif Kaya",
+      "customerEmail": "elif.kaya@email.com",
+      "customerPhone": "+90 532 111 2233",
+      "items": [
+        {
+          "productId": 6,
+          "name": "Soft Pinch Liquid Blush",
+          "brand": "Rare Beauty",
+          "quantity": 1,
+          "price": 1099
+        },
+        {
+          "productId": 2,
+          "name": "Hyaluronic Acid Serum",
+          "brand": "The Inkey List",
+          "quantity": 1,
+          "price": 389
+        }
+      ],
+      "subtotal": 1488,
+      "shipping": 0,
+      "discount": 0,
+      "total": 1488,
+      "status": "delivered",
+      "paymentMethod": "Papara",
+      "payment": {
+        "provider": "Papara",
+        "providerId": "papara",
+        "transactionId": "PPR-88291034",
+        "status": "paid",
+        "amount": 1488,
+        "paidAt": "2026-06-28T14:32:00Z"
+      },
+      "shippingInfo": {
+        "carrier": "MNG Kargo",
+        "carrierCode": "MNG",
+        "trackingNumber": "MNG9988776655",
+        "status": "delivered",
+        "estimatedDelivery": "2026-06-30",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş hazırlanıyor",
+            "location": "RAVANON Depo — İstanbul",
+            "createdAt": "2026-06-28T15:00:00Z"
+          },
+          {
+            "id": "e2",
+            "status": "picked_up",
+            "title": "Kargo firmasına teslim",
+            "location": "İstanbul",
+            "createdAt": "2026-06-28T18:00:00Z"
+          },
+          {
+            "id": "e3",
+            "status": "in_transit",
+            "title": "Dağıtım merkezinde",
+            "location": "İstanbul Aktarma",
+            "createdAt": "2026-06-29T08:00:00Z"
+          },
+          {
+            "id": "e4",
+            "status": "out_for_delivery",
+            "title": "Dağıtıma çıktı",
+            "location": "Kadıköy Şube",
+            "createdAt": "2026-06-30T09:00:00Z"
+          },
+          {
+            "id": "e5",
+            "status": "delivered",
+            "title": "Teslim edildi",
+            "location": "Müşteri adresi",
+            "createdAt": "2026-06-30T14:30:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Caferağa Mah. Moda Cad. No:12, Kadıköy, İstanbul",
+      "pointsEarned": 124,
+      "createdAt": "2026-06-28T14:30:00Z",
+      "updatedAt": "2026-06-30T10:00:00Z"
+    },
+    {
+      "id": "RVN-P9L2K1",
+      "userId": "u2",
+      "customerName": "Zeynep Arslan",
+      "customerEmail": "zeynep.a@email.com",
+      "customerPhone": "+90 533 444 5566",
+      "items": [
+        {
+          "productId": 48,
+          "name": "Relief Sun SPF50+",
+          "brand": "Beauty of Joseon",
+          "quantity": 2,
+          "price": 649
+        },
+        {
+          "productId": 38,
+          "name": "Snail Mucin Essence",
+          "brand": "COSRX",
+          "quantity": 1,
+          "price": 599
+        },
+        {
+          "productId": 17,
+          "name": "Pillow Talk Lipstick",
+          "brand": "Charlotte Tilbury",
+          "quantity": 1,
+          "price": 1699
+        }
+      ],
+      "subtotal": 3596,
+      "shipping": 0,
+      "discount": 200,
+      "total": 3396,
+      "status": "shipped",
+      "paymentMethod": "Kredi Kartı (3 Taksit)",
+      "payment": {
+        "provider": "iyzico",
+        "providerId": "iyzico",
+        "transactionId": "IYZ-2026062918001",
+        "status": "paid",
+        "amount": 3396,
+        "paidAt": "2026-06-29T18:01:00Z",
+        "installment": 3,
+        "cardBrand": "Visa",
+        "lastFour": "4821"
+      },
+      "shippingInfo": {
+        "carrier": "Yurtiçi Kargo",
+        "carrierCode": "YK",
+        "trackingNumber": "YK7849201563",
+        "status": "in_transit",
+        "estimatedDelivery": "2026-07-01",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş hazırlanıyor",
+            "location": "RAVANON Depo — İstanbul",
+            "createdAt": "2026-06-29T10:00:00Z"
+          },
+          {
+            "id": "e2",
+            "status": "picked_up",
+            "title": "Kargo firmasına teslim edildi",
+            "location": "İstanbul Aktarma",
+            "createdAt": "2026-06-29T16:00:00Z"
+          },
+          {
+            "id": "e3",
+            "status": "in_transit",
+            "title": "Dağıtım merkezinde",
+            "location": "Ankara Aktarma",
+            "createdAt": "2026-06-30T08:00:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Kızılay Mah. Atatürk Bulvarı No:45, Çankaya, Ankara",
+      "pointsEarned": 283,
+      "createdAt": "2026-06-29T18:00:00Z",
+      "updatedAt": "2026-06-30T08:00:00Z"
+    },
+    {
+      "id": "RVN-K7J3N2",
+      "userId": "u1",
+      "customerName": "Elif Kaya",
+      "customerEmail": "elif.kaya@email.com",
+      "items": [
+        {
+          "productId": 7,
+          "name": "Brazilian Bum Bum Cream",
+          "brand": "Sol de Janeiro",
+          "quantity": 1,
+          "price": 899
+        }
+      ],
+      "subtotal": 899,
+      "shipping": 49,
+      "discount": 0,
+      "total": 948,
+      "status": "delivered",
+      "paymentMethod": "Kapıda Ödeme",
+      "payment": {
+        "provider": "Kapıda Ödeme",
+        "providerId": "cod",
+        "transactionId": "COD-202606101600",
+        "status": "paid",
+        "amount": 948,
+        "paidAt": "2026-06-12T11:00:00Z"
+      },
+      "shippingInfo": {
+        "carrier": "Yurtiçi Kargo",
+        "carrierCode": "YK",
+        "trackingNumber": "YK1122334455",
+        "status": "delivered",
+        "estimatedDelivery": "2026-06-12",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş hazırlanıyor",
+            "location": "RAVANON Depo",
+            "createdAt": "2026-06-10T17:00:00Z"
+          },
+          {
+            "id": "e2",
+            "status": "picked_up",
+            "title": "Kargoya verildi",
+            "location": "İstanbul",
+            "createdAt": "2026-06-11T09:00:00Z"
+          },
+          {
+            "id": "e5",
+            "status": "delivered",
+            "title": "Teslim edildi",
+            "location": "Kadıköy",
+            "createdAt": "2026-06-12T11:00:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Kadıköy, İstanbul",
+      "pointsEarned": 89,
+      "createdAt": "2026-06-10T16:00:00Z",
+      "updatedAt": "2026-06-12T11:00:00Z"
+    },
+    {
+      "id": "RVN-A3F8W9",
+      "userId": "u10",
+      "customerName": "Fatma İnce",
+      "customerEmail": "fatma.i@email.com",
+      "items": [
+        {
+          "productId": 1,
+          "name": "Niacinamide Serum",
+          "brand": "The Ordinary",
+          "quantity": 2,
+          "price": 449
+        },
+        {
+          "productId": 39,
+          "name": "Heartleaf Toner",
+          "brand": "Anua",
+          "quantity": 1,
+          "price": 449
+        }
+      ],
+      "subtotal": 1347,
+      "shipping": 0,
+      "discount": 134,
+      "total": 1213,
+      "status": "processing",
+      "paymentMethod": "Kredi Kartı",
+      "payment": {
+        "provider": "iyzico",
+        "providerId": "iyzico",
+        "transactionId": "IYZ-202606300915",
+        "status": "paid",
+        "amount": 1213,
+        "paidAt": "2026-06-30T09:16:00Z",
+        "cardBrand": "Mastercard",
+        "lastFour": "9012"
+      },
+      "shippingInfo": {
+        "carrier": "HepsiJet",
+        "carrierCode": "HJ",
+        "trackingNumber": "HJ20260630001",
+        "status": "preparing",
+        "estimatedDelivery": "2026-07-02",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş hazırlanıyor",
+            "location": "RAVANON Depo — İstanbul",
+            "createdAt": "2026-06-30T10:00:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Erzene Mah. Bornova, İzmir",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T09:15:00Z",
+      "updatedAt": "2026-06-30T11:00:00Z"
+    },
+    {
+      "id": "RVN-B5H2Q7",
+      "userId": "u5",
+      "customerName": "Selin Yıldız",
+      "customerEmail": "selin.y@email.com",
+      "items": [
+        {
+          "productId": 6,
+          "name": "Soft Pinch Liquid Blush",
+          "brand": "Rare Beauty",
+          "quantity": 1,
+          "price": 1099
+        }
+      ],
+      "subtotal": 1099,
+      "shipping": 49,
+      "discount": 0,
+      "total": 1148,
+      "status": "confirmed",
+      "paymentMethod": "Kredi Kartı",
+      "payment": {
+        "provider": "PayTR",
+        "providerId": "paytr",
+        "transactionId": "PTR-202606301230",
+        "status": "paid",
+        "amount": 1148,
+        "paidAt": "2026-06-30T12:31:00Z",
+        "cardBrand": "Visa",
+        "lastFour": "3344"
+      },
+      "shippingInfo": {
+        "carrier": "Aras Kargo",
+        "carrierCode": "AR",
+        "trackingNumber": "AR5567891234",
+        "status": "out_for_delivery",
+        "estimatedDelivery": "2026-06-30",
+        "events": [
+          {
+            "id": "e1",
+            "status": "preparing",
+            "title": "Sipariş hazırlanıyor",
+            "location": "RAVANON Depo",
+            "createdAt": "2026-06-30T13:00:00Z"
+          },
+          {
+            "id": "e2",
+            "status": "picked_up",
+            "title": "Kargoya verildi",
+            "location": "Bursa Aktarma",
+            "createdAt": "2026-06-30T15:00:00Z"
+          },
+          {
+            "id": "e4",
+            "status": "out_for_delivery",
+            "title": "Dağıtıma çıktı",
+            "location": "Nilüfer Şube",
+            "createdAt": "2026-06-30T11:00:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Nilüfer, Bursa",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T12:30:00Z",
+      "updatedAt": "2026-06-30T12:30:00Z"
+    },
+    {
+      "id": "RVN-C1D4E6",
+      "userId": "u7",
+      "customerName": "Deniz Mavi",
+      "customerEmail": "deniz.m@email.com",
+      "items": [
+        {
+          "productId": 24,
+          "name": "Chance Eau Tendre EDT",
+          "brand": "Chanel",
+          "quantity": 1,
+          "price": 4299
+        }
+      ],
+      "subtotal": 4299,
+      "shipping": 0,
+      "discount": 0,
+      "total": 4299,
+      "status": "pending",
+      "paymentMethod": "Havale/EFT",
+      "payment": {
+        "provider": "Havale / EFT",
+        "providerId": "havale",
+        "transactionId": "HVL-202606301345",
+        "status": "pending",
+        "amount": 4299
+      },
+      "shippingInfo": {
+        "carrier": "—",
+        "carrierCode": "",
+        "trackingNumber": "—",
+        "status": "preparing",
+        "events": []
+      },
+      "shippingAddress": "Konak, İzmir",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-30T13:45:00Z",
+      "updatedAt": "2026-06-30T13:45:00Z"
+    },
+    {
+      "id": "RVN-D8G3F1",
+      "userId": "u4",
+      "customerName": "Can Öztürk",
+      "customerEmail": "can.ozturk@email.com",
+      "items": [
+        {
+          "productId": 2,
+          "name": "Hyaluronic Acid Serum",
+          "brand": "The Inkey List",
+          "quantity": 1,
+          "price": 389
+        }
+      ],
+      "subtotal": 389,
+      "shipping": 49,
+      "discount": 0,
+      "total": 438,
+      "status": "refunded",
+      "paymentMethod": "Kredi Kartı",
+      "payment": {
+        "provider": "iyzico",
+        "providerId": "iyzico",
+        "transactionId": "IYZ-202605201000",
+        "status": "refunded",
+        "amount": 438,
+        "paidAt": "2026-05-20T10:01:00Z",
+        "cardBrand": "Visa",
+        "lastFour": "7788"
+      },
+      "shippingInfo": {
+        "carrier": "Yurtiçi Kargo",
+        "carrierCode": "YK",
+        "trackingNumber": "YK9988776655",
+        "status": "returned",
+        "events": [
+          {
+            "id": "e1",
+            "status": "returned",
+            "title": "İade kargosu alındı",
+            "location": "İstanbul",
+            "createdAt": "2026-05-25T14:00:00Z"
+          }
+        ]
+      },
+      "shippingAddress": "Beşiktaş, İstanbul",
+      "pointsEarned": -39,
+      "createdAt": "2026-05-20T10:00:00Z",
+      "updatedAt": "2026-05-25T14:00:00Z"
+    },
+    {
+      "id": "RVN-E2H9K5",
+      "userId": "u2",
+      "customerName": "Zeynep Arslan",
+      "customerEmail": "zeynep.a@email.com",
+      "items": [
+        {
+          "productId": 38,
+          "name": "Snail Mucin Essence",
+          "brand": "COSRX",
+          "quantity": 3,
+          "price": 599
+        }
+      ],
+      "subtotal": 1797,
+      "shipping": 0,
+      "discount": 0,
+      "total": 1797,
+      "status": "cancelled",
+      "paymentMethod": "Kredi Kartı",
+      "payment": {
+        "provider": "iyzico",
+        "providerId": "iyzico",
+        "transactionId": "IYZ-202606150800",
+        "status": "refunded",
+        "amount": 1797
+      },
+      "shippingInfo": {
+        "carrier": "—",
+        "carrierCode": "",
+        "trackingNumber": "—",
+        "status": "preparing",
+        "events": []
+      },
+      "shippingAddress": "Çankaya, Ankara",
+      "pointsEarned": 0,
+      "createdAt": "2026-06-15T08:00:00Z",
+      "updatedAt": "2026-06-15T10:30:00Z"
+    }
+  ]
+}

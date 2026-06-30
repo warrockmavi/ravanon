@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T15:25:27.650Z",
+  "users": [
+    {
+      "id": "u1",
+      "name": "Elif Kaya",
+      "email": "elif.kaya@email.com",
+      "phone": "+90 532 111 2233",
+      "points": 1840,
+      "tier": "gold",
+      "lifetimeSpend": 12450,
+      "totalOrders": 18,
+      "status": "active",
+      "createdAt": "2025-03-12T08:00:00Z",
+      "lastLoginAt": "2026-06-30T10:22:00Z"
+    },
+    {
+      "id": "u2",
+      "name": "Zeynep Arslan",
+      "email": "zeynep.a@email.com",
+      "phone": "+90 533 222 3344",
+      "points": 5420,
+      "tier": "platinum",
+      "lifetimeSpend": 28900,
+      "totalOrders": 42,
+      "status": "active",
+      "createdAt": "2024-11-05T12:00:00Z",
+      "lastLoginAt": "2026-06-29T18:45:00Z"
+    },
+    {
+      "id": "u3",
+      "name": "Merve Demir",
+      "email": "merve.d@email.com",
+      "points": 680,
+      "tier": "silver",
+      "lifetimeSpend": 4200,
+      "totalOrders": 7,
+      "status": "active",
+      "createdAt": "2026-01-20T14:00:00Z",
+      "lastLoginAt": "2026-06-28T09:10:00Z"
+    },
+    {
+      "id": "u4",
+      "name": "Can Öztürk",
+      "email": "can.ozturk@email.com",
+      "points": 0,
+      "tier": "bronze",
+      "lifetimeSpend": 890,
+      "totalOrders": 2,
+      "status": "banned",
+      "createdAt": "2026-02-14T10:00:00Z",
+      "lastLoginAt": "2026-05-10T11:00:00Z"
+    },
+    {
+      "id": "u5",
+      "name": "Selin Yıldız",
+      "email": "selin.y@email.com",
+      "points": 220,
+      "tier": "bronze",
+      "lifetimeSpend": 1890,
+      "totalOrders": 4,
+      "status": "active",
+      "createdAt": "2026-04-02T09:00:00Z",
+      "lastLoginAt": "2026-06-30T07:55:00Z"
+    },
+    {
+      "id": "u6",
+      "name": "Ayşe Toprak",
+      "email": "ayse.t@email.com",
+      "points": 0,
+      "tier": "bronze",
+      "lifetimeSpend": 0,
+      "totalOrders": 0,
+      "status": "pending",
+      "createdAt": "2026-06-25T19:50:00Z",
+      "lastLoginAt": "2026-06-25T20:00:00Z"
+    },
+    {
+      "id": "u7",
+      "name": "Deniz Mavi",
+      "email": "deniz.m@email.com",
+      "points": 920,
+      "tier": "silver",
+      "lifetimeSpend": 6100,
+      "totalOrders": 11,
+      "status": "active",
+      "createdAt": "2025-08-18T11:00:00Z",
+      "lastLoginAt": "2026-06-30T12:00:00Z"
+    },
+    {
+      "id": "u8",
+      "name": "Ceren Bulut",
+      "email": "ceren.b@email.com",
+      "points": 0,
+      "tier": "bronze",
+      "lifetimeSpend": 0,
+      "totalOrders": 0,
+      "status": "invited",
+      "createdAt": "2026-06-29T15:00:00Z",
+      "lastLoginAt": ""
+    },
+    {
+      "id": "u9",
+      "name": "Oğuzhan Mavi Bafralı",
+      "email": "oguzhan@ravanon.com",
+      "points": 8900,
+      "tier": "platinum",
+      "lifetimeSpend": 0,
+      "totalOrders": 0,
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLoginAt": "2026-06-30T14:00:00Z"
+    },
+    {
+      "id": "u10",
+      "name": "Fatma İnce",
+      "email": "fatma.i@email.com",
+      "points": 2100,
+      "tier": "gold",
+      "lifetimeSpend": 15800,
+      "totalOrders": 24,
+      "status": "active",
+      "createdAt": "2025-06-30T08:00:00Z",
+      "lastLoginAt": "2026-06-27T16:20:00Z"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Sepetim — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="font-display text-4xl font-light mb-8">Sepetim</h1>
+
+      <div id="cart-empty" class="hidden text-center py-20">
+        <span class="text-6xl block mb-4">🛒</span>
+        <h2 class="text-2xl font-light text-cream mb-2">Sepetiniz boş</h2>
+        <p class="text-cream/50 mb-8">Henüz sepetinize ürün eklemediniz</p>
+        <a href="shop.html" class="inline-block px-8 py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Alışverişe Başla</a>
+      </div>
+
+      <div id="cart-content" class="hidden grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-4" id="cart-items"></div>
+
+        <div class="lg:col-span-1">
+          <div class="bg-navy-light rounded-2xl border border-gold/10 p-6 sticky top-36">
+            <h2 class="font-medium text-cream mb-6">Sipariş Özeti</h2>
+
+            <div class="mb-4">
+              <label class="text-xs text-cream/50 block mb-2">İndirim Kodu</label>
+              <div class="flex gap-2">
+                <input type="text" id="discount-code" placeholder="RAVANON20" class="flex-1 bg-navy border border-gold/20 rounded-lg px-3 py-2 text-sm text-cream focus:outline-none focus:border-gold/50 uppercase">
+                <button onclick="CartPage.applyDiscount()" class="px-4 py-2 bg-gold/10 text-gold text-sm rounded-lg hover:bg-gold/20 transition-colors">Uygula</button>
+              </div>
+              <p class="text-xs text-cream/30 mt-2">Örnek: RAVANON20, CLUB50, WELCOME15</p>
+            </div>
+
+            <div class="space-y-3 text-sm border-t border-gold/10 pt-4">
+              <div class="flex justify-between"><span class="text-cream/50">Ara Toplam</span><span id="subtotal" class="text-cream">₺0</span></div>
+              <div class="flex justify-between"><span class="text-cream/50">İndirim</span><span id="discount-amount" class="text-rose-gold">-₺0</span></div>
+              <div class="flex justify-between text-base font-medium border-t border-gold/10 pt-3">
+                <span>Toplam</span><span id="total" class="text-gold text-xl">₺0</span>
+              </div>
+            </div>
+
+            <p class="text-xs text-cream/40 mt-4" id="free-shipping-msg"></p>
+
+            <div id="cart-club-earn" class="hidden mt-4 p-3 rounded-xl border border-[#E91E8C]/20 bg-[#FFF0F3]/40 text-sm">
+              <p class="text-cream/60 text-xs mb-1">⭐ RAVANON Club ile kazanacağınız</p>
+              <p class="text-[#E91E8C] font-semibold" id="cart-points-estimate">+0 puan</p>
+            </div>
+            <div id="cart-club-join" class="hidden mt-4 p-3 rounded-xl border border-gold/15 text-center text-xs">
+              <a href="account.html" class="text-gold hover:underline">Club'a katılın</a> — bu alışverişten puan kazanın + 100 hoş geldin bonusu
+            </div>
+
+            <a href="checkout.html" id="checkout-btn" class="block w-full mt-6 py-4 bg-gold text-navy font-semibold rounded-xl text-center hover:bg-gold-light transition-colors">
+              Ödemeye Geç
+            </a>
+            <a href="shop.html" class="block text-center text-sm text-gold mt-4 hover:underline">Alışverişe Devam Et</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const CartPage = {
+      init() {
+        initSharedUI();
+        this.render();
+        window.addEventListener('ravanon-update', () => this.render());
+      },
+
+      render() {
+        const items = Cart.getItems();
+        const empty = document.getElementById('cart-empty');
+        const content = document.getElementById('cart-content');
+
+        if (!items.length) {
+          empty.classList.remove('hidden');
+          content.classList.add('hidden');
+          return;
+        }
+
+        empty.classList.add('hidden');
+        content.classList.remove('hidden');
+
+        document.getElementById('cart-items').innerHTML = items.map(item => `
+          <div class="flex gap-4 p-4 bg-navy-light rounded-xl border border-gold/10">
+            <a href="product.html?id=${item.product.id}" class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">${getProductImageHTML(item.product, 'thumb')}</a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-gold/70">${item.product.brand}</p>
+              <a href="product.html?id=${item.product.id}" class="text-cream font-medium hover:text-gold transition-colors">${item.product.name}</a>
+              <p class="text-gold font-semibold mt-1">${formatPrice(item.product.price)}</p>
+            </div>
+            <div class="flex flex-col items-end justify-between">
+              <button onclick="Cart.remove(${item.product.id});CartPage.render()" class="text-cream/30 hover:text-red-400 text-sm">Kaldır</button>
+              <div class="flex items-center border border-gold/20 rounded-lg">
+                <button onclick="Cart.updateQty(${item.product.id}, ${item.quantity - 1});CartPage.render()" class="px-3 py-1 text-gold hover:bg-gold/10">−</button>
+                <span class="px-3 py-1 text-sm">${item.quantity}</span>
+                <button onclick="Cart.updateQty(${item.product.id}, ${item.quantity + 1});CartPage.render()" class="px-3 py-1 text-gold hover:bg-gold/10">+</button>
+              </div>
+              <p class="text-sm text-cream/60">${formatPrice(item.product.price * item.quantity)}</p>
+            </div>
+          </div>`).join('');
+
+        const subtotal = Cart.getSubtotal();
+        const discount = Discount.calculate(subtotal);
+        const total = subtotal - discount;
+
+        document.getElementById('subtotal').textContent = formatPrice(subtotal);
+        document.getElementById('discount-amount').textContent = discount ? '-' + formatPrice(discount) : formatPrice(0);
+        document.getElementById('total').textContent = formatPrice(total);
+
+        const remaining = 750 - subtotal;
+        document.getElementById('free-shipping-msg').textContent = remaining > 0
+          ? `Ücretsiz kargo için ${formatPrice(remaining)} daha ekleyin`
+          : '🎉 Ücretsiz kargo hak ettiniz!';
+
+        const clubEarn = document.getElementById('cart-club-earn');
+        const clubJoin = document.getElementById('cart-club-join');
+        const summary = Auth.getClubSummary?.();
+        if (summary && total > 0) {
+          clubEarn.classList.remove('hidden');
+          clubJoin.classList.add('hidden');
+          const pts = calculatePointsEarned(total);
+          document.getElementById('cart-points-estimate').textContent = `+${pts} puan (${summary.tier.name} · ${summary.rateLabel})`;
+        } else if (total > 0) {
+          clubEarn.classList.add('hidden');
+          clubJoin.classList.remove('hidden');
+        } else {
+          clubEarn.classList.add('hidden');
+          clubJoin.classList.add('hidden');
+        }
+      },
+
+      applyDiscount() {
+        const code = document.getElementById('discount-code').value;
+        if (Discount.apply(code)) this.render();
+      }
+    };
+
+    onStoreReady(() => CartPage.init());
+  </script>
+</body>
+</html>

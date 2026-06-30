@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Mağaza — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <!-- Page header -->
+      <div class="mb-8 scroll-animate">
+        <h1 class="font-display text-4xl md:text-5xl font-light mb-2">Mağaza</h1>
+        <p class="text-cream/50" id="product-count">48 ürün</p>
+        <p class="text-sm text-gold mt-1 hidden" id="collection-banner"></p>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Filters Sidebar -->
+        <aside class="lg:w-72 flex-shrink-0">
+          <div class="bg-navy-light rounded-2xl border border-gold/10 p-6 sticky top-36 space-y-6">
+            <div class="flex items-center justify-between">
+              <h2 class="font-medium text-cream">Filtreler</h2>
+              <button onclick="ShopPage.resetFilters()" class="text-xs text-gold hover:underline">Temizle</button>
+            </div>
+
+            <!-- Category -->
+            <div>
+              <h3 class="text-xs text-gold uppercase tracking-wider mb-3">Kategori</h3>
+              <div class="space-y-2" id="filter-category"></div>
+            </div>
+
+            <!-- Brand -->
+            <div>
+              <h3 class="text-xs text-gold uppercase tracking-wider mb-3">Marka</h3>
+              <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar" id="filter-brand"></div>
+            </div>
+
+            <!-- Price -->
+            <div>
+              <h3 class="text-xs text-gold uppercase tracking-wider mb-3">Fiyat Aralığı</h3>
+              <div class="flex gap-2 items-center">
+                <input type="number" id="price-min" placeholder="Min" class="w-full bg-navy border border-gold/20 rounded-lg px-3 py-2 text-sm text-cream focus:outline-none focus:border-gold/50">
+                <span class="text-cream/30">—</span>
+                <input type="number" id="price-max" placeholder="Max" class="w-full bg-navy border border-gold/20 rounded-lg px-3 py-2 text-sm text-cream focus:outline-none focus:border-gold/50">
+              </div>
+            </div>
+
+            <!-- Skin Type -->
+            <div>
+              <h3 class="text-xs text-gold uppercase tracking-wider mb-3">Cilt Tipi</h3>
+              <div class="space-y-2" id="filter-skin"></div>
+            </div>
+
+            <!-- Toggles -->
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="filter-vegan" class="filter-checkbox accent-gold w-4 h-4">
+                <span class="text-sm text-cream/70">Vegan</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="filter-cruelty" class="filter-checkbox accent-gold w-4 h-4">
+                <span class="text-sm text-cream/70">Cruelty-Free</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="filter-sale" class="filter-checkbox accent-gold w-4 h-4">
+                <span class="text-sm text-cream/70">İndirimli</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="filter-popular" class="filter-checkbox accent-gold w-4 h-4">
+                <span class="text-sm text-cream/70">En Popüler</span>
+              </label>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Products -->
+        <div class="flex-1">
+          <div class="flex items-center justify-between mb-6">
+            <select id="sort-select" class="bg-navy-light border border-gold/20 rounded-lg px-4 py-2 text-sm text-cream focus:outline-none focus:border-gold/50">
+              <option value="default">Önerilen</option>
+              <option value="price-asc">Fiyat: Düşük → Yüksek</option>
+              <option value="price-desc">Fiyat: Yüksek → Düşük</option>
+              <option value="rating">En Yüksek Puan</option>
+              <option value="newest">En Yeni</option>
+            </select>
+            <div class="flex gap-2">
+              <button onclick="ShopPage.setView('grid')" id="view-grid" class="p-2 rounded-lg border border-gold/30 text-gold" title="Grid">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              </button>
+              <button onclick="ShopPage.setView('list')" id="view-list" class="p-2 rounded-lg border border-gold/10 text-cream/50 hover:text-gold" title="Liste">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="products-container" class="product-grid"></div>
+          <div id="empty-state" class="hidden text-center py-20">
+            <span class="text-5xl block mb-4">🔍</span>
+            <p class="text-cream/50 text-lg">Aramanızla eşleşen ürün bulunamadı</p>
+            <button onclick="ShopPage.resetFilters()" class="mt-4 text-gold hover:underline">Filtreleri Temizle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/collection-covers.js"></script>
+  <script src="js/collection-promo.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const ShopPage = {
+      view: 'grid',
+      filters: { categories: [], brands: [], skinTypes: [], vegan: false, crueltyFree: false, onSale: false, popular: false, priceMin: null, priceMax: null, collection: null },
+
+      init() {
+        initSharedUI('shop');
+        this.renderFilterOptions();
+        this.parseURLParams();
+        this.bindEvents();
+        this.applyFilters();
+        const collectionId = getQueryParam('collection');
+        if (collectionId && typeof CollectionPromo !== 'undefined') {
+          CollectionPromo.initForShop(collectionId);
+        }
+      },
+
+      parseURLParams() {
+        const cat = getQueryParam('category');
+        if (cat) this.filters.categories = [cat];
+        const filter = getQueryParam('filter');
+        if (filter === 'new') this.filters.new = true;
+        if (filter === 'flash') this.filters.onSale = true;
+        if (filter === 'bestseller') this.filters.popular = true;
+        const collectionId = getQueryParam('collection');
+        if (collectionId) {
+          this.filters.collection = getCollectionById(collectionId);
+          const banner = document.getElementById('collection-banner');
+          if (banner && this.filters.collection) {
+            banner.textContent = `${this.filters.collection.emoji} ${this.filters.collection.name} — ${this.filters.collection.tagline}`;
+            banner.classList.remove('hidden');
+            document.querySelector('h1').textContent = this.filters.collection.name;
+          }
+          if (collectionId === 'viral-tiktok') {
+            document.body.classList.add('shop-tiktok-viral');
+          }
+        }
+      },
+
+      renderFilterOptions() {
+        document.getElementById('filter-category').innerHTML = RAVANON_DATA.categories.map(c => `
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" value="${c.id}" class="cat-filter accent-gold w-4 h-4" ${this.filters.categories.includes(c.id) ? 'checked' : ''}>
+            <span class="text-sm text-cream/70">${c.icon} ${c.name}</span>
+          </label>`).join('');
+
+        const brands = [...new Set(RAVANON_DATA.products.map(p => p.brand))].sort();
+        document.getElementById('filter-brand').innerHTML = brands.map(b => `
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" value="${b}" class="brand-filter accent-gold w-4 h-4">
+            <span class="text-sm text-cream/70">${b}</span>
+          </label>`).join('');
+
+        document.getElementById('filter-skin').innerHTML = RAVANON_DATA.skinTypes.map(s => `
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" value="${s}" class="skin-filter accent-gold w-4 h-4">
+            <span class="text-sm text-cream/70">${s}</span>
+          </label>`).join('');
+      },
+
+      bindEvents() {
+        document.querySelectorAll('.cat-filter').forEach(el => el.addEventListener('change', () => this.applyFilters()));
+        document.querySelectorAll('.brand-filter').forEach(el => el.addEventListener('change', () => this.applyFilters()));
+        document.querySelectorAll('.skin-filter').forEach(el => el.addEventListener('change', () => this.applyFilters()));
+        ['filter-vegan', 'filter-cruelty', 'filter-sale', 'filter-popular'].forEach(id => {
+          document.getElementById(id)?.addEventListener('change', () => this.applyFilters());
+        });
+        document.getElementById('price-min')?.addEventListener('input', debounce(() => this.applyFilters(), 400));
+        document.getElementById('price-max')?.addEventListener('input', debounce(() => this.applyFilters(), 400));
+        document.getElementById('sort-select')?.addEventListener('change', () => this.applyFilters());
+      },
+
+      getFilteredProducts() {
+        let products = [...RAVANON_DATA.products];
+        if (this.filters.collection) {
+          const ids = getCollectionProducts(this.filters.collection).map(p => p.id);
+          products = products.filter(p => ids.includes(p.id));
+        }
+        const cats = [...document.querySelectorAll('.cat-filter:checked')].map(el => el.value);
+        const brands = [...document.querySelectorAll('.brand-filter:checked')].map(el => el.value);
+        const skins = [...document.querySelectorAll('.skin-filter:checked')].map(el => el.value);
+
+        if (cats.length) products = products.filter(p => cats.includes(p.category));
+        if (brands.length) products = products.filter(p => brands.includes(p.brand));
+        if (skins.length) products = products.filter(p => p.skinType?.some(s => skins.includes(s)));
+        if (document.getElementById('filter-vegan')?.checked) products = products.filter(p => p.vegan);
+        if (document.getElementById('filter-cruelty')?.checked) products = products.filter(p => p.crueltyFree);
+        if (document.getElementById('filter-sale')?.checked) products = products.filter(p => p.originalPrice || p.flash);
+        if (document.getElementById('filter-popular')?.checked) products = products.filter(p => p.bestseller);
+        if (this.filters.new) products = products.filter(p => p.new);
+
+        const min = parseFloat(document.getElementById('price-min')?.value);
+        const max = parseFloat(document.getElementById('price-max')?.value);
+        if (!isNaN(min)) products = products.filter(p => p.price >= min);
+        if (!isNaN(max)) products = products.filter(p => p.price <= max);
+
+        const sort = document.getElementById('sort-select')?.value;
+        if (sort === 'price-asc') products.sort((a, b) => a.price - b.price);
+        else if (sort === 'price-desc') products.sort((a, b) => b.price - a.price);
+        else if (sort === 'rating') products.sort((a, b) => b.rating - a.rating);
+        else if (sort === 'newest') products.sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
+
+        return products;
+      },
+
+      applyFilters() {
+        const products = this.getFilteredProducts();
+        const container = document.getElementById('products-container');
+        const empty = document.getElementById('empty-state');
+        document.getElementById('product-count').textContent = `${products.length} ürün`;
+
+        if (!products.length) {
+          container.innerHTML = '';
+          container.classList.add('hidden');
+          empty.classList.remove('hidden');
+          return;
+        }
+
+        empty.classList.add('hidden');
+        container.classList.remove('hidden');
+        container.className = this.view === 'grid' ? 'product-grid' : 'space-y-4';
+        container.innerHTML = products.map(p => renderProductCard(p, { listView: this.view === 'list' })).join('');
+        initScrollAnimations();
+      },
+
+      setView(view) {
+        this.view = view;
+        document.getElementById('view-grid').className = view === 'grid' ? 'p-2 rounded-lg border border-gold/30 text-gold' : 'p-2 rounded-lg border border-gold/10 text-cream/50 hover:text-gold';
+        document.getElementById('view-list').className = view === 'list' ? 'p-2 rounded-lg border border-gold/30 text-gold' : 'p-2 rounded-lg border border-gold/10 text-cream/50 hover:text-gold';
+        this.applyFilters();
+      },
+
+      resetFilters() {
+        document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+        document.getElementById('price-min').value = '';
+        document.getElementById('price-max').value = '';
+        document.getElementById('sort-select').value = 'default';
+        this.filters = { categories: [], brands: [], skinTypes: [], vegan: false, crueltyFree: false, onSale: false, popular: false };
+        this.applyFilters();
+      }
+    };
+
+    onStoreReady(() => ShopPage.init());
+  </script>
+</body>
+</html>

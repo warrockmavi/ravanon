@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T15:19:24.465Z",
+  "campaigns": [
+    {
+      "id": "c1",
+      "name": "Hoş Geldin İndirimi",
+      "code": "WELCOME15",
+      "type": "percent",
+      "value": 15,
+      "minOrder": 0,
+      "usageCount": 342,
+      "usageLimit": 1000,
+      "active": true,
+      "startsAt": "2026-01-01",
+      "endsAt": "2026-12-31"
+    },
+    {
+      "id": "c2",
+      "name": "RAVANON20",
+      "code": "RAVANON20",
+      "type": "percent",
+      "value": 20,
+      "minOrder": 0,
+      "usageCount": 120,
+      "active": true,
+      "startsAt": "2026-01-01",
+      "endsAt": "2026-12-31"
+    },
+    {
+      "id": "c3",
+      "name": "Club Sabit İndirim",
+      "code": "CLUB50",
+      "type": "fixed",
+      "value": 50,
+      "minOrder": 300,
+      "usageCount": 89,
+      "active": true,
+      "startsAt": "2026-01-01",
+      "endsAt": "2026-12-31"
+    },
+    {
+      "id": "c4",
+      "name": "Ücretsiz Kargo",
+      "code": "KARGO0",
+      "type": "shipping",
+      "value": 0,
+      "minOrder": 750,
+      "usageCount": 1204,
+      "active": true,
+      "startsAt": "2026-01-01",
+      "endsAt": "2026-12-31"
+    },
+    {
+      "id": "c5",
+      "name": "Yaz Flaş",
+      "code": "YAZ2026",
+      "type": "percent",
+      "value": 20,
+      "minOrder": 500,
+      "usageCount": 89,
+      "usageLimit": 500,
+      "active": true,
+      "startsAt": "2026-06-01",
+      "endsAt": "2026-08-31"
+    }
+  ]
+}

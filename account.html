@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Hesabım — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <!-- Invite acceptance -->
+      <div id="invite-section" class="hidden max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h1 class="font-display text-4xl font-light mb-2">Davetiniz Var!</h1>
+          <p class="text-cream/50">RAVANON Club'a katılmak için hesabınızı tamamlayın</p>
+        </div>
+        <form id="invite-form" class="bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-4" onsubmit="AccountPage.acceptInvite(event)">
+          <input type="tel" id="invite-phone" placeholder="Telefon (isteğe bağlı)" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="date" id="invite-birthday" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="password" id="invite-password" placeholder="Şifre belirleyin (min. 6 karakter)" required minlength="6" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <button type="submit" class="w-full py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Daveti Kabul Et</button>
+        </form>
+      </div>
+
+      <!-- Auth Forms (not logged in) -->
+      <div id="auth-section" class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h1 class="font-display text-4xl font-light mb-2">Hesabım</h1>
+          <p class="text-cream/50">Giriş yapın veya yeni hesap oluşturun</p>
+        </div>
+
+        <div class="flex gap-2 mb-6 bg-navy-light rounded-xl p-1">
+          <button onclick="AccountPage.showAuthTab('login')" id="tab-login" class="flex-1 py-2.5 rounded-lg text-sm font-medium bg-gold text-navy transition-colors">Giriş Yap</button>
+          <button onclick="AccountPage.showAuthTab('register')" id="tab-register" class="flex-1 py-2.5 rounded-lg text-sm font-medium text-cream/60 transition-colors">Kayıt Ol</button>
+        </div>
+
+        <form id="login-form" class="bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-4" onsubmit="AccountPage.login(event)">
+          <input type="text" id="login-email" placeholder="E-posta veya telefon" required autocomplete="username" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="password" id="login-password" placeholder="Şifre" required class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <button type="submit" class="w-full py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Giriş Yap</button>
+        </form>
+
+        <form id="register-form" class="hidden bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-4" onsubmit="AccountPage.register(event)">
+          <input type="text" id="reg-name" placeholder="Ad Soyad" required class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="email" id="reg-email" placeholder="E-posta" required class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="tel" id="reg-phone" placeholder="Telefon" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="date" id="reg-birthday" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <input type="password" id="reg-password" placeholder="Şifre (min. 6 karakter)" required minlength="6" class="w-full bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+          <button type="submit" class="w-full py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Kayıt Ol — 100 Puan Hediye!</button>
+        </form>
+      </div>
+
+      <!-- Dashboard (logged in) -->
+      <div id="dashboard-section" class="hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h1 class="font-display text-4xl font-light">Merhaba, <span id="user-name" class="text-gold"></span></h1>
+            <p class="text-cream/50 mt-1" id="user-email"></p>
+          </div>
+          <button onclick="Auth.logout()" class="px-6 py-2.5 border border-gold/30 text-gold rounded-xl hover:bg-gold/10 transition-colors text-sm">Çıkış Yap</button>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-4 mb-8">
+          <button onclick="AccountPage.showPanel('orders')" class="panel-tab p-4 bg-navy-light rounded-xl border border-gold/10 hover:border-gold/30 text-left transition-colors" data-panel="orders">
+            <span class="text-2xl block mb-2">📦</span>
+            <p class="font-medium">Siparişlerim</p>
+          </button>
+          <button onclick="AccountPage.showPanel('club')" class="panel-tab p-4 bg-navy-light rounded-xl border border-gold/10 hover:border-gold/30 text-left transition-colors" data-panel="club">
+            <span class="text-2xl block mb-2">⭐</span>
+            <p class="font-medium">RAVANON Club</p>
+          </button>
+          <button onclick="AccountPage.showPanel('wishlist')" class="panel-tab p-4 bg-navy-light rounded-xl border border-gold/10 hover:border-gold/30 text-left transition-colors" data-panel="wishlist">
+            <span class="text-2xl block mb-2">♥</span>
+            <p class="font-medium">Favorilerim</p>
+          </button>
+          <button onclick="AccountPage.showPanel('addresses')" class="panel-tab p-4 bg-navy-light rounded-xl border border-gold/10 hover:border-gold/30 text-left transition-colors" data-panel="addresses">
+            <span class="text-2xl block mb-2">📍</span>
+            <p class="font-medium">Adreslerim</p>
+          </button>
+        </div>
+
+        <div id="panel-orders" class="panel-content bg-navy-light rounded-2xl border border-gold/10 p-6">
+          <h2 class="font-medium text-lg mb-4">Sipariş Geçmişi</h2>
+          <div id="orders-list"></div>
+        </div>
+
+        <div id="panel-club" class="panel-content hidden bg-navy-light rounded-2xl border border-gold/10 p-6">
+          <div id="club-mini-dashboard"></div>
+          <div id="club-point-history" class="mt-6"></div>
+          <a href="club.html" class="inline-block mt-4 text-gold text-sm hover:underline">Club detaylarına git →</a>
+        </div>
+
+        <div id="panel-wishlist" class="panel-content hidden">
+          <div class="product-grid" id="wishlist-grid"></div>
+          <div id="wishlist-empty" class="hidden text-center py-12 text-cream/50">
+            <span class="text-4xl block mb-3">♡</span>
+            <p>Favori listeniz boş</p>
+            <a href="shop.html" class="text-gold text-sm mt-2 inline-block hover:underline">Mağazaya git</a>
+          </div>
+        </div>
+
+        <div id="panel-addresses" class="panel-content hidden bg-navy-light rounded-2xl border border-gold/10 p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-medium text-lg">Kayıtlı Adresler</h2>
+            <button onclick="AccountPage.showAddAddress()" class="text-sm text-gold hover:underline">+ Yeni Adres</button>
+          </div>
+          <div id="addresses-list" class="space-y-3"></div>
+          <form id="add-address-form" class="hidden mt-4 space-y-3 p-4 bg-navy rounded-xl border border-gold/10" onsubmit="AccountPage.addAddress(event)">
+            <input type="text" id="addr-title" placeholder="Adres Başlığı (Ev, İş...)" required class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+            <input type="text" id="addr-line" placeholder="Adres" required class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+            <div class="grid grid-cols-2 gap-3">
+              <input type="text" id="addr-city" placeholder="Şehir" required class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <input type="text" id="addr-district" placeholder="İlçe" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+            </div>
+            <button type="submit" class="px-6 py-2.5 bg-gold text-navy text-sm font-semibold rounded-xl">Kaydet</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const AccountPage = {
+      inviteToken: null,
+
+      async init() {
+        initSharedUI('account');
+        const deepLink = await Auth.handleAccountParams();
+        if (deepLink === 'impersonate' || (typeof deepLink === 'object' && deepLink?.type === 'impersonate')) {
+          this.showDashboard();
+          return;
+        }
+        if (typeof deepLink === 'object' && deepLink?.type === 'invite') {
+          this.inviteToken = deepLink.token;
+          this.showInvite();
+          return;
+        }
+        if (Auth.isLoggedIn()) this.showDashboard();
+        else this.showAuth();
+
+        const hash = window.location.hash.replace('#', '');
+        if (hash && Auth.isLoggedIn()) setTimeout(() => this.showPanel(hash), 100);
+
+        window.addEventListener('ravanon-club-update', () => {
+          if (Auth.isLoggedIn()) {
+            this.renderClubMini();
+            this.renderOrders();
+          }
+        });
+      },
+
+      showAuth() {
+        document.getElementById('invite-section')?.classList.add('hidden');
+        document.getElementById('auth-section').classList.remove('hidden');
+        document.getElementById('dashboard-section').classList.add('hidden');
+      },
+
+      showInvite() {
+        document.getElementById('invite-section')?.classList.remove('hidden');
+        document.getElementById('auth-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.add('hidden');
+      },
+
+      showDashboard() {
+        document.getElementById('invite-section')?.classList.add('hidden');
+        document.getElementById('auth-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.remove('hidden');
+        const user = Auth.getUser();
+        document.getElementById('user-name').textContent = user.name.split(' ')[0];
+        document.getElementById('user-email').textContent = user.email;
+        this.renderOrders();
+        this.renderClubMini();
+        this.renderWishlist();
+        this.renderAddresses();
+        this.showPanel('orders');
+      },
+
+      showAuthTab(tab) {
+        document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+        document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+        document.getElementById('tab-login').className = tab === 'login' ? 'flex-1 py-2.5 rounded-lg text-sm font-medium bg-gold text-navy transition-colors' : 'flex-1 py-2.5 rounded-lg text-sm font-medium text-cream/60 transition-colors';
+        document.getElementById('tab-register').className = tab === 'register' ? 'flex-1 py-2.5 rounded-lg text-sm font-medium bg-gold text-navy transition-colors' : 'flex-1 py-2.5 rounded-lg text-sm font-medium text-cream/60 transition-colors';
+      },
+
+      async login(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Giriş yapılıyor...'; }
+        const ok = await Auth.login(
+          document.getElementById('login-email').value,
+          document.getElementById('login-password').value
+        );
+        if (btn) { btn.disabled = false; btn.textContent = 'Giriş Yap'; }
+        if (ok) this.showDashboard();
+      },
+
+      async acceptInvite(e) {
+        e.preventDefault();
+        if (!this.inviteToken) {
+          showToast('Geçersiz davet bağlantısı', 'error');
+          return;
+        }
+        const btn = e.target.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Kaydediliyor...'; }
+        const ok = await Auth.acceptInvite(this.inviteToken, {
+          phone: document.getElementById('invite-phone').value,
+          birthday: document.getElementById('invite-birthday').value,
+          password: document.getElementById('invite-password').value
+        });
+        if (btn) { btn.disabled = false; btn.textContent = 'Daveti Kabul Et'; }
+        if (ok) {
+          this.inviteToken = null;
+          history.replaceState(null, '', 'account.html');
+          this.showDashboard();
+        }
+      },
+
+      async register(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Kayıt olunuyor...'; }
+        const ok = await Auth.register({
+          name: document.getElementById('reg-name').value,
+          email: document.getElementById('reg-email').value,
+          phone: document.getElementById('reg-phone').value,
+          birthday: document.getElementById('reg-birthday').value,
+          password: document.getElementById('reg-password').value
+        });
+        if (btn) { btn.disabled = false; btn.textContent = 'Kayıt Ol — 100 Puan Hediye!'; }
+        if (ok) this.showDashboard();
+      },
+
+      showPanel(panel) {
+        document.querySelectorAll('.panel-content').forEach(el => el.classList.add('hidden'));
+        document.getElementById(`panel-${panel}`)?.classList.remove('hidden');
+        document.querySelectorAll('.panel-tab').forEach(el => {
+          el.classList.toggle('border-gold/30', el.dataset.panel === panel);
+        });
+      },
+
+      renderOrders() {
+        const user = Auth.getUser();
+        const orders = Orders.getForUser(user?.id);
+        const container = document.getElementById('orders-list');
+        if (!orders.length) {
+          container.innerHTML = '<p class="text-cream/50 text-center py-8">Henüz siparişiniz yok</p>';
+          return;
+        }
+        container.innerHTML = orders.map(o => `<div class="flex items-center justify-between p-4 bg-navy rounded-xl mb-3">
+            <div>
+              <p class="text-cream font-medium text-sm">${o.id}</p>
+              <p class="text-xs text-cream/40">${new Date(o.createdAt).toLocaleDateString('tr-TR')} · ${o.items.length} ürün</p>
+            </div>
+            <div class="text-right">
+              <p class="text-gold font-semibold">${formatPrice(o.total)}</p>
+              <span class="text-xs px-2 py-0.5 bg-gold/10 text-gold rounded-full">${o.status}</span>
+            </div>
+          </div>`).join('');
+      },
+
+      renderClubMini() {
+        const summary = Auth.getClubSummary();
+        if (!summary) return;
+        const { user, tier, next, progress, rateLabel } = summary;
+
+        document.getElementById('club-mini-dashboard').innerHTML = `
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold" style="background:${tier.color}20;color:${tier.color};border:2px solid ${tier.color}">${tier.name[0]}</div>
+            <div>
+              <p class="text-cream font-medium">${tier.name} Üye</p>
+              <p class="text-2xl text-gold font-semibold">${user.points.toLocaleString('tr-TR')} puan</p>
+              <p class="text-xs text-cream/40">${rateLabel}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mb-4 text-center">
+            <div class="p-3 bg-navy rounded-xl"><p class="text-xs text-cream/40">Toplam Harcama</p><p class="text-sm text-cream font-medium">${formatPrice(user.lifetimeSpend || 0)}</p></div>
+            <div class="p-3 bg-navy rounded-xl"><p class="text-xs text-cream/40">Sipariş</p><p class="text-sm text-cream font-medium">${user.totalOrders || 0}</p></div>
+          </div>
+          ${next ? `<div class="mb-2 flex justify-between text-xs text-cream/50"><span>${tier.name}</span><span>${next.name} için ${(next.minPoints - user.points).toLocaleString('tr-TR')} puan</span></div>
+          <div class="h-2 bg-navy rounded-full overflow-hidden"><div class="h-full rounded-full transition-all duration-1000" style="width:${progress}%;background:${tier.color}"></div></div>` : '<p class="text-gold text-sm">En üst seviyedesiniz! 🎉</p>'}`;
+
+        const history = user.pointHistory || [];
+        const histEl = document.getElementById('club-point-history');
+        if (history.length) {
+          histEl.innerHTML = `
+            <h3 class="text-sm font-medium text-cream mb-3">Puan Geçmişi</h3>
+            <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
+              ${history.slice(0, 10).map(h => `
+                <div class="flex justify-between items-center p-3 bg-navy rounded-lg text-sm">
+                  <div>
+                    <p class="text-cream/80">${h.description}</p>
+                    <p class="text-[10px] text-cream/40">${new Date(h.createdAt).toLocaleDateString('tr-TR')}</p>
+                  </div>
+                  <span class="text-[#E91E8C] font-semibold">+${h.amount}</span>
+                </div>`).join('')}
+            </div>`;
+        } else {
+          histEl.innerHTML = '';
+        }
+      },
+
+      renderWishlist() {
+        const ids = Wishlist.get();
+        const grid = document.getElementById('wishlist-grid');
+        const empty = document.getElementById('wishlist-empty');
+        if (!ids.length) {
+          grid.innerHTML = '';
+          grid.classList.add('hidden');
+          empty.classList.remove('hidden');
+          return;
+        }
+        empty.classList.add('hidden');
+        grid.classList.remove('hidden');
+        grid.innerHTML = ids.map(id => { const p = getProductById(id); return p ? renderProductCard(p) : ''; }).join('');
+      },
+
+      renderAddresses() {
+        const user = Auth.getUser();
+        const addresses = user?.addresses || [];
+        const container = document.getElementById('addresses-list');
+        if (!addresses.length) {
+          container.innerHTML = '<p class="text-cream/50 text-sm">Kayıtlı adres yok</p>';
+          return;
+        }
+        container.innerHTML = addresses.map(a => `
+          <div class="flex items-center justify-between p-4 bg-navy rounded-xl">
+            <div>
+              <p class="text-cream font-medium text-sm">${a.title}</p>
+              <p class="text-xs text-cream/50">${a.line}, ${a.district || ''} ${a.city}</p>
+            </div>
+            <button onclick="Auth.removeAddress(${a.id});AccountPage.renderAddresses()" class="text-cream/30 hover:text-red-400 text-sm">Sil</button>
+          </div>`).join('');
+      },
+
+      showAddAddress() { document.getElementById('add-address-form').classList.toggle('hidden'); },
+
+      addAddress(e) {
+        e.preventDefault();
+        Auth.addAddress({
+          title: document.getElementById('addr-title').value,
+          line: document.getElementById('addr-line').value,
+          city: document.getElementById('addr-city').value,
+          district: document.getElementById('addr-district').value
+        });
+        document.getElementById('add-address-form').classList.add('hidden');
+        this.renderAddresses();
+      }
+    };
+
+    onStoreReady(() => AccountPage.init().catch(console.error));
+  </script>
+</body>
+</html>

@@ -1,0 +1,1340 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T15:18:04.994Z",
+  "products": [
+    {
+      "id": 1,
+      "name": "Niacinamide %10 + Zinc %1 Serum",
+      "brand": "The Ordinary",
+      "category": "cilt-bakimi",
+      "price": 449,
+      "originalPrice": 549,
+      "rating": 4.8,
+      "reviews": 2341,
+      "skinType": [
+        "Yağlı",
+        "Karma",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": true,
+      "routineRole": "serum",
+      "tags": [
+        "gözenek",
+        "leke",
+        "serum"
+      ],
+      "description": "Gözenek görünümünü azaltan ve cilt tonunu eşitleyen güçlü serum.",
+      "ingredients": "Aqua, Niacinamide, Zinc PCA, Pentylene Glycol, Tamarindus Indica Seed Gum",
+      "badge": "Flaş İndirim",
+      "stock": 0,
+      "active": true,
+      "sku": "RVN-1",
+      "updatedAt": "2026-06-30T15:18:04.994Z"
+    },
+    {
+      "id": 2,
+      "name": "Hyaluronic Acid Serum",
+      "brand": "The Inkey List",
+      "category": "cilt-bakimi",
+      "price": 389,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 1823,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "nem",
+        "kırışıklık",
+        "serum"
+      ],
+      "description": "Derinlemesine nemlendirme sağlayan hafif formül.",
+      "ingredients": "Aqua, Propanediol, Sodium Hyaluronate, Glycerin",
+      "badge": "En Çok Satan"
+    },
+    {
+      "id": 3,
+      "name": "Retro Matte Lipstick - Ruby Woo",
+      "brand": "MAC",
+      "category": "makyaj",
+      "price": 899,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 5621,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": false,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "ruj",
+        "mat"
+      ],
+      "description": "İkonik mat kırmızı ruj, uzun süre kalıcı formül.",
+      "ingredients": "Ricinus Communis Seed Oil, Cera Alba, Ozokerite",
+      "badge": "İkon"
+    },
+    {
+      "id": 4,
+      "name": "Radiant Creamy Concealer",
+      "brand": "NARS",
+      "category": "makyaj",
+      "price": 1249,
+      "originalPrice": 1399,
+      "rating": 4.8,
+      "reviews": 3102,
+      "skinType": [
+        "Kuru",
+        "Karma",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": true,
+      "tags": [
+        "kapatıcı",
+        "aydınlatıcı"
+      ],
+      "description": "Kırışıklık görünümünü azaltan aydınlatıcı kapatıcı.",
+      "ingredients": "Aqua, Dimethicone, Glycerin, Titanium Dioxide",
+      "badge": "Flaş İndirim"
+    },
+    {
+      "id": 5,
+      "name": "Pro Filt'r Soft Matte Foundation",
+      "brand": "Fenty Beauty",
+      "category": "makyaj",
+      "price": 1599,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 4890,
+      "skinType": [
+        "Yağlı",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "fondöten",
+        "mat"
+      ],
+      "description": "50 ton seçeneğiyle mat bitişli fondöten.",
+      "ingredients": "Aqua, Dimethicone, Cyclopentasiloxane, Glycerin",
+      "badge": "En Çok Satan"
+    },
+    {
+      "id": 6,
+      "name": "Soft Pinch Liquid Blush - Hope",
+      "brand": "Rare Beauty",
+      "category": "makyaj",
+      "price": 1099,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 7234,
+      "skinType": [
+        "Normal",
+        "Kuru",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "allık",
+        "doğal"
+      ],
+      "description": "Doğal görünümlü, uzun süre kalıcı sıvı allık.",
+      "ingredients": "Aqua, Dimethicone, Glycerin, Mica",
+      "badge": "Yeni"
+    },
+    {
+      "id": 7,
+      "name": "Brazilian Bum Bum Cream",
+      "brand": "Sol de Janeiro",
+      "category": "vucut-bakimi",
+      "price": 899,
+      "originalPrice": 1099,
+      "rating": 4.8,
+      "reviews": 8901,
+      "skinType": [
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": true,
+      "tags": [
+        "nem",
+        "parfüm"
+      ],
+      "description": "Kafein ve guarana ile sıkılaştırıcı vücut kremi.",
+      "ingredients": "Aqua, Cocos Nucifera Oil, Theobroma Grandiflorum Seed Butter",
+      "badge": "Flaş İndirim"
+    },
+    {
+      "id": 8,
+      "name": "Moisturizing Cream",
+      "brand": "CeraVe",
+      "category": "cilt-bakimi",
+      "price": 549,
+      "originalPrice": null,
+      "rating": 4.6,
+      "reviews": 4521,
+      "skinType": [
+        "Kuru",
+        "Hassas",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "moisturizer",
+      "tags": [
+        "nem",
+        "bariyer"
+      ],
+      "description": "3 esansiyel seramid ile nem bariyerini onaran krem.",
+      "ingredients": "Aqua, Glycerin, Cetearyl Alcohol, Ceramide NP",
+      "badge": "Dermatolog Onaylı"
+    },
+    {
+      "id": 9,
+      "name": "Anthelios UVmune 400 SPF50+",
+      "brand": "La Roche-Posay",
+      "category": "cilt-bakimi",
+      "price": 799,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 3210,
+      "skinType": [
+        "Hassas",
+        "Normal",
+        "Kuru"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "spf",
+      "tags": [
+        "güneş",
+        "koruma"
+      ],
+      "description": "Ultra hafif, geniş spektrumlu güneş koruyucu.",
+      "ingredients": "Aqua, Drometrizole Trisiloxane, Glycerin, Tocopherol",
+      "badge": "SPF50+"
+    },
+    {
+      "id": 10,
+      "name": "Perfect Coverage Foundation",
+      "brand": "Flormar",
+      "category": "makyaj",
+      "price": 349,
+      "originalPrice": 449,
+      "rating": 4.4,
+      "reviews": 1890,
+      "skinType": [
+        "Karma",
+        "Yağlı",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": false,
+      "flash": true,
+      "tags": [
+        "fondöten",
+        "kapatıcı"
+      ],
+      "description": "Yerli marka, tam kapatıcılı fondöten.",
+      "ingredients": "Aqua, Cyclopentasiloxane, Titanium Dioxide",
+      "badge": "Türk Markası"
+    },
+    {
+      "id": 11,
+      "name": "Dream Lips Matte Lipstick",
+      "brand": "Golden Rose",
+      "category": "makyaj",
+      "price": 189,
+      "originalPrice": null,
+      "rating": 4.3,
+      "reviews": 5670,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "ruj",
+        "mat"
+      ],
+      "description": "Uygun fiyatlı, uzun süre kalıcı mat ruj.",
+      "ingredients": "Ricinus Communis Seed Oil, Cera Microcristallina",
+      "badge": "Uygun Fiyat"
+    },
+    {
+      "id": 12,
+      "name": "Profashion Eyeshadow Palette",
+      "brand": "Pastel",
+      "category": "makyaj",
+      "price": 299,
+      "originalPrice": 399,
+      "rating": 4.5,
+      "reviews": 2340,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "göz",
+        "palet"
+      ],
+      "description": "12 renkli profesyonel göz farı paleti.",
+      "ingredients": "Mica, Talc, Magnesium Stearate, Dimethicone",
+      "badge": "Yeni"
+    },
+    {
+      "id": 13,
+      "name": "Revitalift Laser X3 Serum",
+      "brand": "L'Oréal Paris",
+      "category": "cilt-bakimi",
+      "price": 649,
+      "originalPrice": null,
+      "rating": 4.5,
+      "reviews": 2890,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Karma"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "anti-aging",
+        "kırışıklık",
+        "serum"
+      ],
+      "description": "3 etkili anti-aging serum, cildi sıkılaştırır.",
+      "ingredients": "Aqua, Glycerin, Pro-Xylane, Hyaluronic Acid",
+      "badge": "Anti-Aging"
+    },
+    {
+      "id": 14,
+      "name": "Lash Sensational Mascara",
+      "brand": "Maybelline",
+      "category": "makyaj",
+      "price": 399,
+      "originalPrice": null,
+      "rating": 4.6,
+      "reviews": 6780,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "maskara",
+        "hacim"
+      ],
+      "description": "Katmanlı hacim veren ikonik maskara.",
+      "ingredients": "Aqua, Paraffin, Cera Alba, Stearic Acid",
+      "badge": "İkon"
+    },
+    {
+      "id": 15,
+      "name": "Butter Gloss - Tiramisu",
+      "brand": "NYX",
+      "category": "makyaj",
+      "price": 279,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 4320,
+      "skinType": [
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "dudak",
+        "parlak"
+      ],
+      "description": "Kremsi, yapışmayan dudak parlatıcısı.",
+      "ingredients": "Paraffinum Liquidum, Polybutene, Cera Microcristallina",
+      "badge": "Vegan"
+    },
+    {
+      "id": 16,
+      "name": "Rouge Dior Lipstick",
+      "brand": "Dior",
+      "category": "makyaj",
+      "price": 2899,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 1560,
+      "skinType": [
+        "Normal",
+        "Kuru"
+      ],
+      "vegan": false,
+      "crueltyFree": false,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "lüks",
+        "ruj"
+      ],
+      "description": "Lüks saten bitişli ikonik Dior ruj.",
+      "ingredients": "Ricinus Communis Seed Oil, Cera Alba, Lanolin",
+      "badge": "Lüks"
+    },
+    {
+      "id": 17,
+      "name": "Pillow Talk Lipstick",
+      "brand": "Charlotte Tilbury",
+      "category": "makyaj",
+      "price": 2199,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 8900,
+      "skinType": [
+        "Normal",
+        "Kuru"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "nude",
+        "ruj"
+      ],
+      "description": "Dünyaca ünlü nude ruj tonu Pillow Talk.",
+      "ingredients": "Octyldodecanol, Polyethylene, Cera Alba",
+      "badge": "Kült Ürün"
+    },
+    {
+      "id": 18,
+      "name": "Protini Polypeptide Cream",
+      "brand": "Drunk Elephant",
+      "category": "cilt-bakimi",
+      "price": 1899,
+      "originalPrice": 2199,
+      "rating": 4.8,
+      "reviews": 2100,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": false,
+      "flash": true,
+      "routineRole": "moisturizer",
+      "tags": [
+        "peptit",
+        "sıkılaştırma",
+        "kırışıklık"
+      ],
+      "description": "9 sinyal peptit kompleksi ile sıkılaştırıcı krem.",
+      "ingredients": "Aqua, Glycerin, Signal Peptide Complex, Pygmy Waterlily",
+      "badge": "Flaş İndirim"
+    },
+    {
+      "id": 19,
+      "name": "Milky Jelly Cleanser",
+      "brand": "Glossier",
+      "category": "cilt-bakimi",
+      "price": 599,
+      "originalPrice": null,
+      "rating": 4.5,
+      "reviews": 3450,
+      "skinType": [
+        "Hassas",
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "cleanser",
+      "tags": [
+        "temizleyici",
+        "nazik",
+        "hassas"
+      ],
+      "description": "Hassas ciltler için nazik jel temizleyici.",
+      "ingredients": "Aqua, Rose Water, Poloxamer 184, Allantoin",
+      "badge": "Hassas Cilt"
+    },
+    {
+      "id": 20,
+      "name": "DEFENCE Hydractive Serum",
+      "brand": "BioNike",
+      "category": "cilt-bakimi",
+      "price": 699,
+      "originalPrice": null,
+      "rating": 4.4,
+      "reviews": 890,
+      "skinType": [
+        "Hassas",
+        "Kuru"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "nem",
+        "hassas",
+        "serum"
+      ],
+      "description": "Hipoalerjenik yoğun nem serumu.",
+      "ingredients": "Aqua, Hyaluronic Acid, Panthenol, Allantoin",
+      "badge": "Yeni"
+    },
+    {
+      "id": 21,
+      "name": "Sensibio H2O Micellar Water",
+      "brand": "Bioderma",
+      "category": "cilt-bakimi",
+      "price": 449,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 5670,
+      "skinType": [
+        "Hassas",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "micellar",
+      "tags": [
+        "makyaj temizleme",
+        "hassas"
+      ],
+      "description": "Hassas ciltler için micellar temizleme suyu.",
+      "ingredients": "Aqua, PEG-6 Caprylic/Capric Glycerides, Cucumber Extract",
+      "badge": "Dermatolog Onaylı"
+    },
+    {
+      "id": 22,
+      "name": "Treatment Shampoo",
+      "brand": "Moroccanoil",
+      "category": "sac-bakimi",
+      "price": 899,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 2340,
+      "skinType": [
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "saç",
+        "nem"
+      ],
+      "description": "Argan yağı ile besleyici şampuan.",
+      "ingredients": "Aqua, Argania Spinosa Kernel Oil, Cocamidopropyl Betaine",
+      "badge": "En Çok Satan"
+    },
+    {
+      "id": 23,
+      "name": "No.3 Hair Perfector",
+      "brand": "Olaplex",
+      "category": "sac-bakimi",
+      "price": 1299,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 7890,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "onarım",
+        "hasar"
+      ],
+      "description": "Hasarlı saçları onaran salon tedavisi.",
+      "ingredients": "Aqua, Bis-Aminopropyl Diglycol Dimaleate, Phenoxyethanol",
+      "badge": "Salon Favorisi"
+    },
+    {
+      "id": 24,
+      "name": "Chance Eau Tendre EDT",
+      "brand": "Chanel",
+      "category": "parfum",
+      "price": 4599,
+      "originalPrice": null,
+      "rating": 4.9,
+      "reviews": 1230,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": false,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "tags": [
+        "çiçeksi",
+        "feminen"
+      ],
+      "description": "Zarif ve feminen çiçeksi parfüm.",
+      "ingredients": "Alcohol, Parfum, Aqua, Linalool, Limonene",
+      "badge": "Lüks"
+    },
+    {
+      "id": 25,
+      "name": "Cheirosa 62 Body Mist",
+      "brand": "Sol de Janeiro",
+      "category": "parfum",
+      "price": 649,
+      "originalPrice": 799,
+      "rating": 4.8,
+      "reviews": 4560,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": true,
+      "tags": [
+        "vücut spreyi",
+        "tropik"
+      ],
+      "description": "Pistachio ve vanilya notalarıyla tropik vücut spreyi.",
+      "ingredients": "Alcohol Denat, Parfum, Aqua, Benzyl Salicylate",
+      "badge": "Flaş İndirim"
+    },
+    {
+      "id": 26,
+      "name": "Vitamin C Brightening Serum",
+      "brand": "The Inkey List",
+      "category": "cilt-bakimi",
+      "price": 459,
+      "originalPrice": null,
+      "rating": 4.6,
+      "reviews": 1890,
+      "skinType": [
+        "Karma",
+        "Normal",
+        "Kuru"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "vitamin c",
+        "aydınlatma",
+        "leke",
+        "serum"
+      ],
+      "description": "C vitamini ile cildi aydınlatan serum.",
+      "ingredients": "Aqua, Ascorbic Acid, Squalane, Ferulic Acid",
+      "badge": "Yeni"
+    },
+    {
+      "id": 27,
+      "name": "Bundle: Cilt Bakım Seti",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 999,
+      "originalPrice": 1499,
+      "rating": 4.7,
+      "reviews": 456,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": false,
+      "flash": false,
+      "bundle": true,
+      "tags": [
+        "set",
+        "bundle"
+      ],
+      "description": "Temizleyici + Serum + Nemlendirici 3'lü set.",
+      "ingredients": "Çeşitli - set içeriği detay sayfasında",
+      "badge": "Bundle"
+    },
+    {
+      "id": 28,
+      "name": "Bundle: Makyaj Başlangıç Seti",
+      "brand": "RAVANON",
+      "category": "makyaj",
+      "price": 749,
+      "originalPrice": 1199,
+      "rating": 4.5,
+      "reviews": 678,
+      "skinType": [
+        "Normal",
+        "Karma"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": false,
+      "flash": false,
+      "bundle": true,
+      "tags": [
+        "set",
+        "başlangıç"
+      ],
+      "description": "Fondöten + Maskara + Ruj başlangıç seti.",
+      "ingredients": "Çeşitli - set içeriği detay sayfasında",
+      "badge": "Bundle"
+    },
+    {
+      "id": 29,
+      "name": "RAVANON Glow Toner",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 329,
+      "originalPrice": 399,
+      "rating": 4.6,
+      "reviews": 1240,
+      "skinType": [
+        "Karma",
+        "Yağlı",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": true,
+      "routineRole": "toner",
+      "tags": [
+        "toner",
+        "k-beauty",
+        "glass-skin",
+        "gözenek"
+      ],
+      "description": "Gül suyu ve PHA ile gözenek sıkılaştırıcı, aydınlatıcı toner.",
+      "ingredients": "Rose Water, Gluconolactone, Niacinamide, Panthenol",
+      "badge": "Viral"
+    },
+    {
+      "id": 30,
+      "name": "RAVANON Lip Oil - Cherry Kiss",
+      "brand": "RAVANON",
+      "category": "makyaj",
+      "price": 249,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 3890,
+      "skinType": [
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "dudak",
+        "parlak",
+        "k-beauty"
+      ],
+      "description": "TikTok fenomeni kirazlı dudak yağı, cam parlaklık verir.",
+      "ingredients": "Jojoba Oil, Cherry Extract, Vitamin E, Hyaluronic Acid",
+      "badge": "TikTok Hit"
+    },
+    {
+      "id": 31,
+      "name": "RAVANON Cloud Blush - Peach Dream",
+      "brand": "RAVANON",
+      "category": "makyaj",
+      "price": 399,
+      "originalPrice": 499,
+      "rating": 4.9,
+      "reviews": 5120,
+      "skinType": [
+        "Normal",
+        "Kuru",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": true,
+      "tags": [
+        "allık",
+        "doğal",
+        "soft-glam"
+      ],
+      "description": "Bulut gibi hafif krem allık, doğal şeftali flush efekti.",
+      "ingredients": "Dimethicone, Mica, Peach Extract, Squalane",
+      "badge": "Viral"
+    },
+    {
+      "id": 32,
+      "name": "RAVANON Body Glitter Mist",
+      "brand": "RAVANON",
+      "category": "vucut-bakimi",
+      "price": 349,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 2780,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "parfüm",
+        "parlak"
+      ],
+      "description": "Festival ve yaz geceleri için ışıltılı vücut spreyi.",
+      "ingredients": "Alcohol Denat, Mica, Jojoba Oil, Vanilla Extract",
+      "badge": "Festival"
+    },
+    {
+      "id": 33,
+      "name": "RAVANON Pimple Patch Set",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 179,
+      "originalPrice": null,
+      "rating": 4.5,
+      "reviews": 4560,
+      "skinType": [
+        "Yağlı",
+        "Karma",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "treatment",
+      "tags": [
+        "akne",
+        "gözenek",
+        "k-beauty"
+      ],
+      "description": "72 adet hidrokolloid sivilce bandı, gece boyunca etkili.",
+      "ingredients": "Hydrocolloid, Tea Tree Oil, Centella Asiatica",
+      "badge": "Gen Z Fav"
+    },
+    {
+      "id": 34,
+      "name": "RAVANON Brow Gel - Fluffy",
+      "brand": "RAVANON",
+      "category": "makyaj",
+      "price": 279,
+      "originalPrice": null,
+      "rating": 4.6,
+      "reviews": 1890,
+      "skinType": [
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "kaş",
+        "soft-glam"
+      ],
+      "description": "Soap brow efekti veren şeffaf kaş jeli, 24 saat kalıcı.",
+      "ingredients": "Aqua, Glycerin, Panthenol, Biotin",
+      "badge": "Yeni"
+    },
+    {
+      "id": 35,
+      "name": "RAVANON Sleeping Mask",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 459,
+      "originalPrice": 559,
+      "rating": 4.8,
+      "reviews": 2340,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": true,
+      "routineRole": "mask",
+      "tags": [
+        "nem",
+        "k-beauty",
+        "glass-skin"
+      ],
+      "description": "Gece boyunca nem kilitleyen uyku maskesi, sabah cam cilt.",
+      "ingredients": "Ceramide NP, Squalane, Centella, Hyaluronic Acid",
+      "badge": "K-Beauty"
+    },
+    {
+      "id": 36,
+      "name": "RAVANON Retinol Night Serum",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 549,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 1670,
+      "skinType": [
+        "Normal",
+        "Karma",
+        "Kuru"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "routineRole": "treatment",
+      "tags": [
+        "anti-aging",
+        "kırışıklık",
+        "peptit",
+        "serum"
+      ],
+      "description": "0.3% retinol + bakuchiol, nazik gece yenileme serumu.",
+      "ingredients": "Retinol, Bakuchiol, Squalane, Peptide Complex",
+      "badge": "Gece Bakımı"
+    },
+    {
+      "id": 37,
+      "name": "RAVANON Setting Spray - Dewy",
+      "brand": "RAVANON",
+      "category": "makyaj",
+      "price": 319,
+      "originalPrice": null,
+      "rating": 4.6,
+      "reviews": 2100,
+      "skinType": [
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": false,
+      "new": true,
+      "flash": false,
+      "tags": [
+        "makyaj sabitleyici",
+        "glass-skin"
+      ],
+      "description": "Nemli bitiş veren makyaj sabitleyici sprey.",
+      "ingredients": "Aqua, Glycerin, Niacinamide, Rose Extract",
+      "badge": "Yeni"
+    },
+    {
+      "id": 38,
+      "name": "Advanced Snail 96 Mucin Essence",
+      "brand": "COSRX",
+      "category": "cilt-bakimi",
+      "price": 689,
+      "originalPrice": 799,
+      "rating": 4.9,
+      "reviews": 12400,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas",
+        "Karma"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": true,
+      "routineRole": "essence",
+      "tags": [
+        "k-beauty",
+        "nem",
+        "glass-skin",
+        "hassas"
+      ],
+      "description": "Kore'nin efsane salyangoz essansı — cam cilt rutininin kalbi.",
+      "ingredients": "Snail Secretion Filtrate 96%, Betaine, Sodium Hyaluronate",
+      "badge": "K-Beauty İkon"
+    },
+    {
+      "id": 39,
+      "name": "Glow Deep Serum Rice + Alpha Arbutin",
+      "brand": "Beauty of Joseon",
+      "category": "cilt-bakimi",
+      "price": 549,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 8900,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "k-beauty",
+        "leke",
+        "aydınlatma",
+        "serum"
+      ],
+      "description": "Hanbang formülü pirinç + alpha arbutin ile leke giderici serum.",
+      "ingredients": "Oryza Sativa Extract, Alpha-Arbutin, Niacinamide, Glycerin",
+      "badge": "TikTok Viral"
+    },
+    {
+      "id": 40,
+      "name": "Heartleaf 77% Soothing Toner",
+      "brand": "Anua",
+      "category": "cilt-bakimi",
+      "price": 479,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 6700,
+      "skinType": [
+        "Hassas",
+        "Yağlı",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "toner",
+      "tags": [
+        "k-beauty",
+        "toner",
+        "hassas",
+        "gözenek"
+      ],
+      "description": "%77 heartleaf ekstraktı ile yatıştırıcı Kore toniği.",
+      "ingredients": "Houttuynia Cordata Extract, Panthenol, Hyaluronic Acid",
+      "badge": "K-Beauty"
+    },
+    {
+      "id": 41,
+      "name": "Water Sleeping Mask",
+      "brand": "Laneige",
+      "category": "cilt-bakimi",
+      "price": 899,
+      "originalPrice": 1099,
+      "rating": 4.9,
+      "reviews": 15200,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": true,
+      "routineRole": "mask",
+      "tags": [
+        "k-beauty",
+        "nem",
+        "glass-skin"
+      ],
+      "description": "Laneige'nin ikonik gece maskesi — sabaha kadar yoğun nem.",
+      "ingredients": "Squalane, Evening Primrose Extract, Apricot Extract",
+      "badge": "Kore Favorisi"
+    },
+    {
+      "id": 42,
+      "name": "Green Tea Seed Hyaluronic Serum",
+      "brand": "Innisfree",
+      "category": "cilt-bakimi",
+      "price": 599,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 4300,
+      "skinType": [
+        "Karma",
+        "Yağlı",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "k-beauty",
+        "nem",
+        "serum"
+      ],
+      "description": "Jeju yeşil çay tohumu + hyaluronik asit nem serumu.",
+      "ingredients": "Green Tea Seed Oil, Hyaluronic Acid, Glycerin",
+      "badge": "K-Beauty"
+    },
+    {
+      "id": 43,
+      "name": "Madagascar Centella Ampoule",
+      "brand": "SKIN1004",
+      "category": "cilt-bakimi",
+      "price": 529,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 9800,
+      "skinType": [
+        "Hassas",
+        "Kuru",
+        "Normal"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "k-beauty",
+        "hassas",
+        "serum",
+        "hassasiyet"
+      ],
+      "description": "%100 saf centella ampul — kızarıklık ve tahrişe karşı.",
+      "ingredients": "Centella Asiatica Extract, Panthenol, Madecassoside",
+      "badge": "Hassas Cilt"
+    },
+    {
+      "id": 44,
+      "name": "1025 Dokdo Cleanser",
+      "brand": "Round Lab",
+      "category": "cilt-bakimi",
+      "price": 399,
+      "originalPrice": null,
+      "rating": 4.7,
+      "reviews": 5600,
+      "skinType": [
+        "Hassas",
+        "Kuru",
+        "Normal",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "cleanser",
+      "tags": [
+        "k-beauty",
+        "temizleyici",
+        "hassas"
+      ],
+      "description": "pH 5.5 Dokdo deniz suyu ile nazik köpük temizleyici.",
+      "ingredients": "Sea Water, Panthenol, Allantoin, Glycerin",
+      "badge": "K-Beauty"
+    },
+    {
+      "id": 45,
+      "name": "RAVANON Rice Cleansing Oil",
+      "brand": "RAVANON",
+      "category": "cilt-bakimi",
+      "price": 369,
+      "originalPrice": 449,
+      "rating": 4.7,
+      "reviews": 3200,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Karma",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": true,
+      "routineRole": "oil-cleanser",
+      "tags": [
+        "k-beauty",
+        "makyaj temizleme",
+        "temizleyici"
+      ],
+      "description": "Kore tarzı pirinç yağı ile çift aşamalı temizliğin ilk adımı.",
+      "ingredients": "Rice Bran Oil, Camellia Oil, Vitamin E, Squalane",
+      "badge": "Çift Temizlik"
+    },
+    {
+      "id": 46,
+      "name": "Dive-In Low Molecule Hyaluronic Serum",
+      "brand": "Torriden",
+      "category": "cilt-bakimi",
+      "price": 499,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 7100,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Hassas"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": false,
+      "routineRole": "serum",
+      "tags": [
+        "k-beauty",
+        "nem",
+        "serum",
+        "glass-skin"
+      ],
+      "description": "5 tip hyaluronik asit ile derinlemesine cam cilt nemi.",
+      "ingredients": "Sodium Hyaluronate, Panthenol, Allantoin, Trehalose",
+      "badge": "Glass Skin"
+    },
+    {
+      "id": 47,
+      "name": "Advanced Snail 92 All in One Cream",
+      "brand": "COSRX",
+      "category": "cilt-bakimi",
+      "price": 749,
+      "originalPrice": null,
+      "rating": 4.8,
+      "reviews": 8900,
+      "skinType": [
+        "Kuru",
+        "Normal",
+        "Karma"
+      ],
+      "vegan": false,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": false,
+      "flash": false,
+      "routineRole": "moisturizer",
+      "tags": [
+        "k-beauty",
+        "nem",
+        "bariyer"
+      ],
+      "description": "Salyangoz müsin + nemlendirici — Kore'nin çok satan kremi.",
+      "ingredients": "Snail Secretion Filtrate, Betaine, Sodium Hyaluronate",
+      "badge": "K-Beauty"
+    },
+    {
+      "id": 48,
+      "name": "Relief Sun Rice + Probiotics SPF50+",
+      "brand": "Beauty of Joseon",
+      "category": "cilt-bakimi",
+      "price": 649,
+      "originalPrice": 749,
+      "rating": 4.9,
+      "reviews": 18500,
+      "skinType": [
+        "Hassas",
+        "Kuru",
+        "Normal",
+        "Karma"
+      ],
+      "vegan": true,
+      "crueltyFree": true,
+      "bestseller": true,
+      "new": true,
+      "flash": true,
+      "routineRole": "spf",
+      "tags": [
+        "k-beauty",
+        "güneş",
+        "koruma"
+      ],
+      "description": "Hanbang güneş kremi — yapışmayan, beyaz iz bırakmayan SPF.",
+      "ingredients": "Rice Extract, Probiotics, Niacinamide, Chemical UV Filters",
+      "badge": "SPF50+ K-Beauty"
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Ürün Detay — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20" id="product-main">
+    <div class="max-w-7xl mx-auto px-4">
+      <div id="loading" class="text-center py-20">
+        <div class="w-12 h-12 border-2 border-gold/30 border-t-gold rounded-full animate-spin mx-auto"></div>
+      </div>
+      <div id="product-content" class="hidden"></div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Virtual Try-On Modal -->
+  <div id="tryon-modal" class="hidden fixed inset-0 z-[8500] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-navy/90 backdrop-blur-sm" onclick="ProductPage.closeTryOn()"></div>
+    <div class="relative bg-navy-light border border-gold/20 rounded-2xl w-full max-w-lg p-6">
+      <button onclick="ProductPage.closeTryOn()" class="absolute top-4 right-4 text-cream/50 hover:text-cream text-2xl">&times;</button>
+      <h3 class="text-xl font-light text-cream mb-4">Sanal Deneme</h3>
+      <div class="relative aspect-square bg-navy rounded-xl overflow-hidden mb-4" id="tryon-preview">
+        <img id="tryon-image" src="" alt="Deneme" class="w-full h-full object-cover hidden">
+        <div id="tryon-placeholder" class="flex flex-col items-center justify-center h-full text-cream/30">
+          <span class="text-5xl mb-4">📷</span>
+          <p>Fotoğraf yükleyin veya demo görseli kullanın</p>
+        </div>
+        <div id="tryon-overlay" class="tryon-overlay hidden"></div>
+      </div>
+      <input type="file" id="tryon-upload" accept="image/*" class="hidden">
+      <div class="flex gap-3">
+        <button onclick="document.getElementById('tryon-upload').click()" class="flex-1 py-3 border border-gold/30 text-gold rounded-xl hover:bg-gold/10 transition-colors">Fotoğraf Yükle</button>
+        <button onclick="ProductPage.demoTryOn()" class="flex-1 py-3 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Demo Dene</button>
+      </div>
+      <div class="mt-4">
+        <label class="text-xs text-cream/50 block mb-2">Renk Yoğunluğu</label>
+        <input type="range" id="tryon-intensity" min="0" max="100" value="50" class="w-full accent-gold">
+      </div>
+    </div>
+  </div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const ProductPage = {
+      product: null,
+
+      init() {
+        initSharedUI('shop');
+        const id = getQueryParam('id');
+        if (!id) { window.location.href = 'shop.html'; return; }
+        this.product = getProductById(id);
+        if (!this.product) { window.location.href = 'shop.html'; return; }
+        document.title = `${this.product.name} — RAVANON`;
+        this.render();
+        this.bindTryOn();
+      },
+
+      render() {
+        const p = this.product;
+        const inWishlist = Wishlist.has(p.id);
+        const discount = p.originalPrice ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
+
+        const mockReviews = [
+          { name: 'Elif K.', rating: 5, text: 'Harika bir ürün! Cildimde gözle görülür fark yarattı.', date: '2 hafta önce' },
+          { name: 'Zeynep A.', rating: 4, text: 'Fiyat/performans açısından mükemmel. Tekrar alacağım.', date: '1 ay önce' },
+          { name: 'Merve S.', rating: 5, text: 'RAVANON\'dan aldığım en iyi ürünlerden biri. Kesinlikle tavsiye ederim!', date: '3 hafta önce' }
+        ];
+
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('product-content').classList.remove('hidden');
+        document.getElementById('product-content').innerHTML = `
+          <nav class="text-sm text-cream/40 mb-8">
+            <a href="index.html" class="hover:text-gold">Ana Sayfa</a> /
+            <a href="shop.html" class="hover:text-gold">Mağaza</a> /
+            <a href="shop.html?category=${p.category}" class="hover:text-gold">${RAVANON_DATA.categories.find(c => c.id === p.category)?.name}</a> /
+            <span class="text-cream/60">${p.name}</span>
+          </nav>
+
+          <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <div>
+              <div class="rounded-2xl overflow-hidden border border-gold/10 mb-4">${getProductImageHTML(p, 'hero')}</div>
+              <div class="grid grid-cols-4 gap-3">
+                ${[1,2,3,4].map(i => `<div class="rounded-lg overflow-hidden border border-gold/10 opacity-${i===1?'100':'50'} hover:opacity-100 transition-opacity cursor-pointer">${getProductImageHTML(p, 'thumb')}</div>`).join('')}
+              </div>
+            </div>
+
+            <div>
+              <p class="text-gold text-sm uppercase tracking-[0.3em] mb-2">${p.brand}</p>
+              <h1 class="font-display text-3xl md:text-4xl font-light mb-4">${p.name}</h1>
+              <div class="flex items-center gap-3 mb-6">
+                <div class="flex text-sm">${renderStars(p.rating)}</div>
+                <span class="text-cream/50 text-sm">${p.rating} (${p.reviews.toLocaleString('tr-TR')} değerlendirme)</span>
+              </div>
+
+              <div class="flex items-baseline gap-3 mb-6">
+                ${p.originalPrice ? `<span class="text-xl text-cream/40 line-through">${formatPrice(p.originalPrice)}</span>` : ''}
+                <span class="text-3xl text-gold font-semibold">${formatPrice(p.price)}</span>
+                ${discount ? `<span class="px-3 py-1 bg-rose-gold/20 text-rose-gold text-sm rounded-full">-%${discount}</span>` : ''}
+              </div>
+
+              <p class="text-cream/70 leading-relaxed mb-6">${p.description}</p>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                ${p.vegan ? '<span class="px-3 py-1 bg-green-900/30 text-green-400 text-xs rounded-full">Vegan</span>' : ''}
+                ${p.crueltyFree ? '<span class="px-3 py-1 bg-blue-900/30 text-blue-400 text-xs rounded-full">Cruelty-Free</span>' : ''}
+                ${p.skinType?.map(s => `<span class="px-3 py-1 bg-navy-card text-cream/60 text-xs rounded-full">${s} Cilt</span>`).join('') || ''}
+              </div>
+
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center border border-gold/20 rounded-xl">
+                  <button onclick="ProductPage.changeQty(-1)" class="px-4 py-3 text-gold hover:bg-gold/10 transition-colors rounded-l-xl">−</button>
+                  <span id="qty-display" class="px-4 py-3 text-cream min-w-[3rem] text-center">1</span>
+                  <button onclick="ProductPage.changeQty(1)" class="px-4 py-3 text-gold hover:bg-gold/10 transition-colors rounded-r-xl">+</button>
+                </div>
+                <button onclick="ProductPage.addToCart()" class="flex-1 py-3.5 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Sepete Ekle</button>
+                <button onclick="ProductPage.toggleWishlist()" id="wishlist-btn" class="w-12 h-12 rounded-xl border border-gold/20 flex items-center justify-center text-xl ${inWishlist ? 'text-rose-gold' : 'text-cream/30'} hover:text-rose-gold transition-colors">♥</button>
+              </div>
+
+              <div class="flex flex-wrap gap-3 mb-8">
+                <button onclick="ProductPage.aiSimilar()" class="px-5 py-2.5 border border-gold/30 text-gold text-sm rounded-xl hover:bg-gold/10 transition-colors flex items-center gap-2">
+                  <span>✨</span> AI Benzer Ürün Öner
+                </button>
+                <button onclick="ProductPage.openTryOn()" class="px-5 py-2.5 border border-rose-gold/30 text-rose-gold text-sm rounded-xl hover:bg-rose-gold/10 transition-colors flex items-center gap-2">
+                  <span>📷</span> Sanal Deneme
+                </button>
+              </div>
+
+              <div id="ai-similar-results" class="hidden mb-8 p-4 bg-navy-light rounded-xl border border-gold/10">
+                <h4 class="text-sm text-gold mb-3">AI Önerileri</h4>
+                <div id="similar-products" class="space-y-2"></div>
+              </div>
+
+              <!-- Tabs -->
+              <div class="border-t border-gold/10 pt-6">
+                <div class="flex gap-6 mb-4">
+                  <button onclick="ProductPage.showTab('desc')" class="tab-btn text-sm text-gold border-b-2 border-gold pb-2" data-tab="desc">Açıklama</button>
+                  <button onclick="ProductPage.showTab('ingredients')" class="tab-btn text-sm text-cream/50 pb-2" data-tab="ingredients">İçerik</button>
+                  <button onclick="ProductPage.showTab('reviews')" class="tab-btn text-sm text-cream/50 pb-2" data-tab="reviews">Yorumlar (${mockReviews.length})</button>
+                </div>
+                <div id="tab-desc" class="tab-content text-cream/70 text-sm leading-relaxed">${p.description}</div>
+                <div id="tab-ingredients" class="tab-content hidden text-cream/70 text-sm leading-relaxed">${p.ingredients}</div>
+                <div id="tab-reviews" class="tab-content hidden space-y-4">
+                  ${mockReviews.map(r => `
+                    <div class="p-4 bg-navy-light rounded-xl">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-cream font-medium text-sm">${r.name}</span>
+                        <span class="text-xs text-cream/40">${r.date}</span>
+                      </div>
+                      <div class="text-sm mb-2">${renderStars(r.rating)}</div>
+                      <p class="text-cream/60 text-sm">${r.text}</p>
+                    </div>`).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section>
+            <h2 class="section-title text-2xl mb-6">Bunları da Beğenebilirsiniz</h2>
+            <div class="product-grid" id="related-products"></div>
+          </section>`;
+
+        const related = RAVANON_DATA.products.filter(r => r.category === p.category && r.id !== p.id).slice(0, 4);
+        document.getElementById('related-products').innerHTML = related.map(r => renderProductCard(r)).join('');
+        this.qty = 1;
+      },
+
+      qty: 1,
+      changeQty(delta) {
+        this.qty = Math.max(1, this.qty + delta);
+        document.getElementById('qty-display').textContent = this.qty;
+      },
+
+      addToCart() { Cart.add(this.product.id, this.qty); },
+
+      toggleWishlist() {
+        const added = Wishlist.toggle(this.product.id);
+        document.getElementById('wishlist-btn').className = `w-12 h-12 rounded-xl border border-gold/20 flex items-center justify-center text-xl ${added ? 'text-rose-gold' : 'text-cream/30'} hover:text-rose-gold transition-colors`;
+      },
+
+      showTab(tab) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.getElementById(`tab-${tab}`).classList.remove('hidden');
+        document.querySelectorAll('.tab-btn').forEach(el => {
+          el.className = el.dataset.tab === tab ? 'tab-btn text-sm text-gold border-b-2 border-gold pb-2' : 'tab-btn text-sm text-cream/50 pb-2';
+        });
+      },
+
+      aiSimilar() {
+        const similar = RAVANON_DATA.products.filter(p =>
+          p.id !== this.product.id && (p.category === this.product.category || p.tags?.some(t => this.product.tags?.includes(t)))
+        ).sort((a, b) => b.rating - a.rating).slice(0, 3);
+
+        document.getElementById('ai-similar-results').classList.remove('hidden');
+        document.getElementById('similar-products').innerHTML = similar.map(p => `
+          <a href="product.html?id=${p.id}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-navy transition-colors">
+            <div class="w-12 h-12 rounded-lg overflow-hidden">${getProductImageHTML(p, 'mini')}</div>
+            <div class="flex-1"><p class="text-sm text-cream">${p.name}</p><p class="text-xs text-gold">${formatPrice(p.price)} · %${Math.round((1 - 0.15) * 100 - 85)} benzerlik</p></div>
+          </a>`).join('');
+        showToast('AI benzer ürünler bulundu', 'info');
+      },
+
+      openTryOn() { document.getElementById('tryon-modal').classList.remove('hidden'); },
+      closeTryOn() { document.getElementById('tryon-modal').classList.add('hidden'); },
+
+      demoTryOn() {
+        const img = document.getElementById('tryon-image');
+        const placeholder = document.getElementById('tryon-placeholder');
+        const overlay = document.getElementById('tryon-overlay');
+        img.src = 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect fill="#1A1A2E" width="400" height="400"/><circle cx="200" cy="160" r="80" fill="#2A2A3E"/><ellipse cx="200" cy="320" rx="100" ry="80" fill="#2A2A3E"/><text x="200" y="390" text-anchor="middle" fill="#C9A96E" font-size="14">Demo Yüz</text></svg>`);
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        overlay.classList.remove('hidden');
+        const gradient = getProductGradient(this.product.id, this.product.category);
+        overlay.style.background = gradient.replace('linear-gradient', 'linear-gradient').replace('135deg', '135deg');
+        overlay.style.opacity = (document.getElementById('tryon-intensity').value / 100) * 0.6;
+        showToast('Sanal deneme aktif!', 'info');
+      },
+
+      bindTryOn() {
+        document.getElementById('tryon-upload')?.addEventListener('change', e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            document.getElementById('tryon-image').src = ev.target.result;
+            document.getElementById('tryon-image').classList.remove('hidden');
+            document.getElementById('tryon-placeholder').classList.add('hidden');
+            document.getElementById('tryon-overlay').classList.remove('hidden');
+            this.demoTryOn();
+          };
+          reader.readAsDataURL(file);
+        });
+        document.getElementById('tryon-intensity')?.addEventListener('input', e => {
+          document.getElementById('tryon-overlay').style.opacity = (e.target.value / 100) * 0.6;
+        });
+      }
+    };
+
+    onStoreReady(() => ProductPage.init());
+  </script>
+</body>
+</html>

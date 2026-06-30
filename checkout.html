@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/ravanon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Ödeme — RAVANON</title>
+  <script src="js/tailwind-theme.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/luxury.css">
+  <link rel="stylesheet" href="css/theme-sephora.css">
+</head>
+<body class="theme-sephora bg-white text-cream">
+  <div id="site-header"></div>
+
+  <main class="pt-36 pb-20">
+    <div class="max-w-5xl mx-auto px-4">
+      <h1 class="font-display text-4xl font-light mb-8">Ödeme</h1>
+
+      <!-- Steps -->
+      <div class="flex items-center justify-center gap-4 mb-12">
+        <div class="checkout-step active flex items-center gap-2" data-step="1">
+          <span class="step-number w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-sm">1</span>
+          <span class="text-sm hidden sm:inline">Teslimat</span>
+        </div>
+        <div class="w-12 h-px bg-gold/20"></div>
+        <div class="checkout-step flex items-center gap-2" data-step="2">
+          <span class="step-number w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-sm text-cream/50">2</span>
+          <span class="text-sm text-cream/50 hidden sm:inline">Ödeme</span>
+        </div>
+        <div class="w-12 h-px bg-gold/20"></div>
+        <div class="checkout-step flex items-center gap-2" data-step="3">
+          <span class="step-number w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-sm text-cream/50">3</span>
+          <span class="text-sm text-cream/50 hidden sm:inline">Onay</span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <!-- Step 1: Shipping -->
+          <div id="step-1" class="bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-6">
+            <h2 class="font-medium text-lg">Teslimat Bilgileri</h2>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <input type="text" id="ship-name" placeholder="Ad Soyad *" class="bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <input type="tel" id="ship-phone" placeholder="Telefon *" class="bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <input type="text" id="ship-address" placeholder="Adres *" class="sm:col-span-2 bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <input type="text" id="ship-city" placeholder="Şehir *" class="bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <input type="text" id="ship-district" placeholder="İlçe" class="bg-navy border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+            </div>
+
+            <h3 class="text-sm text-gold uppercase tracking-wider">Kargo Seçenekleri</h3>
+            <div class="space-y-3" id="shipping-options">
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="shipping" value="free" class="accent-gold" checked>
+                <div class="flex-1"><p class="text-cream font-medium">Ücretsiz Kargo</p><p class="text-xs text-cream/50">750 TL ve üzeri · 3-5 iş günü</p></div>
+                <span class="text-gold text-sm">Ücretsiz</span>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="shipping" value="standard" class="accent-gold">
+                <div class="flex-1"><p class="text-cream font-medium">Standart Kargo</p><p class="text-xs text-cream/50">2-5 iş günü</p></div>
+                <span class="text-cream text-sm">₺49,90</span>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="shipping" value="express" class="accent-gold">
+                <div class="flex-1"><p class="text-cream font-medium">Hızlı Kargo</p><p class="text-xs text-cream/50">1-2 iş günü</p></div>
+                <span class="text-cream text-sm">₺89,90</span>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="shipping" value="pickup" class="accent-gold">
+                <div class="flex-1"><p class="text-cream font-medium">Mağazadan Teslimat (Click & Collect)</p><p class="text-xs text-cream/50">Aynı gün veya ertesi gün</p></div>
+                <span class="text-gold text-sm">Ücretsiz</span>
+              </label>
+            </div>
+
+            <div id="pickup-section" class="hidden space-y-4 p-4 bg-navy rounded-xl border border-gold/10">
+              <select id="pickup-city" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+                <option value="">Şehir Seçin</option>
+                <option value="istanbul">İstanbul</option>
+                <option value="ankara">Ankara</option>
+                <option value="izmir">İzmir</option>
+                <option value="bursa">Bursa</option>
+              </select>
+              <select id="pickup-store" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" disabled>
+                <option value="">Önce şehir seçin</option>
+              </select>
+            </div>
+
+            <button onclick="CheckoutPage.goToStep(2)" class="w-full py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Devam Et →</button>
+          </div>
+
+          <!-- Step 2: Payment -->
+          <div id="step-2" class="hidden bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-6">
+            <h2 class="font-medium text-lg">Ödeme Yöntemi</h2>
+            <div class="space-y-3">
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="card" class="accent-gold" checked>
+                <div><p class="text-cream font-medium">Kredi / Banka Kartı</p><p class="text-xs text-cream/50">3-12 taksit seçeneği</p></div>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="transfer" class="accent-gold">
+                <div><p class="text-cream font-medium">Banka Havalesi / EFT</p></div>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="apple" class="accent-gold">
+                <div><p class="text-cream font-medium"> Apple Pay</p></div>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="google" class="accent-gold">
+                <div><p class="text-cream font-medium"> Google Pay</p></div>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="papara" class="accent-gold">
+                <div><p class="text-cream font-medium">Papara</p></div>
+              </label>
+              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+                <input type="radio" name="payment" value="iyzico" class="accent-gold">
+                <div><p class="text-cream font-medium">Güvenli Ödeme (iyzico)</p><p class="text-xs text-cream/50">256-bit SSL şifreleme</p></div>
+              </label>
+            </div>
+
+            <div id="card-form" class="space-y-4 p-4 bg-navy rounded-xl border border-gold/10">
+              <input type="text" placeholder="Kart Numarası" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="19">
+              <div class="grid grid-cols-2 gap-4">
+                <input type="text" placeholder="AA/YY" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="5">
+                <input type="text" placeholder="CVV" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="3">
+              </div>
+              <select class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+                <option>Tek Çekim</option>
+                <option>3 Taksit</option>
+                <option>6 Taksit</option>
+                <option>9 Taksit</option>
+                <option>12 Taksit</option>
+              </select>
+            </div>
+
+            <div class="flex gap-4">
+              <button onclick="CheckoutPage.goToStep(1)" class="px-6 py-4 border border-gold/30 text-gold rounded-xl hover:bg-gold/10 transition-colors">← Geri</button>
+              <button onclick="CheckoutPage.goToStep(3)" class="flex-1 py-4 bg-gold text-navy font-semibold rounded-xl hover:bg-gold-light transition-colors">Siparişi Onayla</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Confirm -->
+          <div id="step-3" class="hidden bg-navy-light rounded-2xl border border-gold/10 p-6 text-center">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gold/20 flex items-center justify-center text-3xl animate-pulse-soft">⏳</div>
+            <h2 class="text-xl font-light mb-2">Siparişiniz işleniyor...</h2>
+            <p class="text-cream/50 text-sm">Güvenli ödeme doğrulanıyor</p>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="lg:col-span-1">
+          <div class="bg-navy-light rounded-2xl border border-gold/10 p-6 sticky top-36">
+            <h2 class="font-medium mb-4">Sipariş Özeti</h2>
+            <div id="checkout-items" class="space-y-3 mb-4 max-h-60 overflow-y-auto custom-scrollbar"></div>
+            <div class="space-y-2 text-sm border-t border-gold/10 pt-4">
+              <div class="flex justify-between"><span class="text-cream/50">Ara Toplam</span><span id="co-subtotal">₺0</span></div>
+              <div class="flex justify-between"><span class="text-cream/50">İndirim</span><span id="co-discount" class="text-rose-gold">-₺0</span></div>
+              <div class="flex justify-between"><span class="text-cream/50">Kargo</span><span id="co-shipping">₺0</span></div>
+              <div class="flex justify-between font-medium text-lg border-t border-gold/10 pt-3">
+                <span>Toplam</span><span id="co-total" class="text-gold">₺0</span>
+              </div>
+            </div>
+            <div id="club-points-preview" class="hidden mt-4 p-4 rounded-xl border border-[#E91E8C]/20 bg-[#FFF0F3]/50">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">⭐</span>
+                <p class="text-sm font-medium text-cream">RAVANON Club Kazancınız</p>
+              </div>
+              <p class="text-2xl font-semibold text-[#E91E8C]" id="co-points">+0 puan</p>
+              <p class="text-xs text-cream/50 mt-1" id="co-points-rate">Her 10 TL = 1 puan</p>
+              <p class="text-xs text-cream/40 mt-2" id="co-tier-info"></p>
+            </div>
+            <div id="club-guest-hint" class="hidden mt-4 p-4 rounded-xl border border-gold/20 bg-navy text-center">
+              <p class="text-sm text-cream/70 mb-2">Club üyesi olun, bu alışverişten puan kazanın!</p>
+              <a href="account.html" class="text-sm text-gold font-medium hover:underline">Ücretsiz Kayıt — 100 Puan Hediye →</a>
+            </div>
+            <div class="mt-4 p-3 bg-navy rounded-xl text-xs text-cream/40 flex items-center gap-2">
+              <span>🔒</span> 256-bit SSL ile güvenli ödeme
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/product-visuals.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store-bridge.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const CheckoutPage = {
+      currentStep: 1,
+
+      init() {
+        initSharedUI();
+        if (!Cart.getItems().length) { window.location.href = 'cart.html'; return; }
+        this.renderSummary();
+        this.bindEvents();
+        const user = Auth.getUser();
+        if (user) {
+          document.getElementById('ship-name').value = user.name || '';
+          document.getElementById('ship-phone').value = user.phone || '';
+        }
+      },
+
+      bindEvents() {
+        document.querySelectorAll('input[name="shipping"]').forEach(el => {
+          el.addEventListener('change', () => {
+            const pickup = document.getElementById('pickup-section');
+            pickup.classList.toggle('hidden', el.value !== 'pickup' || !el.checked);
+            if (el.checked) this.renderSummary();
+          });
+        });
+        document.getElementById('pickup-city')?.addEventListener('change', e => {
+          const stores = RAVANON_DATA.stores[e.target.value] || [];
+          const select = document.getElementById('pickup-store');
+          select.disabled = !stores.length;
+          select.innerHTML = stores.length
+            ? stores.map(s => `<option value="${s.id}">${s.name} — ${s.address}</option>`).join('')
+            : '<option value="">Mağaza bulunamadı</option>';
+        });
+        document.querySelectorAll('input[name="payment"]').forEach(el => {
+          el.addEventListener('change', () => {
+            document.getElementById('card-form').classList.toggle('hidden', el.value !== 'card' || !el.checked);
+          });
+        });
+      },
+
+      getShippingMethod() {
+        return document.querySelector('input[name="shipping"]:checked')?.value || 'standard';
+      },
+
+      renderSummary() {
+        const items = Cart.getItems();
+        const subtotal = Cart.getSubtotal();
+        const discount = Discount.calculate(subtotal);
+        const shipping = calculateShipping(subtotal, this.getShippingMethod());
+        const total = subtotal - discount + shipping;
+
+        document.getElementById('checkout-items').innerHTML = items.map(i => `
+          <div class="flex justify-between text-sm">
+            <span class="text-cream/70 truncate mr-2">${i.product.name} × ${i.quantity}</span>
+            <span class="text-cream flex-shrink-0">${formatPrice(i.product.price * i.quantity)}</span>
+          </div>`).join('');
+
+        document.getElementById('co-subtotal').textContent = formatPrice(subtotal);
+        document.getElementById('co-discount').textContent = discount ? '-' + formatPrice(discount) : formatPrice(0);
+        document.getElementById('co-shipping').textContent = shipping ? formatPrice(shipping) : 'Ücretsiz';
+        document.getElementById('co-total').textContent = formatPrice(total);
+
+        const clubPreview = document.getElementById('club-points-preview');
+        const guestHint = document.getElementById('club-guest-hint');
+        const summary = Auth.getClubSummary?.();
+        if (summary) {
+          clubPreview.classList.remove('hidden');
+          guestHint.classList.add('hidden');
+          const pts = calculatePointsEarned(total);
+          document.getElementById('co-points').textContent = `+${pts} puan`;
+          document.getElementById('co-points-rate').textContent = summary.rateLabel;
+          document.getElementById('co-tier-info').textContent = `${summary.tier.name} üye · Mevcut: ${summary.user.points.toLocaleString('tr-TR')} puan`;
+        } else {
+          clubPreview.classList.add('hidden');
+          if (total > 0) guestHint.classList.remove('hidden');
+          else guestHint.classList.add('hidden');
+        }
+      },
+
+      goToStep(step) {
+        if (step === 2) {
+          const name = document.getElementById('ship-name').value.trim();
+          const phone = document.getElementById('ship-phone').value.trim();
+          const address = document.getElementById('ship-address').value.trim();
+          if (!name || !phone || !address) { showToast('Lütfen zorunlu alanları doldurun', 'error'); return; }
+          if (this.getShippingMethod() === 'pickup') {
+            const city = document.getElementById('pickup-city').value;
+            const store = document.getElementById('pickup-store').value;
+            if (!city || !store) { showToast('Mağaza seçin', 'error'); return; }
+          }
+        }
+
+        if (step === 3) {
+          this.processOrder();
+          return;
+        }
+
+        this.currentStep = step;
+        ['step-1', 'step-2', 'step-3'].forEach((id, i) => {
+          document.getElementById(id).classList.toggle('hidden', i + 1 !== step);
+        });
+        document.querySelectorAll('.checkout-step').forEach((el, i) => {
+          el.classList.toggle('active', i + 1 === step);
+          el.classList.toggle('completed', i + 1 < step);
+        });
+        this.renderSummary();
+      },
+
+      processOrder() {
+        document.getElementById('step-1').classList.add('hidden');
+        document.getElementById('step-2').classList.add('hidden');
+        document.getElementById('step-3').classList.remove('hidden');
+
+        showLoading(true);
+
+        setTimeout(() => {
+          const subtotal = Cart.getSubtotal();
+          const discount = Discount.calculate(subtotal);
+          const shipping = calculateShipping(subtotal, this.getShippingMethod());
+          const total = subtotal - discount + shipping;
+          const order = Orders.create({
+            items: Cart.getItems().map(i => ({ productId: i.productId, name: i.product.name, brand: i.product.brand, price: i.product.price, quantity: i.quantity })),
+            subtotal, discount, shippingCost: shipping, total,
+            shippingAddress: {
+              name: document.getElementById('ship-name').value,
+              phone: document.getElementById('ship-phone').value,
+              address: document.getElementById('ship-address').value,
+              city: document.getElementById('ship-city').value,
+              method: this.getShippingMethod()
+            },
+            payment: document.querySelector('input[name="payment"]:checked')?.value
+          });
+
+          let clubResult = null;
+          if (Auth.isLoggedIn()) {
+            clubResult = Auth.recordPurchase(total, order.id);
+          }
+          const points = clubResult?.earned || 0;
+          const tierUp = clubResult?.tierUpgraded ? '1' : '0';
+          const newTotal = clubResult?.newTotal || 0;
+
+          Cart.clear();
+          Discount.clear();
+          showLoading(false);
+          window.location.href = `success.html?order=${order.id}&points=${points}&tierUp=${tierUp}&totalPts=${newTotal}`;
+        }, 2000);
+      }
+    };
+
+    onStoreReady(() => CheckoutPage.init());
+  </script>
+</body>
+</html>
