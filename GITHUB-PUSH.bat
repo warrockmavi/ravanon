@@ -25,5 +25,5 @@ if errorlevel 1 (
     git push -u origin main
 )
 echo.
-echo  Tamamlandi: https://github.com/mavioguzhan/ravanon
+echo  Tamamlandi: https://github.com/warrockmavi/ravanon
 pause

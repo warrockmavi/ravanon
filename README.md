@@ -21,7 +21,7 @@ Premium kozmetik e-ticaret platformu — AI destekli mağaza + tam özellikli ad
 ### 1. Projeyi indirin
 
 ```bash
-git clone https://github.com/mavioguzhan/ravanon.git
+git clone https://github.com/warrockmavi/ravanon.git
 cd ravanon
 ```
 
