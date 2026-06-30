@@ -138,6 +138,12 @@ export function OrderDetailDrawer({ order, open, onClose, onUpdate }: OrderDetai
               </TabsContent>
 
               <TabsContent value="shipping" className="space-y-4 mt-4">
+                {order.shippingMethod && (
+                  <div className="rounded-lg border border-gold/20 bg-gold/5 p-3 text-sm">
+                    <p className="text-cream/50 text-xs mb-1">Müşteri seçimi</p>
+                    <p className="text-cream">{order.shippingMethod.carrierId} · {order.shippingMethod.serviceId}</p>
+                  </div>
+                )}
                 {order.shippingInfo.trackingNumber !== "—" ? (
                   <>
                     <div className="rounded-lg border border-border bg-surface p-4 space-y-2">
@@ -156,18 +162,53 @@ export function OrderDetailDrawer({ order, open, onClose, onUpdate }: OrderDetai
                         </div>
                       )}
                     </div>
-                    {trackingUrl && (
-                      <Button variant="outline" size="sm" asChild>
-                        <a href={trackingUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-3.5 w-3.5" />
-                          Kargo Sitesinde Takip Et
-                        </a>
+                    <div className="flex flex-wrap gap-2">
+                      {trackingUrl && (
+                        <Button variant="outline" size="sm" asChild>
+                          <a href={trackingUrl} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-3.5 w-3.5" />
+                            Kargo Sitesinde Takip Et
+                          </a>
+                        </Button>
+                      )}
+                      <Button variant="outline" size="sm" onClick={async () => {
+                        const res = await fetch("/api/shipping", {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ action: "syncTracking", orderId: order.id }),
+                        });
+                        if (res.ok) {
+                          const { order: updated } = await res.json();
+                          onUpdate(updated);
+                        }
+                      }}>
+                        <Truck className="h-3.5 w-3.5" />
+                        Takibi Güncelle
                       </Button>
-                    )}
+                    </div>
                     <ShippingTimeline events={order.shippingInfo.events} />
                   </>
                 ) : (
-                  <p className="text-sm text-cream/40">Bu sipariş için henüz kargo bilgisi oluşturulmadı.</p>
+                  <div className="space-y-3">
+                    <p className="text-sm text-cream/40">Kargo gönderisi henüz oluşturulmadı. API ile etiket oluşturun.</p>
+                    <Button size="sm" onClick={async () => {
+                      const res = await fetch("/api/shipping/create", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ orderId: order.id }),
+                      });
+                      if (res.ok) {
+                        const { order: updated } = await res.json();
+                        onUpdate(updated);
+                      } else {
+                        const err = await res.json().catch(() => ({}));
+                        alert(err.error || "Kargo oluşturulamadı");
+                      }
+                    }}>
+                      <Truck className="h-3.5 w-3.5" />
+                      Kargo Gönderisi Oluştur
+                    </Button>
+                  </div>
                 )}
               </TabsContent>
 

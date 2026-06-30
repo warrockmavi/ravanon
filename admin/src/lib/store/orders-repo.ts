@@ -1,7 +1,9 @@
 import fs from "fs/promises";
-import type { AdminOrder, OrderStatus } from "@/types/admin";
+import type { AdminOrder, OrderShippingMethod, OrderStatus } from "@/types/admin";
 import { ORDERS_JSON } from "./paths";
 import { MOCK_ORDERS } from "@/lib/mock/orders";
+import { getCarriers } from "./shipping-repo";
+import { getSettings } from "./settings-repo";
 
 interface OrdersFile {
   version: number;
@@ -59,7 +61,7 @@ const STATUS_MAP: Record<string, OrderStatus> = {
   "İade": "refunded",
 };
 
-export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder {
+export async function storefrontToAdminOrder(raw: Record<string, unknown>): Promise<AdminOrder> {
   const ship = (raw.shippingAddress ?? raw.shipping) as Record<string, string> | undefined;
   const items = (raw.items as AdminOrder["items"]) ?? [];
   const now = new Date().toISOString();
@@ -71,6 +73,18 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
   const providerName = String(payMeta?.providerName ?? raw.payment ?? "iyzico");
   const providerId = String(payMeta?.providerId ?? raw.payment ?? "iyzico");
   const txId = String(payMeta?.transactionId ?? `TX-${raw.id}`);
+
+  const sm = raw.shippingMethod as OrderShippingMethod | undefined;
+  const [carriers, settings] = await Promise.all([getCarriers(), getSettings()]);
+  const carrier = sm
+    ? carriers.find((c) => c.id === sm.carrierId)
+    : carriers.find((c) => c.id === settings.defaultCarrier) || carriers.find((c) => c.active);
+  const isPickup = sm?.type === "pickup" || ship?.method === "pickup";
+  const carrierName = isPickup ? "Mağazadan Teslim" : carrier?.name || "HepsiJet";
+  const carrierId = isPickup ? "pickup" : carrier?.id || "hepsijet";
+  const carrierCode = isPickup ? "PU" : carrier?.code || "HJ";
+  const etaDays = sm?.etaDays ?? carrier?.avgDeliveryDays ?? 3;
+
   return {
     id: String(raw.id),
     userId: raw.userId ? String(raw.userId) : "guest",
@@ -100,12 +114,15 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
       paidAt: payStatus === "paid" ? now : undefined,
       authCode: payMeta?.authCode as string | undefined,
     },
+    shippingMethod: sm,
     shippingInfo: {
-      carrier: "HepsiJet",
-      carrierCode: "HJ",
-      trackingNumber: `HJ${String(raw.id).replace(/\D/g, "").slice(-8)}`,
+      carrier: carrierName,
+      carrierId,
+      carrierCode,
+      serviceId: sm?.serviceId,
+      trackingNumber: "—",
       status: "preparing",
-      estimatedDelivery: new Date(Date.now() + 3 * 86400000).toISOString().slice(0, 10),
+      estimatedDelivery: new Date(Date.now() + etaDays * 86400000).toISOString().slice(0, 10),
       events: [{ id: "e1", status: "preparing", title: "Sipariş alındı", location: "RAVANON Depo", createdAt: now }],
     },
     shippingAddress: ship ? `${ship.address}, ${ship.city}` : "",
@@ -116,7 +133,7 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
 }
 
 export async function createStorefrontOrder(raw: Record<string, unknown>): Promise<AdminOrder> {
-  const order = storefrontToAdminOrder(raw);
+  const order = await storefrontToAdminOrder(raw);
   return saveOrder(order);
 }
 

@@ -15,6 +15,7 @@ const CARRIERS = [
   { id: "yurtici", label: "Yurtiçi Kargo" },
   { id: "aras", label: "Aras Kargo" },
   { id: "mng", label: "MNG Kargo" },
+  { id: "ptt", label: "PTT Kargo" },
 ];
 
 export default function SettingsPage() {

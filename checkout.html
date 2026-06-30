@@ -52,26 +52,7 @@
 
             <h3 class="text-sm text-gold uppercase tracking-wider">Kargo Seçenekleri</h3>
             <div class="space-y-3" id="shipping-options">
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="shipping" value="free" class="accent-gold" checked>
-                <div class="flex-1"><p class="text-cream font-medium">Ücretsiz Kargo</p><p class="text-xs text-cream/50">750 TL ve üzeri · 3-5 iş günü</p></div>
-                <span class="text-gold text-sm">Ücretsiz</span>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="shipping" value="standard" class="accent-gold">
-                <div class="flex-1"><p class="text-cream font-medium">Standart Kargo</p><p class="text-xs text-cream/50">2-5 iş günü</p></div>
-                <span class="text-cream text-sm">₺49,90</span>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="shipping" value="express" class="accent-gold">
-                <div class="flex-1"><p class="text-cream font-medium">Hızlı Kargo</p><p class="text-xs text-cream/50">1-2 iş günü</p></div>
-                <span class="text-cream text-sm">₺89,90</span>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="shipping" value="pickup" class="accent-gold">
-                <div class="flex-1"><p class="text-cream font-medium">Mağazadan Teslimat (Click & Collect)</p><p class="text-xs text-cream/50">Aynı gün veya ertesi gün</p></div>
-                <span class="text-gold text-sm">Ücretsiz</span>
-              </label>
+              <p class="text-sm text-cream/40 text-center py-4">Kargo seçenekleri yükleniyor...</p>
             </div>
 
             <div id="pickup-section" class="hidden space-y-4 p-4 bg-navy rounded-xl border border-gold/10">
@@ -172,6 +153,7 @@
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/shipping.js"></script>
   <script src="js/payments.js"></script>
   <script src="js/ai-chat.js"></script>
   <script src="js/skin-quiz.js"></script>
@@ -186,6 +168,7 @@
       async init() {
         initSharedUI();
         if (!Cart.getItems().length) { window.location.href = 'cart.html'; return; }
+        await this.loadShippingOptions();
         const loaded = await Payments.loadMethods();
         this.paymentMethods = loaded.methods;
         this.bankAccount = loaded.bank;
@@ -199,6 +182,39 @@
           const emailEl = document.getElementById('ship-email');
           if (emailEl) emailEl.value = user.email || '';
         }
+      },
+
+      async loadShippingOptions() {
+        const subtotal = Cart.getSubtotal();
+        await Shipping.loadMethods(subtotal);
+        this.renderShippingMethods();
+      },
+
+      renderShippingMethods() {
+        const box = document.getElementById('shipping-options');
+        const methods = Shipping._methods || [];
+        if (!methods.length) {
+          box.innerHTML = '<p class="text-red-400 text-sm text-center py-4">Kargo seçeneği bulunamadı</p>';
+          return;
+        }
+        box.innerHTML = methods.map((m, i) => {
+          const priceLabel = m.price === 0 ? '<span class="text-gold text-sm">Ücretsiz</span>' : `<span class="text-cream text-sm">${formatPrice(m.price)}</span>`;
+          return `<label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer hover:border-gold/40 transition-colors has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+            <input type="radio" name="shipping" value="${m.methodId}" data-carrier="${m.carrierId}" data-service="${m.serviceId}" data-price="${m.price}" data-eta="${m.etaDays}" class="accent-gold" ${i === 0 ? 'checked' : ''}>
+            <div class="flex-1">
+              <p class="text-cream font-medium">${m.logo} ${m.name}</p>
+              <p class="text-xs text-cream/50">${m.description || m.etaLabel}</p>
+            </div>
+            ${priceLabel}
+          </label>`;
+        }).join('');
+        this.updatePickupVisibility();
+      },
+
+      updatePickupVisibility() {
+        const m = Shipping.getSelectedMethod();
+        const pickup = document.getElementById('pickup-section');
+        pickup?.classList.toggle('hidden', m?.type !== 'pickup');
       },
 
       renderPaymentMethods() {
@@ -242,12 +258,11 @@
       },
 
       bindEvents() {
-        document.querySelectorAll('input[name="shipping"]').forEach(el => {
-          el.addEventListener('change', () => {
-            const pickup = document.getElementById('pickup-section');
-            pickup.classList.toggle('hidden', el.value !== 'pickup' || !el.checked);
-            if (el.checked) this.renderSummary();
-          });
+        document.getElementById('shipping-options')?.addEventListener('change', (e) => {
+          if (e.target.name === 'shipping') {
+            this.updatePickupVisibility();
+            this.renderSummary();
+          }
         });
         document.getElementById('pickup-city')?.addEventListener('change', e => {
           const stores = RAVANON_DATA.stores[e.target.value] || [];
@@ -263,14 +278,14 @@
       },
 
       getShippingMethod() {
-        return document.querySelector('input[name="shipping"]:checked')?.value || 'standard';
+        return Shipping.getSelectedMethod()?.methodId || 'standard';
       },
 
       renderSummary() {
         const items = Cart.getItems();
         const subtotal = Cart.getSubtotal();
         const discount = Discount.calculate(subtotal);
-        const shipping = calculateShipping(subtotal, this.getShippingMethod());
+        const shipping = Shipping.getCost(subtotal);
         const total = subtotal - discount + shipping;
 
         document.getElementById('checkout-items').innerHTML = items.map(i => `
@@ -307,7 +322,7 @@
           const phone = document.getElementById('ship-phone').value.trim();
           const address = document.getElementById('ship-address').value.trim();
           if (!name || !phone || !address) { showToast('Lütfen zorunlu alanları doldurun', 'error'); return; }
-          if (this.getShippingMethod() === 'pickup') {
+          if (Shipping.getSelectedMethod()?.type === 'pickup') {
             const city = document.getElementById('pickup-city').value;
             const store = document.getElementById('pickup-store').value;
             if (!city || !store) { showToast('Mağaza seçin', 'error'); return; }
@@ -338,9 +353,10 @@
 
         const subtotal = Cart.getSubtotal();
         const discount = Discount.calculate(subtotal);
-        const shipping = calculateShipping(subtotal, this.getShippingMethod());
+        const shipping = Shipping.getCost(subtotal);
         const total = subtotal - discount + shipping;
         const orderRef = 'CHK-' + Date.now();
+        const shipMethod = Shipping.buildOrderMethod();
         const providerId = this.getPaymentProviderId();
         const user = Auth.getUser();
 
@@ -375,12 +391,13 @@
           const order = Orders.create({
             items: Cart.getItems().map(i => ({ productId: i.productId, name: i.product.name, brand: i.product.brand, price: i.product.price, quantity: i.quantity })),
             subtotal, discount, shippingCost: shipping, total,
+            shippingMethod: shipMethod,
             shippingAddress: {
               name: document.getElementById('ship-name').value,
               phone: document.getElementById('ship-phone').value,
               address: document.getElementById('ship-address').value,
               city: document.getElementById('ship-city').value,
-              method: this.getShippingMethod()
+              method: shipMethod?.methodId || this.getShippingMethod()
             },
             payment: providerId,
             paymentResult: payment,

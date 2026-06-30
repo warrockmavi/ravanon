@@ -1,11 +1,13 @@
 import type { Shipment, ShippingCarrier, ShippingTrackingEvent } from "@/types/admin";
 
+const SVC = (price: number, days: number) => [{ id: "standard", name: "Standart", basePrice: price, etaDays: days, active: true }];
+
 export const MOCK_CARRIERS: ShippingCarrier[] = [
-  { id: "yurtici", name: "Yurtiçi Kargo", code: "YK", logo: "📦", trackingUrl: "https://www.yurticikargo.com/tr/online-servisler/gonderi-sorgula?code=", active: true, avgDeliveryDays: 2 },
-  { id: "aras", name: "Aras Kargo", code: "AR", logo: "🚚", trackingUrl: "https://www.araskargo.com.tr/trmm.aspx?q=", active: true, avgDeliveryDays: 2 },
-  { id: "mng", name: "MNG Kargo", code: "MNG", logo: "📮", trackingUrl: "https://www.mngkargo.com.tr/tracking?code=", active: true, avgDeliveryDays: 3 },
-  { id: "ptt", name: "PTT Kargo", code: "PTT", logo: "✉️", trackingUrl: "https://gonderitakip.ptt.gov.tr/", active: false, avgDeliveryDays: 4 },
-  { id: "hepsijet", name: "HepsiJet", code: "HJ", logo: "⚡", trackingUrl: "https://www.hepsijet.com/takip/", active: true, avgDeliveryDays: 1 },
+  { id: "yurtici", name: "Yurtiçi Kargo", code: "YK", logo: "📦", trackingUrl: "https://www.yurticikargo.com/tr/online-servisler/gonderi-sorgula?code=", active: true, testMode: true, avgDeliveryDays: 2, apiKeyMasked: "—", services: SVC(44.9, 2) },
+  { id: "aras", name: "Aras Kargo", code: "AR", logo: "🚚", trackingUrl: "https://www.araskargo.com.tr/trmm.aspx?q=", active: true, testMode: true, avgDeliveryDays: 2, apiKeyMasked: "—", services: SVC(42.9, 2) },
+  { id: "mng", name: "MNG Kargo", code: "MNG", logo: "📮", trackingUrl: "https://www.mngkargo.com.tr/tracking?code=", active: true, testMode: true, avgDeliveryDays: 3, apiKeyMasked: "—", services: SVC(39.9, 3) },
+  { id: "ptt", name: "PTT Kargo", code: "PTT", logo: "✉️", trackingUrl: "https://gonderitakip.ptt.gov.tr/", active: false, testMode: true, avgDeliveryDays: 4, apiKeyMasked: "—", services: SVC(35.9, 4) },
+  { id: "hepsijet", name: "HepsiJet", code: "HJ", logo: "⚡", trackingUrl: "https://www.hepsijet.com/takip/", active: true, testMode: true, avgDeliveryDays: 1, apiKeyMasked: "—", services: [{ id: "express", name: "Hızlı", basePrice: 89.9, etaDays: 1, active: true }, { id: "standard", name: "Standart", basePrice: 49.9, etaDays: 2, active: true }] },
 ];
 
 const defaultEvents = (status: string): ShippingTrackingEvent[] => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Truck, Package, MapPin, CheckCircle2, Search, ExternalLink, RefreshCw } from "lucide-react";
+import { Truck, Package, MapPin, CheckCircle2, Search, ExternalLink, RefreshCw, Settings } from "lucide-react";
 import { AdminHeader } from "@/components/admin/header";
 import { KpiCard } from "@/components/admin/kpi-card";
 import { ShippingTimeline } from "@/components/admin/shipping-timeline";
@@ -34,22 +34,13 @@ const STATUS_VARIANT: Record<ShipmentStatus, "default" | "warning" | "success" |
 export default function ShippingPage() {
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [carriers, setCarriers] = useState<ShippingCarrier[]>([]);
-
-  const toggleCarrier = async (id: string) => {
-    const res = await fetch("/api/shipping", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "toggle", id }),
-    });
-    if (res.ok) {
-      const { carrier } = await res.json();
-      setCarriers((prev) => prev.map((c) => (c.id === id ? carrier : c)));
-    }
-  };
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Shipment | null>(null);
   const [filter, setFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | ShipmentStatus>("all");
+  const [configCarrier, setConfigCarrier] = useState<ShippingCarrier | null>(null);
+  const [creds, setCreds] = useState({ apiKey: "", apiSecret: "", customerCode: "", testMode: true });
+  const [saving, setSaving] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -64,6 +55,54 @@ export default function ShippingPage() {
   };
 
   useEffect(() => { load(); }, []);
+
+  const toggleCarrier = async (id: string) => {
+    const res = await fetch("/api/shipping", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "toggle", id }),
+    });
+    if (res.ok) {
+      const { carrier } = await res.json();
+      setCarriers((prev) => prev.map((c) => (c.id === id ? carrier : c)));
+    }
+  };
+
+  const saveCredentials = async () => {
+    if (!configCarrier) return;
+    setSaving(true);
+    try {
+      const res = await fetch("/api/shipping", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "credentials",
+          id: configCarrier.id,
+          apiKey: creds.apiKey || undefined,
+          apiSecret: creds.apiSecret || undefined,
+          customerCode: creds.customerCode || undefined,
+          testMode: creds.testMode,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      const { carrier } = await res.json();
+      setCarriers((prev) => prev.map((c) => (c.id === carrier.id ? carrier : c)));
+      setConfigCarrier(null);
+    } catch {
+      alert("API bilgileri kaydedilemedi");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const syncTracking = async (orderId: string) => {
+    const res = await fetch("/api/shipping", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "syncTracking", orderId }),
+    });
+    if (res.ok) await load();
+  };
 
   const kpis = useMemo(() => ({
     total: shipments.length,
@@ -89,14 +128,16 @@ export default function ShippingPage() {
 
   const getTrackingUrl = (shipment: Shipment) => {
     const carrier = carriers.find((c) => c.code === shipment.carrierCode);
-    return carrier ? `${carrier.trackingUrl}${shipment.trackingNumber}` : "#";
+    return carrier && shipment.trackingNumber !== "—"
+      ? `${carrier.trackingUrl}${shipment.trackingNumber}`
+      : "#";
   };
 
   return (
     <>
       <AdminHeader
-        title="Kargo Takibi"
-        description="Siparişlerden türetilen canlı gönderi durumu"
+        title="Kargo Entegrasyonu"
+        description="HepsiJet, Yurtiçi, Aras, MNG, PTT — API yapılandırma ve canlı takip"
         actions={
           <Button variant="outline" size="sm" onClick={load} disabled={loading}>
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
@@ -132,12 +173,12 @@ export default function ShippingPage() {
               {loading ? (
                 <p className="text-center py-12 text-cream/40">Yükleniyor...</p>
               ) : filtered.length === 0 ? (
-                <p className="text-center py-12 text-cream/40">Gönderi bulunamadı</p>
+                <p className="text-center py-12 text-cream/40">Gönderi bulunamadı — sipariş oluşturup kargo etiketi basın</p>
               ) : (
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-border bg-surface-elevated">
-                      {["Takip No", "Sipariş", "Müşteri", "Kargo", "Durum", "Tahmini"].map((h) => (
+                      {["Takip No", "Sipariş", "Müşteri", "Kargo", "Durum", "Tahmini", ""].map((h) => (
                         <th key={h} className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-cream/40">{h}</th>
                       ))}
                     </tr>
@@ -151,6 +192,11 @@ export default function ShippingPage() {
                         <td className="px-4 py-3 text-sm text-cream/60">{s.carrier}</td>
                         <td className="px-4 py-3"><Badge variant={STATUS_VARIANT[s.status]}>{STATUS_LABELS[s.status]}</Badge></td>
                         <td className="px-4 py-3 text-sm text-cream/50">{formatDate(s.estimatedDelivery)}</td>
+                        <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                          {s.trackingNumber !== "—" && s.status !== "delivered" && (
+                            <Button size="sm" variant="outline" onClick={() => syncTracking(s.orderId)}>Güncelle</Button>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -159,22 +205,37 @@ export default function ShippingPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-border bg-surface-elevated p-5">
-            <h3 className="text-sm font-medium text-cream mb-4">Kargo Firmaları</h3>
+          <div className="rounded-xl border border-border bg-surface-elevated p-5 space-y-4">
+            <h3 className="text-sm font-medium text-cream">Kargo Firmaları</h3>
             <div className="space-y-2">
               {carriers.map((c) => (
-                <div key={c.id} className="flex items-center justify-between rounded-lg border border-border bg-surface px-3 py-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{c.logo}</span>
-                    <div>
-                      <p className="text-sm text-cream">{c.name}</p>
-                      <p className="text-[10px] text-cream/40">~{c.avgDeliveryDays} gün</p>
+                <div key={c.id} className={cn("rounded-lg border px-3 py-3", c.active ? "border-gold/20 bg-surface" : "border-border opacity-60")}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{c.logo}</span>
+                      <div>
+                        <p className="text-sm text-cream">{c.name}</p>
+                        <p className="text-[10px] text-cream/40 font-mono">{c.apiKeyMasked || "—"}</p>
+                      </div>
                     </div>
+                    <Switch checked={c.active} onCheckedChange={() => toggleCarrier(c.id)} />
                   </div>
-                  <Switch checked={c.active} onCheckedChange={() => toggleCarrier(c.id)} />
+                  <div className="flex gap-1 flex-wrap mb-2">
+                    {c.testMode && <Badge variant="warning">Test</Badge>}
+                    {c.services?.map((s) => (
+                      <Badge key={s.id} variant="default">{s.name} ₺{s.basePrice}</Badge>
+                    ))}
+                  </div>
+                  <Button variant="outline" size="sm" className="w-full" onClick={() => { setConfigCarrier(c); setCreds({ apiKey: "", apiSecret: "", customerCode: c.customerCode || "", testMode: c.testMode }); }}>
+                    <Settings className="h-3.5 w-3.5" />
+                    API Yapılandır
+                  </Button>
                 </div>
               ))}
             </div>
+            <p className="text-xs text-cream/40">
+              Her firmanın geliştirici panelinden API anahtarı alın. Test modunda simülasyon takip numarası üretilir.
+            </p>
           </div>
         </div>
       </main>
@@ -189,12 +250,18 @@ export default function ShippingPage() {
                 <Badge variant={STATUS_VARIANT[selected.status]} className="mt-3">{STATUS_LABELS[selected.status]}</Badge>
                 <p className="text-sm text-cream/60 mt-3">{selected.carrier} · {selected.city}</p>
                 {selected.trackingNumber !== "—" && (
-                  <Button variant="outline" size="sm" className="mt-4" asChild>
-                    <a href={getTrackingUrl(selected)} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      Kargo Sitesinde Takip Et
-                    </a>
-                  </Button>
+                  <div className="flex gap-2 mt-4">
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={getTrackingUrl(selected)} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        Kargo Sitesinde Takip Et
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => syncTracking(selected.orderId)}>
+                      <RefreshCw className="h-3.5 w-3.5" />
+                      Güncelle
+                    </Button>
+                  </div>
                 )}
               </div>
               <div className="flex-1 overflow-y-auto p-6">
@@ -205,6 +272,38 @@ export default function ShippingPage() {
           )}
         </SheetContent>
       </Sheet>
+
+      {configCarrier && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setConfigCarrier(null)} />
+          <div className="relative w-full max-w-md rounded-xl border border-border bg-surface-elevated p-6 shadow-2xl">
+            <h2 className="font-display text-lg text-cream mb-1">{configCarrier.name} — API</h2>
+            <p className="text-sm text-cream/40 mb-6">Boş alanlar mevcut değerleri korur</p>
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-cream/50 mb-1.5 block">API Key / Kullanıcı</label>
+                <Input value={creds.apiKey} onChange={(e) => setCreds({ ...creds, apiKey: e.target.value })} className="font-mono text-sm" />
+              </div>
+              <div>
+                <label className="text-xs text-cream/50 mb-1.5 block">API Secret / Şifre</label>
+                <Input type="password" value={creds.apiSecret} onChange={(e) => setCreds({ ...creds, apiSecret: e.target.value })} className="font-mono text-sm" />
+              </div>
+              <div>
+                <label className="text-xs text-cream/50 mb-1.5 block">Müşteri / Sözleşme Kodu</label>
+                <Input value={creds.customerCode} onChange={(e) => setCreds({ ...creds, customerCode: e.target.value })} />
+              </div>
+              <label className="flex items-center gap-3 cursor-pointer">
+                <Switch checked={creds.testMode} onCheckedChange={(v) => setCreds({ ...creds, testMode: v })} />
+                <span className="text-sm text-cream">Test / Sandbox modu</span>
+              </label>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <Button variant="outline" className="flex-1" onClick={() => setConfigCarrier(null)}>İptal</Button>
+              <Button className="flex-1" onClick={saveCredentials} disabled={saving}>{saving ? "Kaydediliyor..." : "Kaydet"}</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

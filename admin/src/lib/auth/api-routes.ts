@@ -1,7 +1,7 @@
 const STORE_ORIGINS = ["http://localhost:8765", "http://127.0.0.1:8765"];
 
-const PUBLIC_GET = ["/api/store", "/api/auth/login", "/api/auth/me", "/api/payments/methods"];
-const STORE_POST = ["/api/users", "/api/orders", "/api/ai/chat", "/api/payments/process"];
+const PUBLIC_GET = ["/api/store", "/api/auth/login", "/api/auth/me", "/api/payments/methods", "/api/shipping/methods", "/api/shipping/track"];
+const STORE_POST = ["/api/users", "/api/orders", "/api/ai/chat", "/api/payments/process", "/api/shipping/quote"];
 
 export function isStoreOrigin(origin: string) {
   return STORE_ORIGINS.includes(origin);

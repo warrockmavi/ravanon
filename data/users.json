@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-30T15:25:27.650Z",
+  "updatedAt": "2026-06-30T18:14:57.662Z",
   "users": [
     {
       "id": "u1",
@@ -123,6 +123,22 @@
       "status": "active",
       "createdAt": "2025-06-30T08:00:00Z",
       "lastLoginAt": "2026-06-27T16:20:00Z"
+    },
+    {
+      "id": "1782843297662",
+      "name": "admin@admin.com",
+      "email": "admin@admin.com",
+      "phone": "admin@admin.com",
+      "password": "admin123",
+      "points": 100,
+      "tier": "bronze",
+      "lifetimeSpend": 0,
+      "totalOrders": 0,
+      "birthday": "2026-06-05",
+      "clubJoinedAt": 1782843297662,
+      "createdAt": 1782843297662,
+      "lastLoginAt": 1782843297662,
+      "status": "active"
     }
   ]
 }

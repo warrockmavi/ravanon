@@ -136,11 +136,23 @@ export interface ShippingTrackingEvent {
 
 export interface OrderShipping {
   carrier: string;
+  carrierId: string;
   carrierCode: string;
+  serviceId?: string;
   trackingNumber: string;
   status: ShipmentStatus;
   estimatedDelivery?: string;
+  labelUrl?: string;
   events: ShippingTrackingEvent[];
+}
+
+export interface OrderShippingMethod {
+  methodId: string;
+  carrierId: string;
+  serviceId: string;
+  type: "delivery" | "pickup" | "free";
+  price: number;
+  etaDays: number;
 }
 
 export interface OrderPayment {
@@ -171,6 +183,7 @@ export interface AdminOrder {
   paymentMethod: string;
   payment: OrderPayment;
   shippingInfo: OrderShipping;
+  shippingMethod?: OrderShippingMethod;
   shippingAddress: string;
   billingAddress?: string;
   pointsEarned: number;
@@ -290,6 +303,21 @@ export interface ClubTierConfig {
   memberCount: number;
 }
 
+export interface ShippingServiceRate {
+  id: string;
+  name: string;
+  basePrice: number;
+  etaDays: number;
+  active: boolean;
+}
+
+export interface ShippingWarehouse {
+  name: string;
+  address: string;
+  city: string;
+  phone: string;
+}
+
 export interface ShippingCarrier {
   id: string;
   name: string;
@@ -297,7 +325,14 @@ export interface ShippingCarrier {
   logo: string;
   trackingUrl: string;
   active: boolean;
+  testMode: boolean;
   avgDeliveryDays: number;
+  apiKeyMasked?: string;
+  apiKey?: string;
+  apiSecret?: string;
+  customerCode?: string;
+  services: ShippingServiceRate[];
+  warehouse?: ShippingWarehouse;
 }
 
 export interface Shipment {

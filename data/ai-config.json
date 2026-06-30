@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "botName": "RAVANON AI Danışman",
+  "welcomeMessage": "Merhaba! Ben RAVANON AI Güzellik Danışmanınız. Canlı ürün kataloğundan size özel öneriler sunuyorum.",
+  "quickReplies": [
+    "2026 trendleri",
+    "Glass skin rutini",
+    "Kuru cilt için",
+    "Vegan ürünler"
+  ],
+  "usePersonalization": true,
+  "logConversations": true
+}

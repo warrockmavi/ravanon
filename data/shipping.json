@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-30T17:52:10.698Z",
+  "updatedAt": "2026-06-30T19:00:00.000Z",
   "carriers": [
     {
       "id": "hepsijet",
@@ -9,7 +9,14 @@
       "logo": "⚡",
       "trackingUrl": "https://www.hepsijet.com/takip/",
       "active": true,
-      "avgDeliveryDays": 1
+      "testMode": true,
+      "avgDeliveryDays": 1,
+      "apiKeyMasked": "—",
+      "services": [
+        { "id": "express", "name": "Hızlı Teslimat", "basePrice": 89.9, "etaDays": 1, "active": true },
+        { "id": "standard", "name": "Standart", "basePrice": 49.9, "etaDays": 2, "active": true }
+      ],
+      "warehouse": { "name": "RAVANON Depo", "address": "Bağdat Cad. No:123", "city": "İstanbul", "phone": "+902161234567" }
     },
     {
       "id": "yurtici",
@@ -18,7 +25,11 @@
       "logo": "📦",
       "trackingUrl": "https://www.yurticikargo.com/tr/online-servisler/gonderi-sorgula?code=",
       "active": true,
-      "avgDeliveryDays": 2
+      "testMode": true,
+      "avgDeliveryDays": 2,
+      "apiKeyMasked": "—",
+      "services": [{ "id": "standard", "name": "Standart", "basePrice": 44.9, "etaDays": 2, "active": true }],
+      "warehouse": { "name": "RAVANON Depo", "address": "Bağdat Cad. No:123", "city": "İstanbul", "phone": "+902161234567" }
     },
     {
       "id": "aras",
@@ -27,7 +38,11 @@
       "logo": "🚚",
       "trackingUrl": "https://www.araskargo.com.tr/trmm.aspx?q=",
       "active": true,
-      "avgDeliveryDays": 2
+      "testMode": true,
+      "avgDeliveryDays": 2,
+      "apiKeyMasked": "—",
+      "services": [{ "id": "standard", "name": "Standart", "basePrice": 42.9, "etaDays": 2, "active": true }],
+      "warehouse": { "name": "RAVANON Depo", "address": "Bağdat Cad. No:123", "city": "İstanbul", "phone": "+902161234567" }
     },
     {
       "id": "mng",
@@ -36,7 +51,11 @@
       "logo": "📮",
       "trackingUrl": "https://www.mngkargo.com.tr/tracking?code=",
       "active": true,
-      "avgDeliveryDays": 3
+      "testMode": true,
+      "avgDeliveryDays": 3,
+      "apiKeyMasked": "—",
+      "services": [{ "id": "standard", "name": "Standart", "basePrice": 39.9, "etaDays": 3, "active": true }],
+      "warehouse": { "name": "RAVANON Depo", "address": "Bağdat Cad. No:123", "city": "İstanbul", "phone": "+902161234567" }
     },
     {
       "id": "ptt",
@@ -44,8 +63,12 @@
       "code": "PTT",
       "logo": "✉️",
       "trackingUrl": "https://gonderitakip.ptt.gov.tr/",
-      "active": false,
-      "avgDeliveryDays": 4
+      "active": true,
+      "testMode": true,
+      "avgDeliveryDays": 4,
+      "apiKeyMasked": "—",
+      "services": [{ "id": "standard", "name": "Standart", "basePrice": 35.9, "etaDays": 4, "active": true }],
+      "warehouse": { "name": "RAVANON Depo", "address": "Bağdat Cad. No:123", "city": "İstanbul", "phone": "+902161234567" }
     }
   ]
 }

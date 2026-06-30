@@ -24,6 +24,10 @@ export async function getFullStore() {
       status: o.status,
       total: o.total,
       trackingNumber: o.shippingInfo.trackingNumber,
+      carrier: o.shippingInfo.carrier,
+      carrierId: o.shippingInfo.carrierId,
+      shipmentStatus: o.shippingInfo.status,
+      estimatedDelivery: o.shippingInfo.estimatedDelivery,
       customerEmail: o.customerEmail,
     })),
   };

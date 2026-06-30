@@ -19,7 +19,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       status: "paid", amount: 1488, paidAt: "2026-06-28T14:32:00Z",
     },
     shippingInfo: {
-      carrier: "MNG Kargo", carrierCode: "MNG", trackingNumber: "MNG9988776655",
+      carrier: "MNG Kargo", carrierId: "mng", carrierCode: "MNG", trackingNumber: "MNG9988776655",
       status: "delivered", estimatedDelivery: "2026-06-30",
       events: [
         { id: "e1", status: "preparing", title: "Sipariş hazırlanıyor", location: "RAVANON Depo — İstanbul", createdAt: "2026-06-28T15:00:00Z" },
@@ -54,7 +54,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       installment: 3, cardBrand: "Visa", lastFour: "4821",
     },
     shippingInfo: {
-      carrier: "Yurtiçi Kargo", carrierCode: "YK", trackingNumber: "YK7849201563",
+      carrier: "Yurtiçi Kargo", carrierId: "yurtici", carrierCode: "YK", trackingNumber: "YK7849201563",
       status: "in_transit", estimatedDelivery: "2026-07-01",
       events: [
         { id: "e1", status: "preparing", title: "Sipariş hazırlanıyor", location: "RAVANON Depo — İstanbul", createdAt: "2026-06-29T10:00:00Z" },
@@ -81,7 +81,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       status: "paid", amount: 948, paidAt: "2026-06-12T11:00:00Z",
     },
     shippingInfo: {
-      carrier: "Yurtiçi Kargo", carrierCode: "YK", trackingNumber: "YK1122334455",
+      carrier: "Yurtiçi Kargo", carrierId: "yurtici", carrierCode: "YK", trackingNumber: "YK1122334455",
       status: "delivered", estimatedDelivery: "2026-06-12",
       events: [
         { id: "e1", status: "preparing", title: "Sipariş hazırlanıyor", location: "RAVANON Depo", createdAt: "2026-06-10T17:00:00Z" },
@@ -112,7 +112,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       cardBrand: "Mastercard", lastFour: "9012",
     },
     shippingInfo: {
-      carrier: "HepsiJet", carrierCode: "HJ", trackingNumber: "HJ20260630001",
+      carrier: "HepsiJet", carrierId: "hepsijet", carrierCode: "HJ", trackingNumber: "HJ20260630001",
       status: "preparing", estimatedDelivery: "2026-07-02",
       events: [
         { id: "e1", status: "preparing", title: "Sipariş hazırlanıyor", location: "RAVANON Depo — İstanbul", createdAt: "2026-06-30T10:00:00Z" },
@@ -138,7 +138,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       cardBrand: "Visa", lastFour: "3344",
     },
     shippingInfo: {
-      carrier: "Aras Kargo", carrierCode: "AR", trackingNumber: "AR5567891234",
+      carrier: "Aras Kargo", carrierId: "aras", carrierCode: "AR", trackingNumber: "AR5567891234",
       status: "out_for_delivery", estimatedDelivery: "2026-06-30",
       events: [
         { id: "e1", status: "preparing", title: "Sipariş hazırlanıyor", location: "RAVANON Depo", createdAt: "2026-06-30T13:00:00Z" },
@@ -165,7 +165,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       status: "pending", amount: 4299,
     },
     shippingInfo: {
-      carrier: "—", carrierCode: "", trackingNumber: "—",
+      carrier: "—", carrierId: "", carrierCode: "", trackingNumber: "—",
       status: "preparing", events: [],
     },
     shippingAddress: "Konak, İzmir",
@@ -188,7 +188,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       cardBrand: "Visa", lastFour: "7788",
     },
     shippingInfo: {
-      carrier: "Yurtiçi Kargo", carrierCode: "YK", trackingNumber: "YK9988776655",
+      carrier: "Yurtiçi Kargo", carrierId: "yurtici", carrierCode: "YK", trackingNumber: "YK9988776655",
       status: "returned", events: [
         { id: "e1", status: "returned", title: "İade kargosu alındı", location: "İstanbul", createdAt: "2026-05-25T14:00:00Z" },
       ],
@@ -212,7 +212,7 @@ export const MOCK_ORDERS: AdminOrder[] = [
       status: "refunded", amount: 1797,
     },
     shippingInfo: {
-      carrier: "—", carrierCode: "", trackingNumber: "—",
+      carrier: "—", carrierId: "", carrierCode: "", trackingNumber: "—",
       status: "preparing", events: [],
     },
     shippingAddress: "Çankaya, Ankara",
