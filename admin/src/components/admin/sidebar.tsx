@@ -152,6 +152,11 @@ export function AdminSidebar() {
           <LogOut className="h-4 w-4" />
           Çıkış Yap
         </Button>
+        <p className="text-[10px] text-center leading-relaxed text-cream/25 px-1 pt-1">
+          Site tasarımı ve admin paneli{" "}
+          <span className="font-medium text-gold/80">Bafralı Oğuzhan</span>
+          &apos;a aittir.
+        </p>
       </div>
     </aside>
   );

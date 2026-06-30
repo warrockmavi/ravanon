@@ -151,7 +151,7 @@ function renderFooter() {
       </div>
       <div class="border-t border-gold/10 mt-12 pt-8 flex flex-col items-center gap-4 text-center">
         <p class="text-xs text-cream/30">© 2026 RAVANON. Tüm hakları saklıdır.</p>
-        <p class="footer-credit"><strong>Oğuzhan Mavi Bafralı</strong> tarafından tasarlanmıştır</p>
+        <p class="footer-credit">Site tasarımı ve admin paneli <strong>Bafralı Oğuzhan</strong>'a aittir.</p>
         <div class="flex gap-6 text-xs text-cream/30">
           <a href="#" class="hover:text-gold">Gizlilik Politikası</a>
           <a href="#" class="hover:text-gold">Kullanım Koşulları</a>

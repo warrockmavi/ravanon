@@ -74,10 +74,15 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
       <Suspense fallback={<div className="text-cream/40">Yükleniyor...</div>}>
         <LoginForm />
       </Suspense>
+      <p className="mt-6 max-w-md text-center text-[10px] leading-relaxed text-cream/30">
+        Site tasarımı ve admin paneli{" "}
+        <span className="font-medium text-gold/70">Bafralı Oğuzhan</span>
+        &apos;a aittir.
+      </p>
     </div>
   );
 }
