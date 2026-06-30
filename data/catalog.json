@@ -151,6 +151,13 @@
       "emoji": "💗",
       "productCount": 6,
       "active": true
+    },
+    {
+      "id": "watsons-haziran",
+      "name": "Watsons Haziran 2026",
+      "emoji": "📖",
+      "productCount": 0,
+      "active": true
     }
   ]
 }

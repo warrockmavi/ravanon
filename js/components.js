@@ -70,6 +70,7 @@ function renderHeader(activePage = '') {
         </a>
         <div class="hidden md:flex items-center gap-8">
           <a href="shop.html" class="nav-link text-sm ${activePage === 'shop' ? 'text-gold' : 'text-cream/70 hover:text-gold'} transition-colors">Mağaza</a>
+          <a href="katalog.html" class="nav-link text-sm ${activePage === 'katalog' ? 'text-gold' : 'text-cream/70 hover:text-gold'} transition-colors">Katalog</a>
           <a href="index.html#koleksiyonlar" class="nav-link text-sm text-cream/70 hover:text-gold transition-colors">Koleksiyonlar</a>
           <a href="shop.html?filter=new" class="nav-link text-sm text-cream/70 hover:text-gold transition-colors">Yeni Gelenler</a>
           <a href="shop.html?filter=flash" class="nav-link text-sm text-cream/70 hover:text-gold transition-colors">Flaş İndirimler</a>
@@ -100,6 +101,7 @@ function renderHeader(activePage = '') {
     </nav>
     <div id="mobile-menu" class="hidden md:hidden bg-navy-light border-t border-gold/10 px-4 py-4 space-y-3">
       <a href="shop.html" class="block text-cream/80 py-2">Mağaza</a>
+      <a href="katalog.html" class="block text-cream/80 py-2">Watsons Kataloğu</a>
       <a href="shop.html?filter=new" class="block text-cream/80 py-2">Yeni Gelenler</a>
       <a href="shop.html?filter=flash" class="block text-cream/80 py-2">Flaş İndirimler</a>
       <a href="club.html" class="block text-cream/80 py-2">RAVANON Club</a>
@@ -128,6 +130,7 @@ function renderFooter() {
             <li><a href="shop.html?category=makyaj" class="hover:text-gold transition-colors">Makyaj</a></li>
             <li><a href="shop.html?category=cilt-bakimi" class="hover:text-gold transition-colors">Cilt Bakımı</a></li>
             <li><a href="shop.html?filter=flash" class="hover:text-gold transition-colors">Flaş İndirimler</a></li>
+            <li><a href="katalog.html" class="hover:text-gold transition-colors">Watsons Kataloğu</a></li>
           </ul>
         </div>
         <div>
