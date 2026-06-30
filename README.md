@@ -48,7 +48,18 @@ npm run setup
 | **`RAVANON Admin.lnk`** | Admin → http://localhost:3000/admin |
 | `Baslat-Hepsi.vbs` | İkisini birden |
 
-> Kısayollar proje klasöründe ve masaüstünde oluşur. Farklı klasöre taşıdıysanız `KISAYOLLAR.bat` ile yenileyin.
+> Kısayollar proje klasöründe ve masaüstünde oluşur.
+
+### Klasörü başka yere kopyaladıysanız
+
+`.lnk` dosyaları eski yolu tutar — **bir kez** şunu çalıştırın:
+
+```
+KISAYOLLAR.bat
+```
+
+Ardından `RAVANON.lnk` ve `RAVANON Admin.lnk` yeni klasörde çalışır.  
+(Alternatif: `RAVANON.bat` / `RAVANON Admin.bat` her zaman doğru yolu kullanır.)
 
 ### 4. Admin girişi
 
