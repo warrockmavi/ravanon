@@ -12,79 +12,65 @@
   <link rel="stylesheet" href="css/luxury.css">
   <link rel="stylesheet" href="css/theme-sephora.css">
   <style>
-    #pdf-canvas { max-width: 100%; height: auto; box-shadow: 0 20px 60px rgba(0,0,0,.35); border-radius: 4px; }
-    .catalog-toolbar { backdrop-filter: blur(12px); }
-    #pdf-iframe { background: #1a1a2e; }
-    #pdf-loading { animation: pulse 1.5s ease-in-out infinite; }
+    #catalog-page-img { max-width: 100%; height: auto; transition: opacity .3s, transform .2s; transform-origin: top center; box-shadow: 0 20px 60px rgba(0,0,0,.4); border-radius: 4px; }
+    #view-pages { min-height: 60vh; }
+    #page-loading { animation: pulse 1.2s ease-in-out infinite; }
+    #pdf-embed { min-height: 80vh; }
   </style>
 </head>
 <body class="theme-sephora bg-white text-cream">
   <div id="site-header"></div>
 
   <main class="pt-32 pb-16 min-h-screen bg-gradient-to-b from-[#0a1628] to-navy">
-    <div class="max-w-6xl mx-auto px-4">
+    <div class="max-w-5xl mx-auto px-4">
       <div class="text-center mb-8">
         <span class="inline-block px-4 py-1 rounded-full bg-[#00A651]/20 text-[#4ade80] text-xs font-semibold uppercase tracking-widest mb-4">Watsons · Haziran 2026</span>
         <h1 class="font-display text-4xl md:text-5xl font-light mb-3">Insert Kataloğu</h1>
-        <p class="text-cream/50 max-w-xl mx-auto">51 sayfa · Güncel kampanya ve ürün fırsatları</p>
+        <p class="text-cream/50">51 sayfa · Kaydır veya ok tuşları ile gezin</p>
       </div>
 
-      <div class="catalog-toolbar sticky top-28 z-20 flex flex-wrap items-center justify-between gap-3 p-4 mb-6 rounded-2xl border border-gold/20 bg-navy-light/90">
+      <div id="catalog-toolbar" class="sticky top-28 z-20 flex flex-wrap items-center justify-center gap-3 p-4 mb-6 rounded-2xl border border-gold/20 bg-navy-light/95 backdrop-blur-md">
+        <button id="btn-mode-pages" type="button" class="px-4 py-2 rounded-xl text-sm font-medium bg-gold text-navy">Sayfa Görünümü</button>
+        <button id="btn-mode-native" type="button" class="px-4 py-2 rounded-xl text-sm font-medium text-cream/70 border border-gold/20">PDF Görünümü</button>
         <div class="flex items-center gap-2">
-          <button id="btn-mode-native" type="button" class="px-4 py-2 rounded-xl text-sm font-medium bg-gold text-navy">Tam Görünüm</button>
-          <button id="btn-mode-book" type="button" class="px-4 py-2 rounded-xl text-sm font-medium text-cream/70 border border-gold/20 hover:border-gold/40">Kitap Modu</button>
-        </div>
-        <div id="book-toolbar" class="hidden flex flex-wrap items-center gap-2 flex-1 justify-end">
-          <button id="btn-prev" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10" title="Önceki">‹</button>
-          <span class="text-sm text-cream/70 min-w-[80px] text-center">
+          <button id="btn-prev" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold text-xl hover:bg-gold/10" aria-label="Önceki">‹</button>
+          <span class="text-sm text-cream/80 min-w-[90px] text-center font-medium">
             <span id="page-current">1</span> / <span id="page-total">51</span>
           </span>
-          <button id="btn-next" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10" title="Sonraki">›</button>
-          <input type="range" id="page-slider" min="1" max="51" value="1" class="w-24 sm:w-32 accent-gold">
-          <button id="btn-zoom-out" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm text-cream/70">−</button>
-          <span id="zoom-label" class="text-xs text-cream/50 w-10 text-center">100%</span>
-          <button id="btn-zoom-in" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm text-cream/70">+</button>
+          <button id="btn-next" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold text-xl hover:bg-gold/10" aria-label="Sonraki">›</button>
         </div>
-        <div class="flex items-center gap-2">
-          <a href="assets/catalogs/watsons-haziran-2026.pdf" target="_blank" rel="noopener" class="px-4 py-2 border border-gold/30 text-gold text-sm rounded-xl hover:bg-gold/10">Yeni Sekmede Aç</a>
-          <a href="assets/catalogs/watsons-haziran-2026.pdf" download class="px-4 py-2 bg-gold text-navy text-sm font-semibold rounded-xl hover:bg-gold-light">İndir</a>
-        </div>
+        <input type="range" id="page-slider" min="1" max="51" value="1" class="w-32 sm:w-48 accent-gold" aria-label="Sayfa">
+        <button id="btn-zoom-out" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm">−</button>
+        <span id="zoom-label" class="text-xs text-cream/50 w-10 text-center">100%</span>
+        <button id="btn-zoom-in" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm">+</button>
+        <a href="assets/catalogs/watsons-haziran-2026.pdf" target="_blank" class="px-4 py-2 border border-gold/30 text-gold text-sm rounded-xl hover:bg-gold/10">PDF Aç</a>
+        <a href="assets/catalogs/watsons-haziran-2026.pdf" download class="px-4 py-2 bg-gold text-navy text-sm font-semibold rounded-xl">İndir</a>
       </div>
 
-      <div id="pdf-loading" class="hidden text-center py-20 text-cream/40">
-        <p id="pdf-progress">Katalog yükleniyor…</p>
+      <div id="pdf-loading" class="text-center py-24 text-cream/40">
+        <p id="pdf-progress" class="text-lg">Katalog hazırlanıyor…</p>
+        <p class="text-xs mt-2 text-cream/30">İlk açılışta birkaç saniye sürebilir</p>
       </div>
 
-      <div id="pdf-error" class="hidden text-center py-16 px-4 rounded-2xl border border-red-500/30 bg-red-900/10">
+      <div id="pdf-error" class="hidden text-center py-16 px-4 rounded-2xl border border-red-500/30 bg-red-900/10 mb-6">
         <p class="text-red-400 mb-2" id="pdf-error-msg">Katalog yüklenemedi</p>
-        <p class="text-sm text-cream/40 mb-4">PDF dosyası eksik olabilir — <code class="text-gold">scripts\copy-watsons-catalog.bat</code> çalıştırın</p>
-        <a href="assets/catalogs/watsons-haziran-2026.pdf" target="_blank" class="text-gold underline">PDF'i doğrudan açmayı dene</a>
+        <button onclick="location.reload()" class="mt-4 px-6 py-2 bg-gold text-navy rounded-xl text-sm font-semibold">Yenile</button>
       </div>
 
-      <div id="view-native" class="rounded-2xl border border-gold/20 overflow-hidden shadow-2xl" style="height: min(85vh, 900px);">
-        <iframe id="pdf-iframe" title="Watsons Haziran 2026 Kataloğu" class="w-full h-full border-0" src="assets/catalogs/watsons-haziran-2026.pdf"></iframe>
+      <!-- Ana görünüm: önceden render edilmiş sayfa görselleri -->
+      <div id="view-pages" class="hidden flex flex-col items-center justify-start overflow-auto pb-8">
+        <p id="page-loading" class="text-cream/40 text-sm mb-4 hidden">Sayfa yükleniyor…</p>
+        <img id="catalog-page-img" alt="Katalog sayfası" class="select-none" draggable="false">
+        <p class="text-xs text-cream/30 mt-4">← → ok tuşları veya kaydırma ile sayfa değiştirin</p>
       </div>
 
-      <div id="view-book" class="hidden flex justify-center overflow-auto pb-8 min-h-[60vh]">
+      <!-- Yedek: tarayıcı PDF (bazı ortamlarda çalışmayabilir) -->
+      <div id="view-native" class="hidden rounded-2xl border border-gold/20 overflow-hidden bg-navy">
+        <embed id="pdf-embed" type="application/pdf" class="w-full" style="height:85vh" />
+      </div>
+
+      <div id="view-book" class="hidden flex justify-center overflow-auto pb-8">
         <canvas id="pdf-canvas"></canvas>
-      </div>
-
-      <div class="mt-12 grid sm:grid-cols-3 gap-4 text-center">
-        <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
-          <p class="text-2xl mb-1">📖</p>
-          <p class="text-sm text-cream font-medium">Tam Görünüm</p>
-          <p class="text-xs text-cream/40 mt-1">Tarayıcı PDF okuyucu</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
-          <p class="text-2xl mb-1">📑</p>
-          <p class="text-sm text-cream font-medium">Kitap Modu</p>
-          <p class="text-xs text-cream/40 mt-1">Sayfa sayfa gezinme</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
-          <p class="text-2xl mb-1">🛒</p>
-          <p class="text-sm text-cream font-medium">Alışveriş</p>
-          <p class="text-xs text-cream/40 mt-1"><a href="shop.html" class="text-gold hover:underline">Mağazaya git →</a></p>
-        </div>
       </div>
     </div>
   </main>

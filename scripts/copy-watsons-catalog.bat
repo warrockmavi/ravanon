@@ -9,4 +9,10 @@ if not exist "%SRC%" (
 if not exist "%~dp0..\assets\catalogs" mkdir "%~dp0..\assets\catalogs"
 copy /Y "%SRC%" "%DST%"
 echo [OK] Katalog kopyalandi: %DST%
+echo.
+echo Sayfa goruntuleri olusturuluyor (ilk seferde ~5 dk)...
+cd /d "%~dp0.."
+node scripts\render-catalog-pages.js
+echo.
+echo [OK] Katalog siteye hazir! http://localhost:8765/katalog.html
 pause

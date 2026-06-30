@@ -41,5 +41,6 @@ admin/next-env.d.ts
 # Test artifacts
 coverage/
 
-# Büyük katalog PDF (scripts\copy-watsons-catalog.bat ile kopyalanır)
+# Büyük katalog dosyaları (scripts\copy-watsons-catalog.bat + render-catalog-pages.js)
 assets/catalogs/*.pdf
+assets/catalogs/pages/*.png
