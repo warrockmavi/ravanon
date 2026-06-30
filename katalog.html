@@ -12,8 +12,9 @@
   <link rel="stylesheet" href="css/luxury.css">
   <link rel="stylesheet" href="css/theme-sephora.css">
   <style>
-    #catalog-page-img { max-width: 100%; height: auto; transition: opacity .3s, transform .2s; transform-origin: top center; box-shadow: 0 20px 60px rgba(0,0,0,.4); border-radius: 4px; }
-    #view-pages { min-height: 60vh; }
+    #catalog-page-img { max-width: 100%; height: auto; transition: opacity .25s, transform .2s; transform-origin: top center; box-shadow: 0 20px 60px rgba(0,0,0,.4); border-radius: 4px; display: block; }
+    #view-pages { min-height: 50vh; display: flex; flex-direction: column; align-items: center; width: 100%; }
+    #view-pages.hidden { display: none !important; }
     #page-loading { animation: pulse 1.2s ease-in-out infinite; }
     #pdf-embed { min-height: 80vh; }
   </style>
@@ -58,9 +59,9 @@
       </div>
 
       <!-- Ana görünüm: önceden render edilmiş sayfa görselleri -->
-      <div id="view-pages" class="hidden flex flex-col items-center justify-start overflow-auto pb-8">
+      <div id="view-pages" class="hidden flex-col items-center justify-start overflow-auto pb-8 w-full">
         <p id="page-loading" class="text-cream/40 text-sm mb-4 hidden">Sayfa yükleniyor…</p>
-        <img id="catalog-page-img" alt="Katalog sayfası" class="select-none" draggable="false">
+        <img id="catalog-page-img" alt="Katalog sayfası" class="select-none max-w-full h-auto w-full sm:w-auto" draggable="false" width="1200">
         <p class="text-xs text-cream/30 mt-4">← → ok tuşları veya kaydırma ile sayfa değiştirin</p>
       </div>
 
@@ -77,11 +78,13 @@
 
   <div id="site-footer"></div>
 
-  <script src="assets/vendor/pdf.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/ai-chat.js"></script>
+  <script src="js/skin-quiz.js"></script>
+  <script src="js/luxury-features.js"></script>
   <script src="js/components.js"></script>
   <script src="js/catalog-viewer.js"></script>
 </body>

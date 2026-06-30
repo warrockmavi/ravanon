@@ -252,7 +252,7 @@ function initSharedUI(activePage = '') {
 
   Cart.updateBadge();
   Wishlist.updateBadge();
-  AIChat.init();
+  if (typeof AIChat !== 'undefined') AIChat.init();
   if (typeof LuxuryUX !== 'undefined') LuxuryUX.init();
   initScrollAnimations();
 
