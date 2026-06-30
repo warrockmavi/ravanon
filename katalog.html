@@ -14,6 +14,7 @@
   <style>
     #pdf-canvas { max-width: 100%; height: auto; box-shadow: 0 20px 60px rgba(0,0,0,.35); border-radius: 4px; }
     .catalog-toolbar { backdrop-filter: blur(12px); }
+    #pdf-iframe { background: #1a1a2e; }
     #pdf-loading { animation: pulse 1.5s ease-in-out infinite; }
   </style>
 </head>
@@ -22,54 +23,67 @@
 
   <main class="pt-32 pb-16 min-h-screen bg-gradient-to-b from-[#0a1628] to-navy">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center mb-8 scroll-animate">
+      <div class="text-center mb-8">
         <span class="inline-block px-4 py-1 rounded-full bg-[#00A651]/20 text-[#4ade80] text-xs font-semibold uppercase tracking-widest mb-4">Watsons · Haziran 2026</span>
         <h1 class="font-display text-4xl md:text-5xl font-light mb-3">Insert Kataloğu</h1>
-        <p class="text-cream/50 max-w-xl mx-auto">51 sayfa · Güncel kampanya ve ürün fırsatları. Sayfalar arasında gezinin veya PDF'i indirin.</p>
+        <p class="text-cream/50 max-w-xl mx-auto">51 sayfa · Güncel kampanya ve ürün fırsatları</p>
       </div>
 
       <div class="catalog-toolbar sticky top-28 z-20 flex flex-wrap items-center justify-between gap-3 p-4 mb-6 rounded-2xl border border-gold/20 bg-navy-light/90">
         <div class="flex items-center gap-2">
-          <button id="btn-prev" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10 transition-colors" title="Önceki">‹</button>
-          <span class="text-sm text-cream/70 min-w-[100px] text-center">
+          <button id="btn-mode-native" type="button" class="px-4 py-2 rounded-xl text-sm font-medium bg-gold text-navy">Tam Görünüm</button>
+          <button id="btn-mode-book" type="button" class="px-4 py-2 rounded-xl text-sm font-medium text-cream/70 border border-gold/20 hover:border-gold/40">Kitap Modu</button>
+        </div>
+        <div id="book-toolbar" class="hidden flex flex-wrap items-center gap-2 flex-1 justify-end">
+          <button id="btn-prev" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10" title="Önceki">‹</button>
+          <span class="text-sm text-cream/70 min-w-[80px] text-center">
             <span id="page-current">1</span> / <span id="page-total">51</span>
           </span>
-          <button id="btn-next" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10 transition-colors" title="Sonraki">›</button>
+          <button id="btn-next" type="button" class="w-10 h-10 rounded-xl border border-gold/30 text-gold hover:bg-gold/10" title="Sonraki">›</button>
+          <input type="range" id="page-slider" min="1" max="51" value="1" class="w-24 sm:w-32 accent-gold">
+          <button id="btn-zoom-out" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm text-cream/70">−</button>
+          <span id="zoom-label" class="text-xs text-cream/50 w-10 text-center">100%</span>
+          <button id="btn-zoom-in" type="button" class="px-2 py-1 rounded-lg border border-gold/20 text-sm text-cream/70">+</button>
         </div>
-        <input type="range" id="page-slider" min="1" max="51" value="1" class="flex-1 min-w-[120px] max-w-xs accent-gold">
         <div class="flex items-center gap-2">
-          <button id="btn-zoom-out" class="px-3 py-2 rounded-xl border border-gold/20 text-sm text-cream/70 hover:text-gold">−</button>
-          <span id="zoom-label" class="text-xs text-cream/50 w-12 text-center">100%</span>
-          <button id="btn-zoom-in" class="px-3 py-2 rounded-xl border border-gold/20 text-sm text-cream/70 hover:text-gold">+</button>
-          <a href="assets/catalogs/watsons-haziran-2026.pdf" download class="px-4 py-2 bg-gold text-navy text-sm font-semibold rounded-xl hover:bg-gold-light transition-colors">İndir</a>
-          <a href="shop.html" class="px-4 py-2 border border-gold/30 text-gold text-sm rounded-xl hover:bg-gold/10 transition-colors hidden sm:inline">Mağazaya Git</a>
+          <a href="assets/catalogs/watsons-haziran-2026.pdf" target="_blank" rel="noopener" class="px-4 py-2 border border-gold/30 text-gold text-sm rounded-xl hover:bg-gold/10">Yeni Sekmede Aç</a>
+          <a href="assets/catalogs/watsons-haziran-2026.pdf" download class="px-4 py-2 bg-gold text-navy text-sm font-semibold rounded-xl hover:bg-gold-light">İndir</a>
         </div>
       </div>
 
-      <div id="pdf-loading" class="text-center py-20 text-cream/40">Katalog yükleniyor…</div>
-      <div id="pdf-error" class="hidden text-center py-20">
-        <p class="text-red-400 mb-4">Katalog dosyası yüklenemedi.</p>
-        <a href="assets/catalogs/watsons-haziran-2026.pdf" class="text-gold underline">PDF'i doğrudan aç</a>
+      <div id="pdf-loading" class="hidden text-center py-20 text-cream/40">
+        <p id="pdf-progress">Katalog yükleniyor…</p>
       </div>
-      <div id="pdf-viewer" class="hidden flex justify-center overflow-auto pb-8">
+
+      <div id="pdf-error" class="hidden text-center py-16 px-4 rounded-2xl border border-red-500/30 bg-red-900/10">
+        <p class="text-red-400 mb-2" id="pdf-error-msg">Katalog yüklenemedi</p>
+        <p class="text-sm text-cream/40 mb-4">PDF dosyası eksik olabilir — <code class="text-gold">scripts\copy-watsons-catalog.bat</code> çalıştırın</p>
+        <a href="assets/catalogs/watsons-haziran-2026.pdf" target="_blank" class="text-gold underline">PDF'i doğrudan açmayı dene</a>
+      </div>
+
+      <div id="view-native" class="rounded-2xl border border-gold/20 overflow-hidden shadow-2xl" style="height: min(85vh, 900px);">
+        <iframe id="pdf-iframe" title="Watsons Haziran 2026 Kataloğu" class="w-full h-full border-0" src="assets/catalogs/watsons-haziran-2026.pdf"></iframe>
+      </div>
+
+      <div id="view-book" class="hidden flex justify-center overflow-auto pb-8 min-h-[60vh]">
         <canvas id="pdf-canvas"></canvas>
       </div>
 
       <div class="mt-12 grid sm:grid-cols-3 gap-4 text-center">
         <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
           <p class="text-2xl mb-1">📖</p>
-          <p class="text-sm text-cream font-medium">Dijital Katalog</p>
-          <p class="text-xs text-cream/40 mt-1">Tam insert deneyimi</p>
+          <p class="text-sm text-cream font-medium">Tam Görünüm</p>
+          <p class="text-xs text-cream/40 mt-1">Tarayıcı PDF okuyucu</p>
         </div>
         <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
-          <p class="text-2xl mb-1">🏷️</p>
-          <p class="text-sm text-cream font-medium">Haziran Fırsatları</p>
-          <p class="text-xs text-cream/40 mt-1">Kampanya ürünleri</p>
+          <p class="text-2xl mb-1">📑</p>
+          <p class="text-sm text-cream font-medium">Kitap Modu</p>
+          <p class="text-xs text-cream/40 mt-1">Sayfa sayfa gezinme</p>
         </div>
         <div class="p-6 rounded-2xl border border-gold/10 bg-navy-light/50">
           <p class="text-2xl mb-1">🛒</p>
-          <p class="text-sm text-cream font-medium">Online Alışveriş</p>
-          <p class="text-xs text-cream/40 mt-1"><a href="shop.html" class="text-gold hover:underline">Mağazada keşfet →</a></p>
+          <p class="text-sm text-cream font-medium">Alışveriş</p>
+          <p class="text-xs text-cream/40 mt-1"><a href="shop.html" class="text-gold hover:underline">Mağazaya git →</a></p>
         </div>
       </div>
     </div>
@@ -77,78 +91,12 @@
 
   <div id="site-footer"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="assets/vendor/pdf.min.js"></script>
   <script src="js/data.js"></script>
-  <script src="js/store-bridge.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/components.js"></script>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    const CatalogViewer = {
-      pdf: null,
-      page: 1,
-      total: 51,
-      scale: 1.2,
-      rendering: false,
-
-      async init() {
-        initSharedUI('katalog');
-        try {
-          const url = 'assets/catalogs/watsons-haziran-2026.pdf';
-          const task = pdfjsLib.getDocument(url);
-          this.pdf = await task.promise;
-          this.total = this.pdf.numPages;
-          document.getElementById('page-total').textContent = this.total;
-          document.getElementById('page-slider').max = this.total;
-          document.getElementById('pdf-loading').classList.add('hidden');
-          document.getElementById('pdf-viewer').classList.remove('hidden');
-          await this.render();
-          this.bind();
-        } catch (e) {
-          document.getElementById('pdf-loading').classList.add('hidden');
-          document.getElementById('pdf-error').classList.remove('hidden');
-        }
-      },
-
-      bind() {
-        document.getElementById('btn-prev').onclick = () => this.go(this.page - 1);
-        document.getElementById('btn-next').onclick = () => this.go(this.page + 1);
-        document.getElementById('page-slider').oninput = (e) => this.go(Number(e.target.value));
-        document.getElementById('btn-zoom-in').onclick = () => { this.scale = Math.min(2.5, this.scale + 0.15); this.render(); };
-        document.getElementById('btn-zoom-out').onclick = () => { this.scale = Math.max(0.6, this.scale - 0.15); this.render(); };
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.go(this.page - 1);
-          if (e.key === 'ArrowRight') this.go(this.page + 1);
-        });
-      },
-
-      async go(n) {
-        if (n < 1 || n > this.total || this.rendering) return;
-        this.page = n;
-        document.getElementById('page-current').textContent = n;
-        document.getElementById('page-slider').value = n;
-        await this.render();
-      },
-
-      async render() {
-        if (!this.pdf || this.rendering) return;
-        this.rendering = true;
-        const pg = await this.pdf.getPage(this.page);
-        const canvas = document.getElementById('pdf-canvas');
-        const ctx = canvas.getContext('2d');
-        const vp = pg.getViewport({ scale: this.scale });
-        canvas.width = vp.width;
-        canvas.height = vp.height;
-        await pg.render({ canvasContext: ctx, viewport: vp }).promise;
-        document.getElementById('zoom-label').textContent = Math.round(this.scale * 100) + '%';
-        this.rendering = false;
-      }
-    };
-
-    onStoreReady(() => CatalogViewer.init());
-  </script>
+  <script src="js/catalog-viewer.js"></script>
 </body>
 </html>
