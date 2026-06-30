@@ -362,6 +362,9 @@
       // Expert tips
       Articles.renderCards('expert-tips');
 
+      // Hash navigasyonu (#uzman vb.) — içerik yüklendikten sonra kaydır
+      initHashScroll(150);
+
       // URL'den makale aç: index.html?article=1
       const articleParam = getQueryParam('article');
       if (articleParam) setTimeout(() => Articles.open(articleParam), 300);

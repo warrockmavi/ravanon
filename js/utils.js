@@ -91,6 +91,29 @@ function initScrollAnimations() {
   document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
 }
 
+function scrollToHash(hash, behavior = 'smooth') {
+  const id = (hash || window.location.hash || '').replace('#', '');
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  const header = document.querySelector('header');
+  const offset = (header?.offsetHeight || 120) + 16;
+  const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+  window.scrollTo({ top, behavior });
+}
+
+function initHashScroll(delay = 0) {
+  const run = () => {
+    if (window.location.hash) scrollToHash(window.location.hash, 'auto');
+  };
+  if (delay > 0) setTimeout(run, delay);
+  else run();
+  if (!window._ravanonHashScrollBound) {
+    window._ravanonHashScrollBound = true;
+    window.addEventListener('hashchange', () => scrollToHash());
+  }
+}
+
 function renderStars(rating) {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5;

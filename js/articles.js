@@ -23,7 +23,7 @@ const Articles = {
   renderCard(article) {
     const grad = this.tipGradients[article.image] || 'from-navy to-gold/20';
     const href = this.url(article);
-    return `<a href="${href}" data-article-id="${article.id}" class="luxury-card article-card group block overflow-hidden scroll-animate cursor-pointer" onclick="Articles.handleCardClick(event, ${article.id})">
+    return `<a href="${href}" data-article-id="${article.id}" class="luxury-card article-card group block overflow-hidden scroll-animate cursor-pointer">
       <div class="h-44 bg-gradient-to-br ${grad} flex items-center justify-center relative">
         <span class="text-5xl opacity-40 group-hover:scale-110 transition-transform duration-500">${article.emoji || '📖'}</span>
         <span class="absolute top-4 left-4 luxury-tag">${article.category}</span>
@@ -40,10 +40,22 @@ const Articles = {
     </a>`;
   },
 
+  bindCardClicks(container) {
+    if (!container || container._articleClickBound) return;
+    container.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-article-id]');
+      if (!card) return;
+      e.preventDefault();
+      this.open(card.dataset.articleId);
+    });
+    container._articleClickBound = true;
+  },
+
   renderCards(containerId = 'expert-tips') {
     const el = document.getElementById(containerId);
     if (!el || !RAVANON_DATA?.expertTips) return;
     el.innerHTML = RAVANON_DATA.expertTips.map(a => this.renderCard(a)).join('');
+    this.bindCardClicks(el);
     initScrollAnimations();
   },
 
@@ -56,17 +68,26 @@ const Articles = {
     if (document.getElementById('article-reader-modal')) return;
     document.body.insertAdjacentHTML('beforeend', `
       <div id="article-reader-modal" class="article-reader hidden" role="dialog" aria-modal="true" aria-label="Makale okuyucu">
-        <div class="article-reader-backdrop" onclick="Articles.close()"></div>
+        <div class="article-reader-backdrop"></div>
         <div class="article-reader-panel">
-          <button type="button" class="article-reader-close" onclick="Articles.close()" aria-label="Kapat">✕</button>
+          <button type="button" class="article-reader-close" aria-label="Kapat">✕</button>
           <div id="article-reader-body" class="article-reader-body"></div>
         </div>
       </div>`);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && !document.getElementById('article-reader-modal')?.classList.contains('hidden')) {
-        Articles.close();
-      }
-    });
+
+    const modal = document.getElementById('article-reader-modal');
+    modal.querySelector('.article-reader-backdrop')?.addEventListener('click', () => this.close());
+    modal.querySelector('.article-reader-close')?.addEventListener('click', () => this.close());
+    this.bindCardClicks(document.getElementById('article-reader-body'));
+
+    if (!this._escapeBound) {
+      this._escapeBound = true;
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !document.getElementById('article-reader-modal')?.classList.contains('hidden')) {
+          this.close();
+        }
+      });
+    }
   },
 
   open(idOrSlug) {
@@ -81,6 +102,7 @@ const Articles = {
     if (!modal || !body) return;
 
     body.innerHTML = this.renderBody(article, { compact: true });
+    this.bindModalActions(body);
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     body.scrollTop = 0;
@@ -141,8 +163,8 @@ const Articles = {
         <div class="article-body">${article.content}</div>
 
         <div class="mt-10 pt-6 border-t border-gold/10 flex flex-wrap gap-3">
-          <button onclick="SkinQuiz.open(); Articles.close();" class="btn-luxury-ghost px-5 py-2.5 rounded-full text-sm text-gold">AI Cilt Analizi</button>
-          <button onclick="AIChat.toggle(true)" class="btn-luxury-primary px-5 py-2.5 rounded-full text-sm">AI Danışmana Sor</button>
+          <button type="button" class="article-action-quiz btn-luxury-ghost px-5 py-2.5 rounded-full text-sm text-gold">AI Cilt Analizi</button>
+          <button type="button" class="article-action-chat btn-luxury-primary px-5 py-2.5 rounded-full text-sm">AI Danışmana Sor</button>
           ${opts.compact ? `<a href="${this.url(article)}" class="btn-outline-rose px-5 py-2.5 rounded-full text-sm inline-flex items-center">Tam Sayfada Oku</a>` : ''}
         </div>
 
@@ -156,7 +178,7 @@ const Articles = {
           <h2 class="section-title text-xl mb-5">Diğer Makaleler</h2>
           <div class="grid md:grid-cols-2 gap-4">
             ${others.map(a => `
-              <a href="${this.url(a)}" class="luxury-card p-5 block group" onclick="Articles.handleCardClick(event, ${a.id})">
+              <a href="${this.url(a)}" data-article-id="${a.id}" class="luxury-card p-5 block group">
                 <span class="text-xs text-gold uppercase tracking-wider">${a.category}</span>
                 <h3 class="text-cream font-medium mt-2 group-hover:text-gold transition-colors line-clamp-2">${a.title}</h3>
                 <p class="text-xs text-cream/40 mt-2">${a.author} · ${a.readTime}</p>
@@ -168,6 +190,17 @@ const Articles = {
           <a href="index.html#uzman" class="text-gold text-sm hover:underline">← Tüm Uzman Tavsiyeleri</a>
         </div>
       </div>`;
+  },
+
+  bindModalActions(container) {
+    if (!container) return;
+    container.querySelector('.article-action-quiz')?.addEventListener('click', () => {
+      this.close();
+      if (typeof SkinQuiz !== 'undefined') SkinQuiz.open();
+    });
+    container.querySelector('.article-action-chat')?.addEventListener('click', () => {
+      if (typeof AIChat !== 'undefined') AIChat.toggle(true);
+    });
   },
 
   initPage() {
@@ -187,8 +220,12 @@ const Articles = {
     if (content) {
       content.classList.remove('hidden');
       content.innerHTML = `<article>${this.renderBody(article)}</article>`;
+      this.bindCardClicks(content);
+      this.bindModalActions(content);
     }
     initScrollAnimations();
     window.scrollTo(0, 0);
   }
 };
+
+window.Articles = Articles;

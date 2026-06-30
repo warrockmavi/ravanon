@@ -105,6 +105,7 @@ function renderHeader(activePage = '') {
       <a href="shop.html?filter=new" class="block text-cream/80 py-2">Yeni Gelenler</a>
       <a href="shop.html?filter=flash" class="block text-cream/80 py-2">Flaş İndirimler</a>
       <a href="club.html" class="block text-cream/80 py-2">RAVANON Club</a>
+      <a href="index.html#uzman" class="block text-cream/80 py-2">Uzman Tavsiyeleri</a>
       <a href="account.html" class="block text-cream/80 py-2">Hesabım</a>
     </div>
   </header>`;
@@ -266,6 +267,31 @@ function initSharedUI(activePage = '') {
     if (headerEl) headerEl.innerHTML = renderHeader(activePage);
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
       document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+    bindHashNavLinks();
+  });
+
+  bindHashNavLinks();
+}
+
+function isIndexPage() {
+  const path = window.location.pathname || '';
+  return !path || path.endsWith('/') || path.endsWith('index.html');
+}
+
+function bindHashNavLinks() {
+  document.querySelectorAll('a[href*="#"]').forEach(link => {
+    if (link._hashNavBound) return;
+    const href = link.getAttribute('href') || '';
+    const hash = href.includes('#') ? href.split('#')[1] : '';
+    if (!hash || !href.includes('index.html')) return;
+    link._hashNavBound = true;
+    link.addEventListener('click', (e) => {
+      if (!isIndexPage()) return;
+      e.preventDefault();
+      if (link.closest('#article-reader-modal') && typeof Articles !== 'undefined') Articles.close();
+      window.location.hash = hash;
+      scrollToHash('#' + hash);
     });
   });
 }
