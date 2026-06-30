@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createDemoOrder } from "@/lib/api/demo";
 import Link from "next/link";
 import { AdminHeader } from "@/components/admin/header";
 import { KpiCard } from "@/components/admin/kpi-card";
@@ -10,8 +11,10 @@ import type { AnalyticsData } from "@/lib/api/analytics";
 import { formatCurrency } from "@/lib/utils";
 import { TrendingUp, ShoppingCart, Users, Crown, Truck, CreditCard, ArrowRight, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DemoOrderButton } from "@/components/admin/demo-order-button";
 
 export default function AdminDashboardPage() {
+  const demoRan = useRef(false);
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,6 +28,15 @@ export default function AdminDashboardPage() {
   };
 
   useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    if (demoRan.current) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("demo") !== "1") return;
+    demoRan.current = true;
+    const t = setTimeout(() => { void createDemoOrder(); }, 800);
+    return () => clearTimeout(t);
+  }, []);
 
   const stats = data?.stats;
 
@@ -41,10 +53,13 @@ export default function AdminDashboardPage() {
         title="Dashboard"
         description="Canlı sipariş, kullanıcı ve gelir özeti"
         actions={
-          <Button variant="outline" size="sm" onClick={load} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
-            Yenile
-          </Button>
+          <>
+            <DemoOrderButton />
+            <Button variant="outline" size="sm" onClick={load} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+              Yenile
+            </Button>
+          </>
         }
       />
       <main className="p-8 space-y-8">

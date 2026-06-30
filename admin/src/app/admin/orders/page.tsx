@@ -11,6 +11,7 @@ import { fetchOrders, saveOrderApi } from "@/lib/api/store";
 import type { AdminOrder } from "@/types/admin";
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { DemoOrderButton } from "@/components/admin/demo-order-button";
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<AdminOrder[]>([]);
@@ -49,10 +50,13 @@ export default function AdminOrdersPage() {
         title="Siparişler"
         description="Mağazadan gelen siparişler burada görünür — durum güncellemeleri senkronize edilir"
         actions={
-          <Button variant="outline" size="sm" onClick={load} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
-            Yenile
-          </Button>
+          <>
+            <DemoOrderButton />
+            <Button variant="outline" size="sm" onClick={load} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+              Yenile
+            </Button>
+          </>
         }
       />
       <main className="p-8 space-y-6">

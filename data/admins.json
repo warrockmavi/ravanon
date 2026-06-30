@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T17:51:37.927Z",
+  "admins": [
+    {
+      "id": "admin-1",
+      "email": "admin@ravanon.com",
+      "passwordHash": "a0da6cc0a0e13b6bfe84b9e2a6f27038973e340ad6f9d29ebf76dd575e9d54c3",
+      "name": "Oğuzhan Mavi Bafralı",
+      "roles": [
+        "super_admin"
+      ],
+      "active": true
+    }
+  ]
+}

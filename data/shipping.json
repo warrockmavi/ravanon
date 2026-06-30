@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T17:52:10.698Z",
+  "carriers": [
+    {
+      "id": "hepsijet",
+      "name": "HepsiJet",
+      "code": "HJ",
+      "logo": "⚡",
+      "trackingUrl": "https://www.hepsijet.com/takip/",
+      "active": true,
+      "avgDeliveryDays": 1
+    },
+    {
+      "id": "yurtici",
+      "name": "Yurtiçi Kargo",
+      "code": "YK",
+      "logo": "📦",
+      "trackingUrl": "https://www.yurticikargo.com/tr/online-servisler/gonderi-sorgula?code=",
+      "active": true,
+      "avgDeliveryDays": 2
+    },
+    {
+      "id": "aras",
+      "name": "Aras Kargo",
+      "code": "AR",
+      "logo": "🚚",
+      "trackingUrl": "https://www.araskargo.com.tr/trmm.aspx?q=",
+      "active": true,
+      "avgDeliveryDays": 2
+    },
+    {
+      "id": "mng",
+      "name": "MNG Kargo",
+      "code": "MNG",
+      "logo": "📮",
+      "trackingUrl": "https://www.mngkargo.com.tr/tracking?code=",
+      "active": true,
+      "avgDeliveryDays": 3
+    },
+    {
+      "id": "ptt",
+      "name": "PTT Kargo",
+      "code": "PTT",
+      "logo": "✉️",
+      "trackingUrl": "https://gonderitakip.ptt.gov.tr/",
+      "active": false,
+      "avgDeliveryDays": 4
+    }
+  ]
+}

@@ -47,6 +47,7 @@ npm run setup
 | **`RAVANON.lnk`** | Mağaza → http://localhost:8765 |
 | **`RAVANON Admin.lnk`** | Admin → http://localhost:3000/admin |
 | `Baslat-Hepsi.vbs` | İkisini birden |
+| **`Demo.vbs`** | Demo modu — admin açar + örnek sipariş bildirimi (ses + balon) |
 
 > Kısayollar proje klasöründe ve masaüstünde oluşur.
 

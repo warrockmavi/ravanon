@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BellRing, Package, Volume2, VolumeX, X } from "lucide-react";
+import { DemoOrderButton } from "@/components/admin/demo-order-button";
 import type { AdminOrder } from "@/types/admin";
 import {
   isOrderAlertSoundEnabled,
@@ -101,14 +102,27 @@ export function OrderAlertSystem() {
       void Notification.requestPermission();
     }
 
+    const onDemo = (e: Event) => {
+      const order = (e as CustomEvent<AdminOrder>).detail;
+      if (!order?.id) return;
+      if (!initialized.current) initialized.current = true;
+      if (!knownIds.current.has(order.id)) {
+        knownIds.current.add(order.id);
+        alertNewOrder(order);
+      }
+    };
+
+    window.addEventListener("ravanon-demo-order", onDemo);
+
     void poll();
     const iv = setInterval(poll, POLL_MS);
     return () => {
       clearInterval(iv);
+      window.removeEventListener("ravanon-demo-order", onDemo);
       document.removeEventListener("click", unlock);
       document.removeEventListener("keydown", unlock);
     };
-  }, [poll]);
+  }, [poll, alertNewOrder]);
 
   useEffect(() => {
     const iv = setInterval(() => {
@@ -148,6 +162,7 @@ export function OrderAlertSystem() {
         >
           {soundOn ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
         </button>
+        <DemoOrderButton size="sm" variant="ghost" className="h-7 px-2 text-[11px] text-gold hover:text-gold" />
       </div>
 
       {/* Uyarı balonları */}
@@ -161,7 +176,9 @@ export function OrderAlertSystem() {
             <div className="bg-gradient-to-r from-gold/20 to-rose-gold/10 px-4 py-2 flex items-center justify-between gap-2">
               <div className="flex items-center gap-2 text-gold">
                 <BellRing className="h-4 w-4 animate-bounce" />
-                <span className="text-sm font-semibold tracking-wide">YENİ SİPARİŞ</span>
+                <span className="text-sm font-semibold tracking-wide">
+                  {t.order.id.includes("DEMO") ? "DEMO SİPARİŞ" : "YENİ SİPARİŞ"}
+                </span>
               </div>
               <button
                 type="button"

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T17:51:42.601Z",
+  "logs": [
+    {
+      "userId": "admin-1",
+      "actorId": "admin-1",
+      "actorName": "Oğuzhan Mavi Bafralı",
+      "action": "admin.login",
+      "details": "admin@ravanon.com admin paneline giriş yaptı",
+      "id": "aud-1782841902601",
+      "createdAt": "2026-06-30T17:51:42.601Z"
+    }
+  ],
+  "activities": []
+}
