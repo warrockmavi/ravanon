@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-30T18:03:17.755Z",
+  "bankAccount": {
+    "bank": "Ziraat Bankası",
+    "iban": "TR33 0001 0009 9901 4444 5555 01",
+    "holder": "RAVANON KOZMETİK TİC. A.Ş.",
+    "branch": "Kadıköy / İstanbul"
+  },
+  "providers": [
+    {
+      "id": "iyzico",
+      "name": "iyzico",
+      "type": "card",
+      "logo": "💳",
+      "active": true,
+      "testMode": true,
+      "commission": 2.49,
+      "supportedInstallments": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        12
+      ],
+      "apiKeyMasked": "—"
+    },
+    {
+      "id": "paytr",
+      "name": "PayTR",
+      "type": "card",
+      "logo": "🏦",
+      "active": true,
+      "testMode": true,
+      "commission": 2.89,
+      "supportedInstallments": [
+        1,
+        3,
+        6,
+        9
+      ],
+      "apiKeyMasked": "—"
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "type": "card",
+      "logo": "🌐",
+      "active": true,
+      "testMode": true,
+      "commission": 2.9,
+      "supportedInstallments": [
+        1
+      ],
+      "apiKeyMasked": "—"
+    },
+    {
+      "id": "papara",
+      "name": "Papara",
+      "type": "wallet",
+      "logo": "📱",
+      "active": true,
+      "testMode": true,
+      "commission": 1.5,
+      "supportedInstallments": [
+        1
+      ],
+      "apiKeyMasked": "—"
+    },
+    {
+      "id": "havale",
+      "name": "Havale / EFT",
+      "type": "transfer",
+      "logo": "🏛️",
+      "active": true,
+      "testMode": false,
+      "commission": 0,
+      "supportedInstallments": [
+        1
+      ],
+      "apiKeyMasked": "—"
+    },
+    {
+      "id": "taksit",
+      "name": "Banka Taksit",
+      "type": "installment",
+      "logo": "📊",
+      "active": true,
+      "testMode": true,
+      "commission": 3.2,
+      "supportedInstallments": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "apiKeyMasked": "—"
+    }
+  ]
+}

@@ -93,40 +93,20 @@
           <!-- Step 2: Payment -->
           <div id="step-2" class="hidden bg-navy-light rounded-2xl border border-gold/10 p-6 space-y-6">
             <h2 class="font-medium text-lg">Ödeme Yöntemi</h2>
-            <div class="space-y-3">
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="card" class="accent-gold" checked>
-                <div><p class="text-cream font-medium">Kredi / Banka Kartı</p><p class="text-xs text-cream/50">3-12 taksit seçeneği</p></div>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="transfer" class="accent-gold">
-                <div><p class="text-cream font-medium">Banka Havalesi / EFT</p></div>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="apple" class="accent-gold">
-                <div><p class="text-cream font-medium"> Apple Pay</p></div>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="google" class="accent-gold">
-                <div><p class="text-cream font-medium"> Google Pay</p></div>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="papara" class="accent-gold">
-                <div><p class="text-cream font-medium">Papara</p></div>
-              </label>
-              <label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
-                <input type="radio" name="payment" value="iyzico" class="accent-gold">
-                <div><p class="text-cream font-medium">Güvenli Ödeme (iyzico)</p><p class="text-xs text-cream/50">256-bit SSL şifreleme</p></div>
-              </label>
+            <div id="payment-methods" class="space-y-3">
+              <p class="text-sm text-cream/40 text-center py-4">Ödeme yöntemleri yükleniyor...</p>
+            </div>
+            <div id="payment-test-hint" class="hidden text-xs text-cream/40 p-3 bg-navy rounded-xl border border-gold/10">
+              Test kartı (iyzico): <span class="font-mono text-gold">5528 7900 0000 0008</span> · AA/YY: 12/30 · CVV: 123
             </div>
 
             <div id="card-form" class="space-y-4 p-4 bg-navy rounded-xl border border-gold/10">
-              <input type="text" placeholder="Kart Numarası" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="19">
+              <input type="text" id="card-number" placeholder="Kart Numarası" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="19" inputmode="numeric">
               <div class="grid grid-cols-2 gap-4">
-                <input type="text" placeholder="AA/YY" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="5">
-                <input type="text" placeholder="CVV" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="3">
+                <input type="text" id="card-expiry" placeholder="AA/YY" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="5" inputmode="numeric">
+                <input type="text" id="card-cvc" placeholder="CVV" class="bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50" maxlength="4" inputmode="numeric">
               </div>
-              <select class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+              <select id="card-installment" class="w-full bg-navy-light border border-gold/20 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold/50">
                 <option>Tek Çekim</option>
                 <option>3 Taksit</option>
                 <option>6 Taksit</option>
@@ -192,6 +172,7 @@
   <script src="js/utils.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/cart.js"></script>
+  <script src="js/payments.js"></script>
   <script src="js/ai-chat.js"></script>
   <script src="js/skin-quiz.js"></script>
   <script src="js/luxury-features.js"></script>
@@ -199,17 +180,65 @@
   <script>
     const CheckoutPage = {
       currentStep: 1,
+      paymentMethods: [],
+      bankAccount: null,
 
-      init() {
+      async init() {
         initSharedUI();
         if (!Cart.getItems().length) { window.location.href = 'cart.html'; return; }
+        const loaded = await Payments.loadMethods();
+        this.paymentMethods = loaded.methods;
+        this.bankAccount = loaded.bank;
+        this.renderPaymentMethods();
         this.renderSummary();
         this.bindEvents();
         const user = Auth.getUser();
         if (user) {
           document.getElementById('ship-name').value = user.name || '';
           document.getElementById('ship-phone').value = user.phone || '';
+          const emailEl = document.getElementById('ship-email');
+          if (emailEl) emailEl.value = user.email || '';
         }
+      },
+
+      renderPaymentMethods() {
+        const box = document.getElementById('payment-methods');
+        const methods = this.paymentMethods;
+        if (!methods.length) {
+          box.innerHTML = '<p class="text-red-400 text-sm text-center py-4">Ödeme yöntemi bulunamadı. Admin panelden sağlayıcıları etkinleştirin.</p>';
+          return;
+        }
+        const labels = {
+          card: 'Kredi / Banka Kartı — 3-12 taksit',
+          wallet: 'Dijital cüzdan ile öde',
+          transfer: 'Banka havalesi — onay sonrası kargo',
+          installment: 'Banka taksitli ödeme'
+        };
+        box.innerHTML = methods.map((m, i) => {
+          const val = m.type === 'card' ? 'card' : m.id;
+          const sub = m.testMode ? '<span class="text-[10px] text-amber-400/80 ml-1">· Test</span>' : '';
+          return `<label class="flex items-center gap-4 p-4 rounded-xl border border-gold/20 cursor-pointer has-[:checked]:border-gold has-[:checked]:bg-gold/5">
+            <input type="radio" name="payment" value="${val}" data-provider="${m.id}" class="accent-gold" ${i === 0 ? 'checked' : ''}>
+            <div>
+              <p class="text-cream font-medium">${m.logo} ${m.name}${sub}</p>
+              <p class="text-xs text-cream/50">${labels[m.type] || m.type}</p>
+            </div>
+          </label>`;
+        }).join('');
+        const hasCard = methods.some(m => m.type === 'card' || m.id === 'iyzico');
+        if (hasCard) document.getElementById('payment-test-hint')?.classList.remove('hidden');
+        this.updateCardFormVisibility();
+      },
+
+      getPaymentProviderId() {
+        const el = document.querySelector('input[name="payment"]:checked');
+        return el?.dataset?.provider || el?.value || 'card';
+      },
+
+      updateCardFormVisibility() {
+        const pid = this.getPaymentProviderId();
+        const show = Payments.needsCard(pid);
+        document.getElementById('card-form')?.classList.toggle('hidden', !show);
       },
 
       bindEvents() {
@@ -228,10 +257,8 @@
             ? stores.map(s => `<option value="${s.id}">${s.name} — ${s.address}</option>`).join('')
             : '<option value="">Mağaza bulunamadı</option>';
         });
-        document.querySelectorAll('input[name="payment"]').forEach(el => {
-          el.addEventListener('change', () => {
-            document.getElementById('card-form').classList.toggle('hidden', el.value !== 'card' || !el.checked);
-          });
+        document.getElementById('payment-methods')?.addEventListener('change', (e) => {
+          if (e.target.name === 'payment') this.updateCardFormVisibility();
         });
       },
 
@@ -303,18 +330,48 @@
         this.renderSummary();
       },
 
-      processOrder() {
+      async processOrder() {
         document.getElementById('step-1').classList.add('hidden');
         document.getElementById('step-2').classList.add('hidden');
         document.getElementById('step-3').classList.remove('hidden');
-
         showLoading(true);
 
-        setTimeout(() => {
-          const subtotal = Cart.getSubtotal();
-          const discount = Discount.calculate(subtotal);
-          const shipping = calculateShipping(subtotal, this.getShippingMethod());
-          const total = subtotal - discount + shipping;
+        const subtotal = Cart.getSubtotal();
+        const discount = Discount.calculate(subtotal);
+        const shipping = calculateShipping(subtotal, this.getShippingMethod());
+        const total = subtotal - discount + shipping;
+        const orderRef = 'CHK-' + Date.now();
+        const providerId = this.getPaymentProviderId();
+        const user = Auth.getUser();
+
+        const payload = {
+          providerId,
+          amount: total,
+          orderRef,
+          customer: {
+            name: document.getElementById('ship-name').value,
+            email: user?.email || document.getElementById('ship-email')?.value || 'musteri@ravanon.com',
+            phone: document.getElementById('ship-phone').value
+          },
+          basket: Cart.getItems().map(i => ({ name: i.product.name, price: i.product.price, quantity: i.quantity }))
+        };
+
+        if (Payments.needsCard(providerId)) {
+          const cardData = Payments.parseCardForm();
+          payload.installment = cardData.installment;
+          payload.card = cardData.card;
+        }
+
+        try {
+          const payment = await Payments.process(payload);
+          if (!payment.success && payment.status !== 'pending') {
+            showLoading(false);
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            showToast(payment.message || 'Ödeme başarısız', 'error');
+            return;
+          }
+
           const order = Orders.create({
             items: Cart.getItems().map(i => ({ productId: i.productId, name: i.product.name, brand: i.product.brand, price: i.product.price, quantity: i.quantity })),
             subtotal, discount, shippingCost: shipping, total,
@@ -325,11 +382,13 @@
               city: document.getElementById('ship-city').value,
               method: this.getShippingMethod()
             },
-            payment: document.querySelector('input[name="payment"]:checked')?.value
+            payment: providerId,
+            paymentResult: payment,
+            paymentPending: payment.status === 'pending'
           });
 
           let clubResult = null;
-          if (Auth.isLoggedIn()) {
+          if (Auth.isLoggedIn() && payment.status === 'paid') {
             clubResult = Auth.recordPurchase(total, order.id);
           }
           const points = clubResult?.earned || 0;
@@ -339,8 +398,18 @@
           Cart.clear();
           Discount.clear();
           showLoading(false);
-          window.location.href = `success.html?order=${order.id}&points=${points}&tierUp=${tierUp}&totalPts=${newTotal}`;
-        }, 2000);
+
+          let qs = `order=${order.id}&points=${points}&tierUp=${tierUp}&totalPts=${newTotal}&pay=${payment.status}`;
+          if (payment.bankTransfer) {
+            qs += `&bank=${encodeURIComponent(payment.bankTransfer.bank)}&iban=${encodeURIComponent(payment.bankTransfer.iban)}&ref=${payment.bankTransfer.reference}`;
+          }
+          window.location.href = `success.html?${qs}`;
+        } catch (e) {
+          showLoading(false);
+          document.getElementById('step-3').classList.add('hidden');
+          document.getElementById('step-2').classList.remove('hidden');
+          showToast('Ödeme sunucusuna bağlanılamadı. Admin panel açık mı?', 'error');
+        }
       }
     };
 

@@ -151,6 +151,7 @@ export interface OrderPayment {
   amount: number;
   paidAt?: string;
   installment?: number;
+  authCode?: string;
   cardBrand?: string;
   lastFour?: string;
 }
@@ -324,6 +325,16 @@ export interface PaymentProvider {
   commission: number;
   supportedInstallments: number[];
   apiKeyMasked: string;
+  apiKey?: string;
+  apiSecret?: string;
+  merchantId?: string;
+}
+
+export interface PaymentBankAccount {
+  bank: string;
+  iban: string;
+  holder: string;
+  branch?: string;
 }
 
 export interface PaymentTransaction {

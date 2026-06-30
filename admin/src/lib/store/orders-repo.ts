@@ -63,8 +63,14 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
   const ship = (raw.shippingAddress ?? raw.shipping) as Record<string, string> | undefined;
   const items = (raw.items as AdminOrder["items"]) ?? [];
   const now = new Date().toISOString();
-  const status = STATUS_MAP[String(raw.status)] ?? "processing";
+  const payMeta = raw.paymentResult as Record<string, unknown> | undefined;
+  const payStatus = String(payMeta?.status ?? (raw.paymentPending ? "pending" : "paid"));
+  const orderStatus =
+    payStatus === "pending" ? "pending" : STATUS_MAP[String(raw.status)] ?? "processing";
   const shippingCost = Number((raw as { shippingCost?: number }).shippingCost ?? (typeof raw.shipping === "number" ? raw.shipping : 0));
+  const providerName = String(payMeta?.providerName ?? raw.payment ?? "iyzico");
+  const providerId = String(payMeta?.providerId ?? raw.payment ?? "iyzico");
+  const txId = String(payMeta?.transactionId ?? `TX-${raw.id}`);
   return {
     id: String(raw.id),
     userId: raw.userId ? String(raw.userId) : "guest",
@@ -82,15 +88,17 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
     shipping: shippingCost,
     discount: Number(raw.discount ?? 0),
     total: Number(raw.total ?? 0),
-    status,
-    paymentMethod: String(raw.payment ?? "Kredi Kartı"),
+    status: orderStatus,
+    paymentMethod: providerName,
     payment: {
-      provider: String(raw.payment ?? "iyzico"),
-      providerId: "iyzico",
-      transactionId: `TX-${raw.id}`,
-      status: status === "pending" ? "pending" : "paid",
+      provider: providerName,
+      providerId,
+      transactionId: txId,
+      status: payStatus === "pending" ? "pending" : payStatus === "failed" ? "failed" : "paid",
       amount: Number(raw.total ?? 0),
-      paidAt: status !== "pending" ? now : undefined,
+      installment: payMeta?.installment as number | undefined,
+      paidAt: payStatus === "paid" ? now : undefined,
+      authCode: payMeta?.authCode as string | undefined,
     },
     shippingInfo: {
       carrier: "HepsiJet",
@@ -109,5 +117,15 @@ export function storefrontToAdminOrder(raw: Record<string, unknown>): AdminOrder
 
 export async function createStorefrontOrder(raw: Record<string, unknown>): Promise<AdminOrder> {
   const order = storefrontToAdminOrder(raw);
+  return saveOrder(order);
+}
+
+export async function confirmPendingPayment(orderId: string): Promise<AdminOrder | null> {
+  const order = await getOrderById(orderId);
+  if (!order || order.payment.status !== "pending") return null;
+  const now = new Date().toISOString();
+  order.payment = { ...order.payment, status: "paid", paidAt: now };
+  order.status = "processing";
+  order.updatedAt = now;
   return saveOrder(order);
 }

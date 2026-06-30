@@ -17,9 +17,20 @@
 
   <main class="pt-36 pb-20">
     <div class="max-w-2xl mx-auto px-4 text-center">
-      <div class="w-24 h-24 mx-auto mb-8 rounded-full bg-green-900/30 border-2 border-green-500/50 flex items-center justify-center text-4xl animate-pulse-soft">✓</div>
-      <h1 class="font-display text-4xl md:text-5xl font-light mb-4">Siparişiniz Alındı!</h1>
-      <p class="text-cream/60 mb-8">Teşekkür ederiz. Siparişiniz hazırlanmaya başlandı.</p>
+      <div id="success-icon" class="w-24 h-24 mx-auto mb-8 rounded-full bg-green-900/30 border-2 border-green-500/50 flex items-center justify-center text-4xl animate-pulse-soft">✓</div>
+      <h1 id="success-title" class="font-display text-4xl md:text-5xl font-light mb-4">Siparişiniz Alındı!</h1>
+      <p id="success-subtitle" class="text-cream/60 mb-8">Teşekkür ederiz. Siparişiniz hazırlanmaya başlandı.</p>
+
+      <div id="bank-transfer-info" class="hidden bg-amber-900/20 rounded-2xl border border-amber-500/30 p-8 mb-6 text-left">
+        <p class="text-xs text-amber-400 uppercase tracking-wider mb-3">🏛️ Havale / EFT Talimatı</p>
+        <p class="text-sm text-cream/70 mb-4">Siparişiniz ödeme onayından sonra hazırlanacaktır. Aşağıdaki hesaba transfer yapın ve açıklama kısmına referans numarasını yazın.</p>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between gap-4"><span class="text-cream/50">Banka</span><span id="bank-name" class="text-cream font-medium">—</span></div>
+          <div class="flex justify-between gap-4"><span class="text-cream/50">IBAN</span><span id="bank-iban" class="text-gold font-mono text-xs sm:text-sm">—</span></div>
+          <div class="flex justify-between gap-4"><span class="text-cream/50">Referans</span><span id="bank-ref" class="text-gold font-mono font-medium">—</span></div>
+        </div>
+        <button onclick="copyBankInfo()" class="mt-4 w-full py-3 border border-amber-500/40 text-amber-300 rounded-xl text-sm hover:bg-amber-500/10 transition-colors">IBAN ve Referansı Kopyala</button>
+      </div>
 
       <div class="bg-navy-light rounded-2xl border border-gold/10 p-8 mb-6 text-left">
         <div class="grid grid-cols-2 gap-4 text-sm">
@@ -29,7 +40,11 @@
           </div>
           <div>
             <p class="text-cream/40 text-xs uppercase tracking-wider mb-1">Durum</p>
-            <p class="text-cream">Hazırlanıyor</p>
+            <p id="order-status" class="text-cream">Hazırlanıyor</p>
+          </div>
+          <div id="payment-info" class="hidden col-span-2">
+            <p class="text-cream/40 text-xs uppercase tracking-wider mb-1">Ödeme</p>
+            <p id="payment-status-text" class="text-cream">—</p>
           </div>
         </div>
       </div>
@@ -64,7 +79,7 @@
         <a href="shop.html" class="px-8 py-4 border border-gold/30 text-gold rounded-xl hover:bg-gold/10 transition-colors">Alışverişe Devam</a>
       </div>
 
-      <div class="mt-12 p-6 bg-gradient-to-r from-gold/5 to-rose-gold/5 rounded-2xl border border-gold/10">
+      <div id="footer-note" class="mt-12 p-6 bg-gradient-to-r from-gold/5 to-rose-gold/5 rounded-2xl border border-gold/10">
         <p class="text-sm text-cream/60">Sipariş onay e-postası gönderildi. Kargo bilgileri hazırlandığında bilgilendirileceksiniz.</p>
       </div>
     </div>
@@ -81,14 +96,48 @@
   <script src="js/luxury-features.js"></script>
   <script src="js/components.js"></script>
   <script>
+    function copyBankInfo() {
+      const iban = document.getElementById('bank-iban')?.textContent || '';
+      const ref = document.getElementById('bank-ref')?.textContent || '';
+      const bank = document.getElementById('bank-name')?.textContent || '';
+      const text = `Banka: ${bank}\nIBAN: ${iban}\nReferans: ${ref}`;
+      navigator.clipboard?.writeText(text).then(() => showToast('Banka bilgileri kopyalandı', 'info'));
+    }
+
     onStoreReady(() => {
       initSharedUI();
       const orderId = getQueryParam('order');
       const points = parseInt(getQueryParam('points') || '0');
       const tierUp = getQueryParam('tierUp') === '1';
       const totalPts = parseInt(getQueryParam('totalPts') || '0');
+      const payStatus = getQueryParam('pay') || 'paid';
 
       if (orderId) document.getElementById('order-id').textContent = orderId;
+
+      if (payStatus === 'pending') {
+        document.getElementById('success-icon').textContent = '⏳';
+        document.getElementById('success-icon').className = 'w-24 h-24 mx-auto mb-8 rounded-full bg-amber-900/30 border-2 border-amber-500/50 flex items-center justify-center text-4xl animate-pulse-soft';
+        document.getElementById('success-title').textContent = 'Siparişiniz Oluşturuldu';
+        document.getElementById('success-subtitle').textContent = 'Ödeme onayı bekleniyor. Havale yaptıktan sonra siparişiniz hazırlanacaktır.';
+        document.getElementById('order-status').textContent = 'Ödeme Bekleniyor';
+        document.getElementById('payment-info').classList.remove('hidden');
+        document.getElementById('payment-status-text').textContent = 'Havale / EFT — Onay bekleniyor';
+        document.getElementById('footer-note').querySelector('p').textContent = 'Ödemeniz onaylandığında e-posta ile bilgilendirileceksiniz.';
+        const bank = getQueryParam('bank');
+        const iban = getQueryParam('iban');
+        const ref = getQueryParam('ref');
+        if (bank || iban) {
+          document.getElementById('bank-transfer-info').classList.remove('hidden');
+          if (bank) document.getElementById('bank-name').textContent = decodeURIComponent(bank);
+          if (iban) document.getElementById('bank-iban').textContent = decodeURIComponent(iban);
+          if (ref) document.getElementById('bank-ref').textContent = ref;
+        }
+      } else if (payStatus === 'failed') {
+        document.getElementById('order-status').textContent = 'Ödeme Başarısız';
+      } else {
+        document.getElementById('payment-info').classList.remove('hidden');
+        document.getElementById('payment-status-text').textContent = 'Ödeme onaylandı ✓';
+      }
 
       if (Auth.isLoggedIn() && points > 0) {
         document.getElementById('club-success').classList.remove('hidden');
